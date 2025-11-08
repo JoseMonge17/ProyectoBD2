@@ -1,0 +1,13 @@
+CREATE CONSTRAINT cliente_id IF NOT EXISTS
+FOR (c:Cliente) REQUIRE c.id IS UNIQUE;
+
+CREATE CONSTRAINT producto_id IF NOT EXISTS
+FOR (p:Producto) REQUIRE p.id IS UNIQUE;
+
+CREATE CONSTRAINT categoria_id IF NOT EXISTS
+FOR (k:Categoria) REQUIRE k.id IS UNIQUE;
+
+CREATE CONSTRAINT orden_id IF NOT EXISTS
+FOR (o:Orden) REQUIRE o.id IS UNIQUE;
+
+CREATE INDEX orden_fecha IF NOT EXISTS FOR (o:Orden) ON (o.fecha);
