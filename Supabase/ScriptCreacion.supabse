@@ -1,0 +1,56 @@
+-- Crear extensión UUID si no existe
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Esquema para las ventas
+CREATE SCHEMA IF NOT EXISTS ventas_pg;
+
+-- Tabla Cliente
+CREATE TABLE ventas_pg.cliente (
+    cliente_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    nombre TEXT NOT NULL,
+    email TEXT UNIQUE,
+    genero CHAR(1) NOT NULL CHECK (genero IN ('M','F')),
+    pais TEXT NOT NULL,
+    fecha_registro DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+-- Tabla Producto
+CREATE TABLE ventas_pg.producto (
+    producto_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    sku TEXT, -- Puede venir vacío en algunos (servicios)
+    nombre TEXT NOT NULL,
+    categoria TEXT NOT NULL
+);
+
+-- Tabla Orden
+CREATE TABLE ventas_pg.orden (
+    orden_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    cliente_id UUID NOT NULL REFERENCES ventas_pg.cliente(cliente_id),
+    fecha TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    canal TEXT NOT NULL CHECK (canal IN ('WEB','APP','PARTNER')),
+    moneda CHAR(3) NOT NULL CHECK (moneda IN ('USD','CRC')),
+    total NUMERIC(18,2) NOT NULL
+);
+
+-- Tabla Orden Detalle
+CREATE TABLE ventas_pg.orden_detalle (
+    orden_detalle_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    orden_id UUID NOT NULL REFERENCES ventas_pg.orden(orden_id),
+    producto_id UUID NOT NULL REFERENCES ventas_pg.producto(producto_id),
+    cantidad INT NOT NULL CHECK (cantidad > 0),
+    precio_unit NUMERIC(18,2) NOT NULL
+);
+
+-- Índices para mejorar rendimiento
+CREATE INDEX ix_orden_fecha ON ventas_pg.orden(fecha);
+CREATE INDEX ix_orden_cliente ON ventas_pg.orden(cliente_id);
+CREATE INDEX ix_detalle_producto ON ventas_pg.orden_detalle(producto_id);
+CREATE INDEX ix_detalle_orden ON ventas_pg.orden_detalle(orden_id);
+CREATE INDEX ix_cliente_email ON ventas_pg.cliente(email);
+CREATE INDEX ix_producto_sku ON ventas_pg.producto(sku) WHERE sku IS NOT NULL;
+
+-- Comentarios para documentación
+COMMENT ON TABLE ventas_pg.cliente IS 'Clientes del sistema de ventas - Supabase';
+COMMENT ON TABLE ventas_pg.producto IS 'Productos y servicios ofrecidos';
+COMMENT ON TABLE ventas_pg.orden IS 'Órdenes de venta con múltiples canales';
+COMMENT ON TABLE ventas_pg.orden_detalle IS 'Detalle de items por orden';

@@ -1,0 +1,93 @@
+-- Insertar datos en la tabla Cliente
+INSERT INTO ventas_pg.cliente (nombre, email, genero, pais, fecha_registro) VALUES
+('María Rodríguez', 'maria.rodriguez@email.com', 'F', 'Costa Rica', '2023-01-15'),
+('Carlos López', 'carlos.lopez@email.com', 'M', 'México', '2023-02-20'),
+('Ana Martínez', 'ana.martinez@email.com', 'F', 'Colombia', '2023-03-10'),
+('Juan Pérez', 'juan.perez@email.com', 'M', 'Argentina', '2023-04-05'),
+('Laura García', 'laura.garcia@email.com', 'F', 'Chile', '2023-05-12'),
+('Pedro Sánchez', 'pedro.sanchez@email.com', 'M', 'España', '2023-06-18'),
+('Sofía Hernández', 'sofia.hernandez@email.com', 'F', 'Panamá', '2023-07-22'),
+('Diego Ramírez', 'diego.ramirez@email.com', 'M', 'Perú', '2023-08-30'),
+('Elena Castro', 'elena.castro@email.com', 'F', 'Ecuador', '2023-09-14'),
+('Miguel Torres', 'miguel.torres@email.com', 'M', 'Uruguay', '2023-10-25');
+
+-- Insertar datos en la tabla Producto (algunos sin SKU - servicios)
+INSERT INTO ventas_pg.producto (sku, nombre, categoria) VALUES
+('SKU-1001', 'Laptop Dell XPS 13', 'Tecnología'),
+('SKU-1002', 'iPhone 15 Pro', 'Tecnología'),
+('SKU-1003', 'Samsung Galaxy S24', 'Tecnología'),
+('SKU-1004', 'Tablet iPad Air', 'Tecnología'),
+('SKU-2001', 'Zapatos Deportivos Nike', 'Ropa'),
+('SKU-2002', 'Camisa Casual', 'Ropa'),
+(NULL, 'Consulta Técnica Premium', 'Servicios'), -- Servicio sin SKU
+('SKU-3001', 'Auriculares Sony', 'Electrónicos'),
+(NULL, 'Mantenimiento Preventivo', 'Servicios'), -- Servicio sin SKU
+('SKU-4001', 'Libro Python Avanzado', 'Educación');
+
+-- Insertar datos en la tabla Orden
+WITH clientes AS (SELECT cliente_id FROM ventas_pg.cliente ORDER BY cliente_id LIMIT 10)
+INSERT INTO ventas_pg.orden (cliente_id, fecha, canal, moneda, total) VALUES
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'maria.rodriguez@email.com'), '2024-01-15 10:30:00', 'WEB', 'USD', 1200.50),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'carlos.lopez@email.com'), '2024-01-20 14:15:00', 'APP', 'CRC', 75000.00),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'ana.martinez@email.com'), '2024-02-05 09:45:00', 'PARTNER', 'USD', 850.75),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'juan.perez@email.com'), '2024-02-18 16:20:00', 'WEB', 'CRC', 45000.00),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'laura.garcia@email.com'), '2024-03-10 11:10:00', 'APP', 'USD', 320.25),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'pedro.sanchez@email.com'), '2024-03-22 13:30:00', 'PARTNER', 'CRC', 120000.00),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'sofia.hernandez@email.com'), '2024-04-05 15:45:00', 'WEB', 'USD', 675.80),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'diego.ramirez@email.com'), '2024-04-18 12:00:00', 'APP', 'CRC', 89000.00),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'elena.castro@email.com'), '2024-05-02 08:30:00', 'PARTNER', 'USD', 1500.00),
+((SELECT cliente_id FROM ventas_pg.cliente WHERE email = 'miguel.torres@email.com'), '2024-05-15 17:20:00', 'WEB', 'CRC', 55000.00);
+
+-- Insertar datos en la tabla Orden Detalle
+WITH 
+ordenes AS (SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 10),
+productos AS (SELECT producto_id FROM ventas_pg.producto ORDER BY producto_id LIMIT 10)
+INSERT INTO ventas_pg.orden_detalle (orden_id, producto_id, cantidad, precio_unit) VALUES
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 0), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-1001'), 1, 1000.00),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 0), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-3001'), 1, 200.50),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 1), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-1002'), 1, 75000.00),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 2), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE nombre = 'Consulta Técnica Premium'), 1, 500.00),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 2), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-2001'), 2, 175.375),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 3), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-1003'), 1, 45000.00),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 4), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-4001'), 3, 106.75),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 5), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE nombre = 'Mantenimiento Preventivo'), 1, 80000.00),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 5), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-2002'), 2, 20000.00),
+ 
+((SELECT orden_id FROM ventas_pg.orden ORDER BY fecha LIMIT 1 OFFSET 6), 
+ (SELECT producto_id FROM ventas_pg.producto WHERE sku = 'SKU-1004'), 1, 675.80);
+
+-- Consulta para verificar los datos insertados
+SELECT 
+    c.nombre as cliente,
+    c.genero,
+    o.orden_id,
+    o.fecha,
+    o.canal,
+    o.moneda,
+    o.total,
+    p.nombre as producto,
+    p.sku,
+    od.cantidad,
+    od.precio_unit
+FROM ventas_pg.orden o
+JOIN ventas_pg.cliente c ON o.cliente_id = c.cliente_id
+JOIN ventas_pg.orden_detalle od ON o.orden_id = od.orden_id
+JOIN ventas_pg.producto p ON od.producto_id = p.producto_id
+ORDER BY o.fecha;
