@@ -1,0 +1,101 @@
+sku,nombre,categoria
+DEP-0001,Pelota de Futbol Profesional,Deportes
+JUG-0002,Lego Creator 3en1,Juguetes
+BEL-0003,Kit de Maquillaje Profesional,Belleza
+ALI-0004,Aceite de Oliva Extra Virgen,Alimentos
+JUG-0005,Pista de Carreras Hot Wheels,Juguetes
+SER-0006,Servicio de Limpieza Premium,Servicios
+,Termometro Digital Infrarrojo,Salud
+AUT-0008,Aceite de Motor Sintetico,Automotriz
+ELE-0009,Audifonos Bluetooth Noise Cancelling,Electronica
+,Aspiradora Robot Inteligente,Hogar
+BEL-0011,Serum Facial con Acido Hialuronico,Belleza
+,Chaqueta Impermeable Deportiva,Ropa
+SER-0013,Servicio de Jardineria Residencial,Servicios
+ELE-0014,Tablet Samsung Galaxy Tab,Electronica
+HOG-0015,Juego de Sabanas de Algodon,Hogar
+AUT-0016,Llantas All Season 205/55R16,Automotriz
+,Cuaderno Espiral A4 200 hojas,Papeleria
+,Paquete de Boligrafos Retractiles,Papeleria
+PAP-0019,Organizador Semanal de Escritorio,Papeleria
+AUT-0020,Bateria para Auto 12V 60Ah,Automotriz
+ELE-0021,Smartwatch con Monitor Cardiaco,Electronica
+HOG-0022,Juego de Ollas de Acero Inoxidable,Hogar
+AUT-0023,Filtro de Aire para Auto,Automotriz
+PAP-0024,Archivador de Oficina A4,Papeleria
+SER-0025,Servicio de Catering para Eventos,Servicios
+ALI-0026,Cafe Molido Premium 500g,Alimentos
+ALI-0027,Miel Natural Pura 1kg,Alimentos
+PAP-0028,Papel Fotografico Brillante A4,Papeleria
+SER-0029,Servicio de Masaje Terapeutico,Servicios
+JUG-0030,Juego de Quimica para Ninos,Juguetes
+SER-0031,Servicio de Instalacion Electrica,Servicios
+BEL-0032,Kit de Cuidado Facial Diario,Belleza
+ROP-0033,Jeans Slim Fit Azul Oscuro,Ropa
+SAL-0034,Monitor de Presion Arterial Digital,Salud
+AUT-0035,Liquido de Frenos DOT4,Automotriz
+PAP-0036,Calculadora Cientifica Avanzada,Papeleria
+PAP-0037,Paquete de Post-it Varios Colores,Papeleria
+JUG-0038,Rompecabezas 1000 Piezas,Juguetes
+JUG-0039,Set de Play-Doh 10 Colores,Juguetes
+SAL-0040,Oximetro de Pulso Digital,Salud
+AUT-0041,Anticongelante Concentrado,Automotriz
+ELE-0042,Teclado Mecanico para Gaming,Electronica
+ALI-0043,Arroz Basmati Premium 2kg,Alimentos
+HOG-0044,Cafetera Programable 12 Tazas,Hogar
+ELE-0045,Disco Duro Externo 2TB,Electronica
+PAP-0046,Ensobradora Termica A4,Papeleria
+ALI-0047,Avena en Hojuelas 1kg,Alimentos
+JAR-0048,Cortadora de Cesped Electrica,Jardin
+SAL-0049,Kit de Primeros Auxilios Familiar,Salud
+BEL-0050,Secador de Pelo Profesional,Belleza
+HOG-0051,Microondas con Grill 30L,Hogar
+ALI-0052,Aceitunas Verdes Rellenas 400g,Alimentos
+JUG-0053,Set de Construccion Magnetico,Juguetes
+,Servicio de Tutoria Academica,Servicios
+ROP-0055,Sudadera con Capucha Algodon,Ropa
+ALI-0056,Salmon Fresco Fileteado 500g,Alimentos
+ELE-0057,Router WiFi 6 de Doble Banda,Electronica
+,Set de Munecas Articuladas,Juguetes
+HOG-0059,Lavadora Carga Frontal 15kg,Hogar
+SAL-0060,Bascula Digital Bano 180kg,Salud
+DEP-0061,Raqueta de Tenis Profesional,Deportes
+PAP-0062,Perforadora de 2 Agujeros,Papeleria
+SAL-0063,Inhalador para Asma,Salud
+PAP-0064,Grapadora de Alta Capacidad,Papeleria
+ELE-0065,Monitor Curvo 27" 144Hz,Electronica
+BEL-0066,Paleta de Sombras de Ojos,Belleza
+,Juego de Mesa Estrategico,Juguetes
+JUG-0068,Peluche Interactivo Mascota,Juguetes
+JUG-0069,Set de Pinturas Acrilicas,Juguetes
+JUG-0070,Trampolin de Jardin 3m,Juguetes
+AUT-0071,Kit de Herramientas Mecanicas,Automotriz
+JAR-0072,Manguera de Jardin 30m,Jardin
+SAL-0073,Almohada Ortopedica Cervical,Salud
+SAL-0074,Andador para Adultos Mayores,Salud
+DEP-0075,Bicicleta de Montana 21 Velocidades,Deportes
+ELE-0076,Altavoz Bluetooth Resistente Agua,Electronica
+HOG-0077,Horno Electrico Empotrable,Hogar
+DEP-0078,Set de Pesas Ajustables 40kg,Deportes
+ELE-0079,Cargador Rapido USB-C 65W,Electronica
+JUG-0080,Videojuego Educativo Nintendo,Juguetes
+HOG-0081,Robot Aspirador con Mapeo,Hogar
+JAR-0082,Cortasetos Electrico Profesional,Jardin
+,Labial Liquido Mate de Larga Duracion,Belleza
+PAP-0084,Tijeras de Oficina Profesionales,Papeleria
+ROP-0085,Chaleco Termico para Exteriores,Ropa
+HOG-0086,Juego de Toallas de Bano Premium,Hogar
+JAR-0087,Sistema de Riego Automatico,Jardin
+PAP-0088,Sellos de Fecha y Hora,Papeleria
+HOG-0089,Licuadora de Alta Velocidad,Hogar
+SAL-0090,Colchon Ortopedico Memory Foam,Salud
+SAL-0091,Desfibrilador Externo Automatico,Salud
+PAP-0092,Guillotina para Papel A3,Papeleria
+,Patines en Linea Ajustables,Deportes
+ALI-0094,Queso Parmesano Envuelto 200g,Alimentos
+AUT-0095,Kit de Limpieza de Inyectores,Automotriz
+JAR-0096,Mesa de Cultivo Huerto Urbano,Jardin
+ALI-0097,Yogur Griego Natural 1kg,Alimentos
+DEP-0098,Reloj Deportivo con GPS,Deportes
+SAL-0099,Nebulizador Portatil,Salud
+AUT-0100,Limpiaparabrisas Conjunto Delantero,Automotriz
