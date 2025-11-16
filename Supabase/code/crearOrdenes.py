@@ -4,8 +4,8 @@ import random
 from datetime import datetime, timedelta
 
 # === CONFIGURACION ===
-CLIENTES_FILE = "Supabase/clientes.csv"
-OUTPUT_FILE = "Supabase/ordenes.csv"
+CLIENTES_FILE = "/Supabase/csv/clientes.csv"
+OUTPUT_FILE = "/Supabase/csv/ordenes.csv"
 
 # === CARGAR CLIENTES ===
 clientes = pd.read_csv(CLIENTES_FILE)
