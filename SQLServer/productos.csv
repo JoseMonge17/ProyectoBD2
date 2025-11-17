@@ -1,0 +1,87 @@
+SKU,Nombre,Categoria,ProductoId
+SKU-LTP-DLL-001,Laptop Dell XPS 13,Tecnología,1
+SKU-CEL-IPH-002,iPhone 14 Pro 128GB,Tecnología,2
+SKU-CEL-SAM-003,Samsung Galaxy S23 Ultra,Tecnología,3
+SKU-TAB-APP-004,iPad Air 5ta Generación,Tecnología,4
+SKU-AUD-SON-005,Auriculares Sony WH-1000XM4,Audio,5
+SKU-SMT-APP-006,Apple Watch Series 8,Tecnología,6
+SKU-LTP-MAC-007,MacBook Air M2,Tecnología,7
+SKU-3009,Audifonos Bluetooth Noise Cancelling,Electronica,8
+SKU-3014,Tablet Samsung Galaxy Tab,Electronica,9
+SKU-3021,Smartwatch con Monitor Cardiaco,Electronica,10
+SKU-3042,Teclado Mecanico para Gaming,Electronica,11
+SKU-3045,Disco Duro Externo 2TB,Electronica,12
+SKU-3057,Router WiFi 6 de Doble Banda,Electronica,13
+SKU-3065,"Monitor Curvo 27"" 144Hz",Electronica,14
+SKU-3076,Altavoz Bluetooth Resistente Agua,Electronica,15
+SKU-4001,Martillo carpintero,Herramientas manuales,16
+SKU-4002,Martillo de bola,Herramientas manuales,17
+SKU-4003,Destornillador plano,Herramientas manuales,18
+SKU-4004,Destornillador de cruz,Herramientas manuales,19
+SKU-4011,Taladro percutor 1/2 pulgada,Herramientas electricas,20
+SKU-4012,Taladro inalambrico 20V,Herramientas electricas,21
+SKU-4013,Amoladora angular 4.5 pulgada,Herramientas electricas,22
+SKU-5016,Martillo carpintero,Herramientas,23
+SKU-5017,Taladro inalambrico,Herramientas,24
+SKU-5018,Destornillador de cruz,Herramientas,25
+SKU-5049,Cinta metrica 5m,Herramientas,26
+SKU-3010,Aspiradora Robot Inteligente,Hogar,27
+SKU-3015,Juego de Sabanas de Algodon,Hogar,28
+SKU-3022,Juego de Ollas de Acero Inoxidable,Hogar,29
+SKU-3044,Cafetera Programable 12 Tazas,Hogar,30
+SKU-3051,Microondas con Grill 30L,Hogar,31
+SKU-3059,Lavadora Carga Frontal 15kg,Hogar,32
+SKU-3077,Horno Electrico Empotrable,Hogar,33
+SKU-3081,Robot Aspirador con Mapeo,Hogar,34
+SKU-3089,Licuadora de Alta Velocidad,Hogar,35
+SKU-5013,Televisor 50 pulgadas,Electrodomesticos,36
+SKU-5034,Microondas,Electrodomesticos,37
+SKU-5035,Plancha de vapor,Electrodomesticos,38
+SKU-5053,Estufa electrica,Electrodomesticos,39
+SKU-5054,Aspiradora portatil,Electrodomesticos,40
+SKU-5001,Arroz blanco 1kg,Alimentos,41
+SKU-5002,Frijoles negros 900g,Alimentos,42
+SKU-5003,Leche entera 1L,Alimentos,43
+SKU-3004,Aceite de Oliva Extra Virgen,Alimentos,44
+SKU-3026,Cafe Molido Premium 500g,Alimentos,45
+SKU-3027,Miel Natural Pura 1kg,Alimentos,46
+SKU-3043,Arroz Basmati Premium 2kg,Alimentos,47
+SKU-3047,Avena en Hojuelas 1kg,Alimentos,48
+SKU-3052,Aceitunas Verdes Rellenas 400g,Alimentos,49
+SKU-3056,Salmon Fresco Fileteado 500g,Alimentos,50
+SKU-3094,Queso Parmesano Envuelto 200g,Alimentos,51
+SKU-3097,Yogur Griego Natural 1kg,Alimentos,52
+SKU-3001,Pelota de Futbol Profesional,Deportes,53
+SKU-3002,Lego Creator 3en1,Juguetes,54
+SKU-3005,Pista de Carreras Hot Wheels,Juguetes,55
+SKU-3030,Juego de Quimica para Ninos,Juguetes,56
+SKU-3038,Rompecabezas 1000 Piezas,Juguetes,57
+SKU-3039,Set de Play-Doh 10 Colores,Juguetes,58
+SKU-3053,Set de Construccion Magnetico,Juguetes,59
+SKU-3061,Raqueta de Tenis Profesional,Deportes,60
+SKU-3067,Juego de Mesa Estrategico,Juguetes,61
+SKU-3075,Bicicleta de Montana 21 Velocidades,Deportes,62
+SKU-3078,Set de Pesas Ajustables 40kg,Deportes,63
+SKU-3093,Patines en Linea Ajustables,Deportes,64
+SKU-3098,Reloj Deportivo con GPS,Deportes,65
+SKU-3003,Kit de Maquillaje Profesional,Belleza,66
+SKU-3007,Termometro Digital Infrarrojo,Salud,67
+SKU-3011,Serum Facial con Acido Hialuronico,Belleza,68
+SKU-3032,Kit de Cuidado Facial Diario,Belleza,69
+SKU-3034,Monitor de Presion Arterial Digital,Salud,70
+SKU-3040,Oximetro de Pulso Digital,Salud,71
+SKU-3049,Kit de Primeros Auxilios Familiar,Salud,72
+SKU-3050,Secador de Pelo Profesional,Belleza,73
+SKU-3060,Bascula Digital Bano 180kg,Salud,74
+SKU-3066,Paleta de Sombras de Ojos,Belleza,75
+SKU-3083,Labial Liquido Mate de Larga Duracion,Belleza,76
+SKU-3090,Colchon Ortopedico Memory Foam,Salud,77
+SKU-3008,Aceite de Motor Sintetico,Automotriz,78
+SKU-3016,Llantas All Season 205/55R16,Automotriz,79
+SKU-3020,Bateria para Auto 12V 60Ah,Automotriz,80
+SKU-3023,Filtro de Aire para Auto,Automotriz,81
+SKU-3035,Liquido de Frenos DOT4,Automotriz,82
+SKU-3041,Anticongelante Concentrado,Automotriz,83
+SKU-3071,Kit de Herramientas Mecanicas,Automotriz,84
+SKU-3095,Kit de Limpieza de Inyectores,Automotriz,85
+SKU-3100,Limpiaparabrisas Conjunto Delantero,Automotriz,86
