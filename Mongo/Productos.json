@@ -1,604 +1,756 @@
 [
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46a8" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46a8"
+        },
         "codigo_mongo": "MNG-5001",
         "nombre": "Arroz blanco 1kg",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46a9" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46a9"
+        },
         "codigo_mongo": "MNG-5002",
         "nombre": "Frijoles negros 900g",
-        "categoria": "Electrodomésticos",
+        "categoria": "Electrodom\u00e9sticos",
         "equivalencias": {
-            "sku": "SKU-5003",
-            "codigo_alt": "ALT-5003"
+            "sku": "SKU-5002",
+            "codigo_alt": "ALT-5002"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46aa" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46aa"
+        },
         "codigo_mongo": "MNG-5003",
         "nombre": "Leche entera 1L",
-        "categoria": "Electrodomésticos"
+        "categoria": "Electrodom\u00e9sticos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ab" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ab"
+        },
         "codigo_mongo": "MNG-5004",
         "nombre": "Pan tajado integral",
         "categoria": "Ropa",
         "equivalencias": {
-            "sku": "SKU-5005",
-            "codigo_alt": "ALT-5005"
+            "sku": "SKU-5004",
+            "codigo_alt": "ALT-5004"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ac" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ac"
+        },
         "codigo_mongo": "MNG-5005",
         "nombre": "Aceite vegetal 900ml",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ad" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ad"
+        },
         "codigo_mongo": "MNG-5006",
         "nombre": "Detergente en polvo 2kg",
-        "categoria": "Tecnología",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5007",
-            "codigo_alt": "ALT-5007"
+            "sku": "SKU-5006",
+            "codigo_alt": "ALT-5006"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ae" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ae"
+        },
         "codigo_mongo": "MNG-5007",
         "nombre": "Suavizante de ropa 1L",
-        "categoria": "Electrodomésticos"
+        "categoria": "Electrodom\u00e9sticos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46af" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46af"
+        },
         "codigo_mongo": "MNG-5008",
         "nombre": "Shampoo familiar 750ml",
-        "categoria": "Electrodomésticos",
+        "categoria": "Electrodom\u00e9sticos",
         "equivalencias": {
-            "sku": "SKU-5009",
-            "codigo_alt": "ALT-5009"
+            "sku": "SKU-5008",
+            "codigo_alt": "ALT-5008"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b0" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b0"
+        },
         "codigo_mongo": "MNG-5009",
         "nombre": "Pasta dental 90g",
         "categoria": "Juguetes"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b1" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b1"
+        },
         "codigo_mongo": "MNG-5010",
         "nombre": "Toallas de papel 3 rollos",
-        "categoria": "Tecnología",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5011",
-            "codigo_alt": "ALT-5011"
+            "sku": "SKU-5010",
+            "codigo_alt": "ALT-5010"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b2" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b2"
+        },
         "codigo_mongo": "MNG-5011",
         "nombre": "Foco LED 10W",
-        "categoria": "Electrodomésticos"
+        "categoria": "Electrodom\u00e9sticos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b3" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b3"
+        },
         "codigo_mongo": "MNG-5012",
-        "nombre": "Extensión eléctrica 3m",
-        "categoria": "Tecnología",
+        "nombre": "Extensi\u00f3n el\u00e9ctrica 3m",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5013",
-            "codigo_alt": "ALT-5013"
+            "sku": "SKU-5012",
+            "codigo_alt": "ALT-5012"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b4" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b4"
+        },
         "codigo_mongo": "MNG-5013",
         "nombre": "Televisor 50 pulgadas",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b5" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b5"
+        },
         "codigo_mongo": "MNG-5014",
-        "nombre": "Audífonos inalámbricos",
+        "nombre": "Aud\u00edfonos inal\u00e1mbricos",
         "categoria": "Hogar",
         "equivalencias": {
-            "sku": "SKU-5015",
-            "codigo_alt": "ALT-5015"
+            "sku": "SKU-5014",
+            "codigo_alt": "ALT-5014"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b6" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b6"
+        },
         "codigo_mongo": "MNG-5015",
-        "nombre": "Laptop básica 14 pulgadas",
+        "nombre": "Laptop b\u00e1sica 14 pulgadas",
         "categoria": "Ropa"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b7" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b7"
+        },
         "codigo_mongo": "MNG-5016",
         "nombre": "Martillo carpintero",
         "categoria": "Herramientas",
         "equivalencias": {
-            "sku": "SKU-5017",
-            "codigo_alt": "ALT-5017"
+            "sku": "SKU-5016",
+            "codigo_alt": "ALT-5016"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b8" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b8"
+        },
         "codigo_mongo": "MNG-5017",
-        "nombre": "Taladro inalámbrico",
-        "categoria": "Tecnología"
+        "nombre": "Taladro inal\u00e1mbrico",
+        "categoria": "Tecnolog\u00eda"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46b9" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46b9"
+        },
         "codigo_mongo": "MNG-5018",
         "nombre": "Destornillador de cruz",
         "categoria": "Herramientas",
         "equivalencias": {
-            "sku": "SKU-5019",
-            "codigo_alt": "ALT-5019"
+            "sku": "SKU-5018",
+            "codigo_alt": "ALT-5018"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ba" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ba"
+        },
         "codigo_mongo": "MNG-5019",
         "nombre": "Cama matrimonial",
         "categoria": "Hogar"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46bb" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46bb"
+        },
         "codigo_mongo": "MNG-5020",
-        "nombre": "Sábanas matrimonio",
-        "categoria": "Electrodomésticos",
+        "nombre": "S\u00e1banas matrimonio",
+        "categoria": "Electrodom\u00e9sticos",
         "equivalencias": {
-            "sku": "SKU-5021",
-            "codigo_alt": "ALT-5021"
+            "sku": "SKU-5020",
+            "codigo_alt": "ALT-5020"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46bc" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46bc"
+        },
         "codigo_mongo": "MNG-5021",
-        "nombre": "Papel higiénico 6 rollos",
+        "nombre": "Papel higi\u00e9nico 6 rollos",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46bd" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46bd"
+        },
         "codigo_mongo": "MNG-5022",
-        "nombre": "Baterías AA",
-        "categoria": "Tecnología",
+        "nombre": "Bater\u00edas AA",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5023",
-            "codigo_alt": "ALT-5023"
+            "sku": "SKU-5022",
+            "codigo_alt": "ALT-5022"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46be" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46be"
+        },
         "codigo_mongo": "MNG-5023",
         "nombre": "Cepillo de dientes",
         "categoria": "Ropa"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46bf" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46bf"
+        },
         "codigo_mongo": "MNG-5024",
         "nombre": "Ropa de cama 2 piezas",
-        "categoria": "Tecnología",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5025",
-            "codigo_alt": "ALT-5025"
+            "sku": "SKU-5024",
+            "codigo_alt": "ALT-5024"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c0" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c0"
+        },
         "codigo_mongo": "MNG-5025",
         "nombre": "Cinta adhesiva",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c1" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c1"
+        },
         "codigo_mongo": "MNG-5026",
         "nombre": "Aceite de oliva 500ml",
         "categoria": "Herramientas",
         "equivalencias": {
-            "sku": "SKU-5027",
-            "codigo_alt": "ALT-5027"
+            "sku": "SKU-5026",
+            "codigo_alt": "ALT-5026"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c2" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c2"
+        },
         "codigo_mongo": "MNG-5027",
         "nombre": "Cereal de avena",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c3" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c3"
+        },
         "codigo_mongo": "MNG-5028",
         "nombre": "Galletas de chocolate",
         "categoria": "Juguetes",
         "equivalencias": {
-            "sku": "SKU-5029",
-            "codigo_alt": "ALT-5029"
+            "sku": "SKU-5028",
+            "codigo_alt": "ALT-5028"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c4" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c4"
+        },
         "codigo_mongo": "MNG-5029",
         "nombre": "Tetra Pak de jugo",
-        "categoria": "Tecnología"
+        "categoria": "Tecnolog\u00eda"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c5" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c5"
+        },
         "codigo_mongo": "MNG-5030",
         "nombre": "Cargador de celular",
         "categoria": "Juguetes",
         "equivalencias": {
-            "sku": "SKU-5031",
-            "codigo_alt": "ALT-5031"
+            "sku": "SKU-5030",
+            "codigo_alt": "ALT-5030"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c6" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c6"
+        },
         "codigo_mongo": "MNG-5031",
-        "nombre": "Almohada espuma viscoelástica",
-        "categoria": "Tecnología"
+        "nombre": "Almohada espuma viscoel\u00e1stica",
+        "categoria": "Tecnolog\u00eda"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c7" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c7"
+        },
         "codigo_mongo": "MNG-5032",
         "nombre": "Cama individual",
         "categoria": "Herramientas",
         "equivalencias": {
-            "sku": "SKU-5033",
-            "codigo_alt": "ALT-5033"
+            "sku": "SKU-5032",
+            "codigo_alt": "ALT-5032"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c8" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c8"
+        },
         "codigo_mongo": "MNG-5033",
         "nombre": "Cuchillo de cocina",
-        "categoria": "Tecnología"
+        "categoria": "Tecnolog\u00eda"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46c9" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46c9"
+        },
         "codigo_mongo": "MNG-5034",
         "nombre": "Microondas",
         "categoria": "Alimentos",
         "equivalencias": {
-            "sku": "SKU-5035",
-            "codigo_alt": "ALT-5035"
+            "sku": "SKU-5034",
+            "codigo_alt": "ALT-5034"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ca" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ca"
+        },
         "codigo_mongo": "MNG-5035",
         "nombre": "Plancha de vapor",
-        "categoria": "Tecnología"
+        "categoria": "Tecnolog\u00eda"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46cb" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46cb"
+        },
         "codigo_mongo": "MNG-5036",
         "nombre": "Mopa limpiadora",
         "categoria": "Alimentos",
         "equivalencias": {
-            "sku": "SKU-5037",
-            "codigo_alt": "ALT-5037"
+            "sku": "SKU-5036",
+            "codigo_alt": "ALT-5036"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46cc" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46cc"
+        },
         "codigo_mongo": "MNG-5037",
         "nombre": "Cuchara medidora",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46cd" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46cd"
+        },
         "codigo_mongo": "MNG-5038",
         "nombre": "Escoba de silicona",
         "categoria": "Alimentos",
         "equivalencias": {
-            "sku": "SKU-5039",
-            "codigo_alt": "ALT-5039"
+            "sku": "SKU-5038",
+            "codigo_alt": "ALT-5038"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ce" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ce"
+        },
         "codigo_mongo": "MNG-5039",
         "nombre": "Guantes de cocina",
         "categoria": "Ropa"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46cf" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46cf"
+        },
         "codigo_mongo": "MNG-5040",
         "nombre": "Carro de compras",
-        "categoria": "Tecnología",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5041",
-            "codigo_alt": "ALT-5041"
+            "sku": "SKU-5040",
+            "codigo_alt": "ALT-5040"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d0" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d0"
+        },
         "codigo_mongo": "MNG-5041",
         "nombre": "Reloj despertador",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d1" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d1"
+        },
         "codigo_mongo": "MNG-5042",
-        "nombre": "Cámara digital",
+        "nombre": "C\u00e1mara digital",
         "categoria": "Juguetes",
         "equivalencias": {
-            "sku": "SKU-5043",
-            "codigo_alt": "ALT-5043"
+            "sku": "SKU-5042",
+            "codigo_alt": "ALT-5042"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d2" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d2"
+        },
         "codigo_mongo": "MNG-5043",
         "nombre": "Bocina Bluetooth",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d3" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d3"
+        },
         "codigo_mongo": "MNG-5044",
-        "nombre": "Laptop para niños",
+        "nombre": "Laptop para ni\u00f1os",
         "categoria": "Juguetes",
         "equivalencias": {
-            "sku": "SKU-5045",
-            "codigo_alt": "ALT-5045"
+            "sku": "SKU-5044",
+            "codigo_alt": "ALT-5044"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d4" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d4"
+        },
         "codigo_mongo": "MNG-5045",
-        "nombre": "Cargador inalámbrico",
+        "nombre": "Cargador inal\u00e1mbrico",
         "categoria": "Ropa"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d5" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d5"
+        },
         "codigo_mongo": "MNG-5046",
         "nombre": "Pilas recargables",
         "categoria": "Juguetes",
         "equivalencias": {
-            "sku": "SKU-5047",
-            "codigo_alt": "ALT-5047"
+            "sku": "SKU-5046",
+            "codigo_alt": "ALT-5046"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d6" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d6"
+        },
         "codigo_mongo": "MNG-5047",
-        "nombre": "Pañales desechables",
+        "nombre": "Pa\u00f1ales desechables",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d7" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d7"
+        },
         "codigo_mongo": "MNG-5048",
-        "nombre": "Bicicleta de montaña",
-        "categoria": "Electrodomésticos",
+        "nombre": "Bicicleta de monta\u00f1a",
+        "categoria": "Electrodom\u00e9sticos",
         "equivalencias": {
-            "sku": "SKU-5049",
-            "codigo_alt": "ALT-5049"
+            "sku": "SKU-5048",
+            "codigo_alt": "ALT-5048"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d8" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d8"
+        },
         "codigo_mongo": "MNG-5049",
-        "nombre": "Cinta métrica 5m",
+        "nombre": "Cinta m\u00e9trica 5m",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46d9" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46d9"
+        },
         "codigo_mongo": "MNG-5050",
         "nombre": "Secador de pelo",
-        "categoria": "Electrodomésticos",
+        "categoria": "Electrodom\u00e9sticos",
         "equivalencias": {
-            "sku": "SKU-5051",
-            "codigo_alt": "ALT-5051"
+            "sku": "SKU-5050",
+            "codigo_alt": "ALT-5050"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46da" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46da"
+        },
         "codigo_mongo": "MNG-5051",
         "nombre": "Alfombra antiresbalante",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46db" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46db"
+        },
         "codigo_mongo": "MNG-5052",
-        "nombre": "Silla de oficina ergonómica",
+        "nombre": "Silla de oficina ergon\u00f3mica",
         "categoria": "Herramientas",
         "equivalencias": {
-            "sku": "SKU-5053",
-            "codigo_alt": "ALT-5053"
+            "sku": "SKU-5052",
+            "codigo_alt": "ALT-5052"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46dc" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46dc"
+        },
         "codigo_mongo": "MNG-5053",
-        "nombre": "Estufa eléctrica",
+        "nombre": "Estufa el\u00e9ctrica",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46dd" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46dd"
+        },
         "codigo_mongo": "MNG-5054",
-        "nombre": "Aspiradora portátil",
+        "nombre": "Aspiradora port\u00e1til",
         "categoria": "Hogar",
         "equivalencias": {
-            "sku": "SKU-5055",
-            "codigo_alt": "ALT-5055"
+            "sku": "SKU-5054",
+            "codigo_alt": "ALT-5054"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46de" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46de"
+        },
         "codigo_mongo": "MNG-5055",
         "nombre": "Cortinas blackout",
         "categoria": "Juguetes"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46df" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46df"
+        },
         "codigo_mongo": "MNG-5056",
         "nombre": "Silla plegable para camping",
-        "categoria": "Tecnología",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5057",
-            "codigo_alt": "ALT-5057"
+            "sku": "SKU-5056",
+            "codigo_alt": "ALT-5056"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e0" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e0"
+        },
         "codigo_mongo": "MNG-5057",
         "nombre": "Botella de agua",
         "categoria": "Ropa"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e1" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e1"
+        },
         "codigo_mongo": "MNG-5058",
         "nombre": "Silla de ruedas",
         "categoria": "Alimentos",
         "equivalencias": {
-            "sku": "SKU-5059",
-            "codigo_alt": "ALT-5059"
+            "sku": "SKU-5058",
+            "codigo_alt": "ALT-5058"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e2" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e2"
+        },
         "codigo_mongo": "MNG-5059",
         "nombre": "Cuaderno de notas",
-        "categoria": "Electrodomésticos"
+        "categoria": "Electrodom\u00e9sticos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e3" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e3"
+        },
         "codigo_mongo": "MNG-5060",
         "nombre": "Zapatos deportivos",
-        "categoria": "Tecnología",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5061",
-            "codigo_alt": "ALT-5061"
+            "sku": "SKU-5060",
+            "codigo_alt": "ALT-5060"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e4" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e4"
+        },
         "codigo_mongo": "MNG-5061",
         "nombre": "Tijeras de oficina",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e5" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e5"
+        },
         "codigo_mongo": "MNG-5062",
-        "nombre": "Cortadora de césped",
+        "nombre": "Cortadora de c\u00e9sped",
         "categoria": "Hogar",
         "equivalencias": {
-            "sku": "SKU-5063",
-            "codigo_alt": "ALT-5063"
+            "sku": "SKU-5062",
+            "codigo_alt": "ALT-5062"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e6" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e6"
+        },
         "codigo_mongo": "MNG-5063",
-        "nombre": "Sillas de jardín",
+        "nombre": "Sillas de jard\u00edn",
         "categoria": "Ropa"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e7" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e7"
+        },
         "codigo_mongo": "MNG-5064",
         "nombre": "Guantes de invierno",
-        "categoria": "Electrodomésticos",
+        "categoria": "Electrodom\u00e9sticos",
         "equivalencias": {
-            "sku": "SKU-5065",
-            "codigo_alt": "ALT-5065"
+            "sku": "SKU-5064",
+            "codigo_alt": "ALT-5064"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e8" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e8"
+        },
         "codigo_mongo": "MNG-5065",
         "nombre": "Mochila para laptop",
         "categoria": "Ropa"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46e9" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46e9"
+        },
         "codigo_mongo": "MNG-5066",
-        "nombre": "Funda de cojín",
+        "nombre": "Funda de coj\u00edn",
         "categoria": "Herramientas",
         "equivalencias": {
-            "sku": "SKU-5067",
-            "codigo_alt": "ALT-5067"
+            "sku": "SKU-5066",
+            "codigo_alt": "ALT-5066"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ea" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ea"
+        },
         "codigo_mongo": "MNG-5067",
         "nombre": "Sarten antiadherente",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46eb" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46eb"
+        },
         "codigo_mongo": "MNG-5068",
         "nombre": "Termo de acero inoxidable",
         "categoria": "Juguetes",
         "equivalencias": {
-            "sku": "SKU-5069",
-            "codigo_alt": "ALT-5069"
+            "sku": "SKU-5068",
+            "codigo_alt": "ALT-5068"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ec" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ec"
+        },
         "codigo_mongo": "MNG-5069",
-        "nombre": "Taza de cerámica",
+        "nombre": "Taza de cer\u00e1mica",
         "categoria": "Hogar"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ed" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ed"
+        },
         "codigo_mongo": "MNG-5070",
         "nombre": "Cargador para coche",
         "categoria": "Ropa",
         "equivalencias": {
-            "sku": "SKU-5071",
-            "codigo_alt": "ALT-5071"
+            "sku": "SKU-5070",
+            "codigo_alt": "ALT-5070"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ee" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ee"
+        },
         "codigo_mongo": "MNG-5071",
         "nombre": "Mueble de almacenamiento",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ef" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ef"
+        },
         "codigo_mongo": "MNG-5072",
-        "nombre": "Pelota de fútbol",
-        "categoria": "Tecnología",
+        "nombre": "Pelota de f\u00fatbol",
+        "categoria": "Tecnolog\u00eda",
         "equivalencias": {
-            "sku": "SKU-5073",
-            "codigo_alt": "ALT-5073"
+            "sku": "SKU-5072",
+            "codigo_alt": "ALT-5072"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f0" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f0"
+        },
         "codigo_mongo": "MNG-5073",
         "nombre": "Gafas de sol",
         "categoria": "Alimentos"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f1" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f1"
+        },
         "codigo_mongo": "MNG-5074",
         "nombre": "Bicicleta infantil",
         "categoria": "Juguetes",
         "equivalencias": {
-            "sku": "SKU-5075",
-            "codigo_alt": "ALT-5075"
+            "sku": "SKU-5074",
+            "codigo_alt": "ALT-5074"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f2" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f2"
+        },
         "codigo_mongo": "MNG-5075",
         "nombre": "Planta artificial",
         "categoria": "Juguetes"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f3" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f3"
+        },
         "codigo_mongo": "MNG-4001",
         "nombre": "Martillo carpintero",
         "categoria": "Herramientas",
@@ -608,13 +760,17 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f4" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f4"
+        },
         "codigo_mongo": "MNG-4002",
         "nombre": "Martillo de bola",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f5" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f5"
+        },
         "codigo_mongo": "MNG-4003",
         "nombre": "Destornillador plano",
         "categoria": "Herramientas",
@@ -624,13 +780,17 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f6" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f6"
+        },
         "codigo_mongo": "MNG-4004",
         "nombre": "Destornillador de cruz",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f7" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f7"
+        },
         "codigo_mongo": "MNG-4005",
         "nombre": "Juego de llaves allen",
         "categoria": "Herramientas",
@@ -640,19 +800,25 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f8" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f8"
+        },
         "codigo_mongo": "MNG-4006",
         "nombre": "Llave inglesa ajustable",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46f9" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46f9"
+        },
         "codigo_mongo": "MNG-4007",
         "nombre": "Alicate de corte",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46fa" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46fa"
+        },
         "codigo_mongo": "MNG-4008",
         "nombre": "Alicate universal",
         "categoria": "Herramientas",
@@ -662,13 +828,17 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46fb" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46fb"
+        },
         "codigo_mongo": "MNG-4009",
         "nombre": "Serrucho manual",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46fc" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46fc"
+        },
         "codigo_mongo": "MNG-4010",
         "nombre": "Sierra de arco",
         "categoria": "Herramientas",
@@ -678,15 +848,19 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46fd" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46fd"
+        },
         "codigo_mongo": "MNG-4011",
         "nombre": "Taladro percutor 1/2 pulgada",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46fe" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46fe"
+        },
         "codigo_mongo": "MNG-4012",
-        "nombre": "Taladro inalámbrico 20V",
+        "nombre": "Taladro inal\u00e1mbrico 20V",
         "categoria": "Herramientas",
         "equivalencias": {
             "sku": "SKU-4012",
@@ -694,15 +868,19 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc46ff" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc46ff"
+        },
         "codigo_mongo": "MNG-4013",
         "nombre": "Amoladora angular 4.5 pulgada",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4700" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4700"
+        },
         "codigo_mongo": "MNG-4014",
-        "nombre": "Pulidora eléctrica 7 pulgada",
+        "nombre": "Pulidora el\u00e9ctrica 7 pulgada",
         "categoria": "Herramientas",
         "equivalencias": {
             "sku": "SKU-4014",
@@ -710,21 +888,27 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4701" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4701"
+        },
         "codigo_mongo": "MNG-4015",
         "nombre": "Lijadora orbital",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4702" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4702"
+        },
         "codigo_mongo": "MNG-4016",
         "nombre": "Lijadora de banda",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4703" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4703"
+        },
         "codigo_mongo": "MNG-4017",
-        "nombre": "Cinta métrica 5m",
+        "nombre": "Cinta m\u00e9trica 5m",
         "categoria": "Herramientas",
         "equivalencias": {
             "sku": "SKU-4017",
@@ -732,13 +916,17 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4704" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4704"
+        },
         "codigo_mongo": "MNG-4018",
-        "nombre": "Cinta métrica 8m",
+        "nombre": "Cinta m\u00e9trica 8m",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4705" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4705"
+        },
         "codigo_mongo": "MNG-4019",
         "nombre": "Nivel de burbuja 40cm",
         "categoria": "Herramientas",
@@ -748,19 +936,25 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4706" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4706"
+        },
         "codigo_mongo": "MNG-4020",
         "nombre": "Nivel de burbuja 80cm",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4707" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4707"
+        },
         "codigo_mongo": "MNG-4021",
         "nombre": "Brocas para concreto set 5pzs",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4708" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4708"
+        },
         "codigo_mongo": "MNG-4022",
         "nombre": "Brocas para metal set 5pzs",
         "categoria": "Herramientas",
@@ -770,25 +964,31 @@
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc4709" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc4709"
+        },
         "codigo_mongo": "MNG-4023",
         "nombre": "Juego de dados 1/2 pulgada",
         "categoria": "Herramientas"
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc470a" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc470a"
+        },
         "codigo_mongo": "MNG-4024",
-        "nombre": "Carretilla metálica 90L",
-        "categoria": "Construcción",
+        "nombre": "Carretilla met\u00e1lica 90L",
+        "categoria": "Construcci\u00f3n",
         "equivalencias": {
             "sku": "SKU-4024",
             "codigo_alt": "ALT-4024"
         }
     },
     {
-        "_id": { "$oid": "6917dcda94f109e21acc470b" },
+        "_id": {
+            "$oid": "6917dcda94f109e21acc470b"
+        },
         "codigo_mongo": "MNG-4025",
         "nombre": "Pala cuadrada",
-        "categoria": "Construcción"
+        "categoria": "Construcci\u00f3n"
     }
 ]

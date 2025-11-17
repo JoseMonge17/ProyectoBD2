@@ -1,6 +1,7 @@
 import pandas as pd
 import pyodbc
 from neo4j import GraphDatabase
+from datetime import datetime
 
 # Conexión global a Neo4j
 URI = "bolt://localhost:7687"
@@ -26,7 +27,7 @@ neo4j_driver = get_driver()
 def extract_clientes_data():
     clientes_query = """
     MATCH (c:Cliente)
-    RETURN c.nombre AS nombre, c.email AS email, c.genero AS genero, c.pais AS pais
+    RETURN c.nombre AS nombre, c.email AS email, c.genero AS genero, c.pais AS pais, c.fechaRegistro AS fechaRegistro
     """
     with neo4j_driver.session(database=DATABASE_NAME) as session:
         clientes_data = session.run(clientes_query)
@@ -78,12 +79,22 @@ def insert_cliente(cliente):
         else:
             genero = 'Otro'  # Si es otro valor, lo dejamos como 'Otro'
 
+        # Convertir fechaRegistro a datetime si no lo está
+        fecha_registro = cliente['fechaRegistro']
+        if isinstance(fecha_registro, str):  # Si la fecha es string, convertirla
+            fecha_registro = datetime.strptime(fecha_registro, '%Y-%m-%d')  # Ajusta el formato si es necesario
+            
+        # Convertir el datetime a cadena de texto con formato compatible para SQL Server
+        fecha_registro_str = fecha_registro.strftime('%Y-%m-%d %H:%M:%S')  # Convertir a 'YYYY-MM-DD HH:MM:SS'
+        
+        # Insertar en la base de datos
         query = """
-        INSERT INTO DIM_Cliente (nombre, email, genero, pais)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO DIM_Cliente (nombre, email, genero, pais, fechaRegistro)
+        VALUES (?, ?, ?, ?, ?)
         """
-        cursor.execute(query, (cliente['nombre'], cliente['email'], genero, cliente['pais']))
+        cursor.execute(query, (cliente['nombre'], cliente['email'], genero, cliente['pais'], fecha_registro_str))
         conn.commit()
+
 
 # 7. Obtener o insertar un producto (con manejo de SKU, código_alterno y código_mongo)
 def get_or_insert_producto(producto):
@@ -299,8 +310,8 @@ def main():
     ordenes_df = extract_ordenes_data()
 
     # Procesar e insertar los datos en SQL Server
-    #process_clientes(clientes_df)
-    #process_productos(productos_df)
+    process_clientes(clientes_df)
+    process_productos(productos_df)
     process_ventas(ordenes_df)
 
     # Cerrar la conexión
