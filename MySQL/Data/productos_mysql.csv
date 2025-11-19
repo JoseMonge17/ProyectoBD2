@@ -1,0 +1,501 @@
+codigo_alt,nombre,categoria
+ALT-0001,Jeans 1,Belleza
+ALT-0002,Colchoneta Yoga 2,Hogar
+ALT-0003,Zapatos Deportivos 3,Juguetes
+ALT-0004,Carro Control Remoto 4,Belleza
+ALT-0005,Carro Control Remoto 5,Hogar
+ALT-0006,Juego Mesa 6,Automotriz
+ALT-0007,Colchoneta Yoga 7,Ropa
+ALT-0008,Raqueta Tenis 8,Libros
+ALT-0009,Novela BestSeller 9,Ropa
+ALT-0010,Chaqueta 10,Salud
+ALT-0011,Tablet 11,Libros
+ALT-0012,Camiseta Básica 12,Salud
+ALT-0013,Raqueta Tenis 13,Hogar
+ALT-0014,Colchoneta Yoga 14,Belleza
+ALT-0015,Puzzle 1000pzs 15,Deportes
+ALT-0016,Libro Cocina 16,Ropa
+ALT-0017,Auriculares Inalámbricos 17,Belleza
+ALT-0018,Auriculares Inalámbricos 18,Electrónicos
+ALT-0019,Sofá 19,Automotriz
+ALT-0020,Cuentos Infantiles 20,Electrónicos
+ALT-0021,Enciclopedia 21,Hogar
+ALT-0022,Chaqueta 22,Salud
+ALT-0023,Refrigerador 23,Electrónicos
+ALT-0024,Laptop Gaming 24,Salud
+ALT-0025,Lámpara LED 25,Libros
+ALT-0026,Cocina Inducción 26,Deportes
+ALT-0027,Auriculares Inalámbricos 27,Alimentos
+ALT-0028,Laptop Gaming 28,Belleza
+ALT-0029,Chaqueta 29,Belleza
+ALT-0030,Bicicleta 30,Alimentos
+ALT-0031,Cuentos Infantiles 31,Hogar
+ALT-0032,Vestido 32,Automotriz
+ALT-0033,Juego Mesa 33,Automotriz
+ALT-0034,Cocina Inducción 34,Electrónicos
+ALT-0035,Camiseta Básica 35,Libros
+ALT-0036,Pelota Fútbol 36,Juguetes
+ALT-0037,Cuentos Infantiles 37,Belleza
+ALT-0038,Mesa Centro 38,Libros
+ALT-0039,Novela BestSeller 39,Libros
+ALT-0040,Enciclopedia 40,Electrónicos
+ALT-0041,Enciclopedia 41,Salud
+ALT-0042,Juego Mesa 42,Automotriz
+ALT-0043,Smartwatch 43,Salud
+ALT-0044,Mesa Centro 44,Salud
+ALT-0045,Pelota Fútbol 45,Alimentos
+ALT-0046,Bicicleta 46,Alimentos
+ALT-0047,Laptop Gaming 47,Alimentos
+ALT-0048,Pesas 48,Deportes
+ALT-0049,Pelota Fútbol 49,Salud
+ALT-0050,Enciclopedia 50,Juguetes
+ALT-0051,Carro Control Remoto 51,Electrónicos
+ALT-0052,Pesas 52,Ropa
+ALT-0053,Biografía 53,Juguetes
+ALT-0054,Vestido 54,Electrónicos
+ALT-0055,Chaqueta 55,Juguetes
+ALT-0056,Carro Control Remoto 56,Alimentos
+ALT-0057,Jeans 57,Salud
+ALT-0058,Puzzle 1000pzs 58,Ropa
+ALT-0059,Juego Mesa 59,Alimentos
+ALT-0060,Pesas 60,Electrónicos
+ALT-0061,Lámpara LED 61,Juguetes
+ALT-0062,Carro Control Remoto 62,Automotriz
+ALT-0063,Chaqueta 63,Belleza
+ALT-0064,Colchoneta Yoga 64,Hogar
+ALT-0065,Enciclopedia 65,Deportes
+ALT-0066,Biografía 66,Belleza
+ALT-0067,Muñeca Articulada 67,Deportes
+ALT-0068,Enciclopedia 68,Automotriz
+ALT-0069,Cocina Inducción 69,Ropa
+ALT-0070,Mesa Centro 70,Hogar
+ALT-0071,Jeans 71,Libros
+ALT-0072,Enciclopedia 72,Juguetes
+ALT-0073,Bicicleta 73,Deportes
+ALT-0074,Pesas 74,Ropa
+ALT-0075,Mesa Centro 75,Libros
+ALT-0076,Enciclopedia 76,Belleza
+ALT-0077,Pelota Fútbol 77,Electrónicos
+ALT-0078,Auriculares Inalámbricos 78,Electrónicos
+ALT-0079,Novela BestSeller 79,Alimentos
+ALT-0080,Camiseta Básica 80,Belleza
+ALT-0081,Novela BestSeller 81,Belleza
+ALT-0082,Pesas 82,Belleza
+ALT-0083,Muñeca Articulada 83,Automotriz
+ALT-0084,Bicicleta 84,Deportes
+ALT-0085,Cuentos Infantiles 85,Hogar
+ALT-0086,Zapatos Deportivos 86,Juguetes
+ALT-0087,Camiseta Básica 87,Hogar
+ALT-0088,Refrigerador 88,Electrónicos
+ALT-0089,Carro Control Remoto 89,Belleza
+ALT-0090,Biografía 90,Alimentos
+ALT-0091,Vestido 91,Libros
+ALT-0092,Carro Control Remoto 92,Deportes
+ALT-0093,Muñeca Articulada 93,Ropa
+ALT-0094,Pesas 94,Belleza
+ALT-0095,Auriculares Inalámbricos 95,Hogar
+ALT-0096,Chaqueta 96,Electrónicos
+ALT-0097,Smartwatch 97,Alimentos
+ALT-0098,Bicicleta 98,Ropa
+ALT-0099,Smartwatch 99,Deportes
+ALT-0100,Smartwatch 100,Hogar
+ALT-0101,Libro Cocina 101,Deportes
+ALT-0102,Juego Mesa 102,Alimentos
+ALT-0103,Refrigerador 103,Salud
+ALT-0104,Vestido 104,Belleza
+ALT-0105,Pesas 105,Belleza
+ALT-0106,Laptop Gaming 106,Hogar
+ALT-0107,Tablet 107,Salud
+ALT-0108,Refrigerador 108,Automotriz
+ALT-0109,Refrigerador 109,Automotriz
+ALT-0110,Sofá 110,Automotriz
+ALT-0111,Bicicleta 111,Alimentos
+ALT-0112,Vestido 112,Automotriz
+ALT-0113,Libro Cocina 113,Hogar
+ALT-0114,Enciclopedia 114,Libros
+ALT-0115,Cuentos Infantiles 115,Alimentos
+ALT-0116,Set Construcción 116,Deportes
+ALT-0117,Pesas 117,Electrónicos
+ALT-0118,Colchoneta Yoga 118,Ropa
+ALT-0119,Raqueta Tenis 119,Libros
+ALT-0120,Puzzle 1000pzs 120,Libros
+ALT-0121,Bicicleta 121,Belleza
+ALT-0122,Smartphone 122,Salud
+ALT-0123,Sofá 123,Electrónicos
+ALT-0124,Juego Mesa 124,Electrónicos
+ALT-0125,Vestido 125,Belleza
+ALT-0126,Set Construcción 126,Automotriz
+ALT-0127,Jeans 127,Hogar
+ALT-0128,Lámpara LED 128,Automotriz
+ALT-0129,Auriculares Inalámbricos 129,Deportes
+ALT-0130,Biografía 130,Deportes
+ALT-0131,Colchoneta Yoga 131,Hogar
+ALT-0132,Pelota Fútbol 132,Salud
+ALT-0133,Sofá 133,Hogar
+ALT-0134,Refrigerador 134,Belleza
+ALT-0135,Laptop Gaming 135,Alimentos
+ALT-0136,Smartwatch 136,Electrónicos
+ALT-0137,Cocina Inducción 137,Belleza
+ALT-0138,Muñeca Articulada 138,Electrónicos
+ALT-0139,Vestido 139,Hogar
+ALT-0140,Enciclopedia 140,Salud
+ALT-0141,Novela BestSeller 141,Juguetes
+ALT-0142,Enciclopedia 142,Belleza
+ALT-0143,Lámpara LED 143,Automotriz
+ALT-0144,Refrigerador 144,Hogar
+ALT-0145,Sofá 145,Electrónicos
+ALT-0146,Chaqueta 146,Belleza
+ALT-0147,Sofá 147,Belleza
+ALT-0148,Smartwatch 148,Hogar
+ALT-0149,Muñeca Articulada 149,Deportes
+ALT-0150,Lámpara LED 150,Automotriz
+ALT-0151,Carro Control Remoto 151,Juguetes
+ALT-0152,Cuentos Infantiles 152,Electrónicos
+ALT-0153,Pelota Fútbol 153,Electrónicos
+ALT-0154,Bicicleta 154,Deportes
+ALT-0155,Chaqueta 155,Hogar
+ALT-0156,Novela BestSeller 156,Alimentos
+ALT-0157,Vestido 157,Ropa
+ALT-0158,Biografía 158,Libros
+ALT-0159,Smartwatch 159,Libros
+ALT-0160,Camiseta Básica 160,Salud
+ALT-0161,Pesas 161,Alimentos
+ALT-0162,Colchoneta Yoga 162,Automotriz
+ALT-0163,Camiseta Básica 163,Alimentos
+ALT-0164,Pesas 164,Belleza
+ALT-0165,Set Construcción 165,Alimentos
+ALT-0166,Colchoneta Yoga 166,Salud
+ALT-0167,Bicicleta 167,Electrónicos
+ALT-0168,Puzzle 1000pzs 168,Libros
+ALT-0169,Bicicleta 169,Salud
+ALT-0170,Enciclopedia 170,Libros
+ALT-0171,Puzzle 1000pzs 171,Electrónicos
+ALT-0172,Libro Cocina 172,Hogar
+ALT-0173,Pelota Fútbol 173,Libros
+ALT-0174,Auriculares Inalámbricos 174,Ropa
+ALT-0175,Biografía 175,Electrónicos
+ALT-0176,Auriculares Inalámbricos 176,Automotriz
+ALT-0177,Smartphone 177,Alimentos
+ALT-0178,Pelota Fútbol 178,Deportes
+ALT-0179,Smartphone 179,Salud
+ALT-0180,Tablet 180,Automotriz
+ALT-0181,Cuentos Infantiles 181,Alimentos
+ALT-0182,Cuentos Infantiles 182,Ropa
+ALT-0183,Novela BestSeller 183,Libros
+ALT-0184,Puzzle 1000pzs 184,Deportes
+ALT-0185,Smartphone 185,Automotriz
+ALT-0186,Libro Cocina 186,Ropa
+ALT-0187,Biografía 187,Electrónicos
+ALT-0188,Bicicleta 188,Alimentos
+ALT-0189,Enciclopedia 189,Automotriz
+ALT-0190,Juego Mesa 190,Automotriz
+ALT-0191,Mesa Centro 191,Libros
+ALT-0192,Raqueta Tenis 192,Juguetes
+ALT-0193,Pesas 193,Juguetes
+ALT-0194,Colchoneta Yoga 194,Belleza
+ALT-0195,Refrigerador 195,Ropa
+ALT-0196,Cuentos Infantiles 196,Automotriz
+ALT-0197,Raqueta Tenis 197,Hogar
+ALT-0198,Refrigerador 198,Deportes
+ALT-0199,Cocina Inducción 199,Electrónicos
+ALT-0200,Juego Mesa 200,Ropa
+ALT-0201,Jeans 201,Automotriz
+ALT-0202,Smartphone 202,Deportes
+ALT-0203,Cocina Inducción 203,Libros
+ALT-0204,Jeans 204,Alimentos
+ALT-0205,Cuentos Infantiles 205,Electrónicos
+ALT-0206,Camiseta Básica 206,Electrónicos
+ALT-0207,Bicicleta 207,Hogar
+ALT-0208,Carro Control Remoto 208,Juguetes
+ALT-0209,Enciclopedia 209,Belleza
+ALT-0210,Carro Control Remoto 210,Alimentos
+ALT-0211,Pelota Fútbol 211,Libros
+ALT-0212,Cocina Inducción 212,Juguetes
+ALT-0213,Enciclopedia 213,Hogar
+ALT-0214,Cocina Inducción 214,Deportes
+ALT-0215,Refrigerador 215,Salud
+ALT-0216,Jeans 216,Electrónicos
+ALT-0217,Juego Mesa 217,Libros
+ALT-0218,Pelota Fútbol 218,Alimentos
+ALT-0219,Puzzle 1000pzs 219,Hogar
+ALT-0220,Camiseta Básica 220,Ropa
+ALT-0221,Puzzle 1000pzs 221,Automotriz
+ALT-0222,Refrigerador 222,Ropa
+ALT-0223,Laptop Gaming 223,Salud
+ALT-0224,Novela BestSeller 224,Ropa
+ALT-0225,Raqueta Tenis 225,Deportes
+ALT-0226,Tablet 226,Alimentos
+ALT-0227,Camiseta Básica 227,Juguetes
+ALT-0228,Raqueta Tenis 228,Salud
+ALT-0229,Refrigerador 229,Automotriz
+ALT-0230,Juego Mesa 230,Belleza
+ALT-0231,Laptop Gaming 231,Ropa
+ALT-0232,Juego Mesa 232,Deportes
+ALT-0233,Pesas 233,Ropa
+ALT-0234,Set Construcción 234,Libros
+ALT-0235,Auriculares Inalámbricos 235,Alimentos
+ALT-0236,Vestido 236,Salud
+ALT-0237,Cocina Inducción 237,Ropa
+ALT-0238,Lámpara LED 238,Alimentos
+ALT-0239,Smartphone 239,Belleza
+ALT-0240,Mesa Centro 240,Ropa
+ALT-0241,Pesas 241,Automotriz
+ALT-0242,Lámpara LED 242,Hogar
+ALT-0243,Set Construcción 243,Libros
+ALT-0244,Camiseta Básica 244,Salud
+ALT-0245,Biografía 245,Electrónicos
+ALT-0246,Bicicleta 246,Libros
+ALT-0247,Set Construcción 247,Salud
+ALT-0248,Enciclopedia 248,Belleza
+ALT-0249,Jeans 249,Belleza
+ALT-0250,Carro Control Remoto 250,Ropa
+ALT-0251,Raqueta Tenis 251,Salud
+ALT-0252,Smartwatch 252,Alimentos
+ALT-0253,Pelota Fútbol 253,Juguetes
+ALT-0254,Smartwatch 254,Libros
+ALT-0255,Auriculares Inalámbricos 255,Salud
+ALT-0256,Pesas 256,Juguetes
+ALT-0257,Libro Cocina 257,Automotriz
+ALT-0258,Vestido 258,Juguetes
+ALT-0259,Carro Control Remoto 259,Ropa
+ALT-0260,Lámpara LED 260,Belleza
+ALT-0261,Lámpara LED 261,Libros
+ALT-0262,Colchoneta Yoga 262,Deportes
+ALT-0263,Zapatos Deportivos 263,Ropa
+ALT-0264,Pelota Fútbol 264,Electrónicos
+ALT-0265,Laptop Gaming 265,Juguetes
+ALT-0266,Cuentos Infantiles 266,Hogar
+ALT-0267,Pelota Fútbol 267,Automotriz
+ALT-0268,Muñeca Articulada 268,Alimentos
+ALT-0269,Auriculares Inalámbricos 269,Libros
+ALT-0270,Zapatos Deportivos 270,Electrónicos
+ALT-0271,Zapatos Deportivos 271,Alimentos
+ALT-0272,Muñeca Articulada 272,Belleza
+ALT-0273,Biografía 273,Libros
+ALT-0274,Chaqueta 274,Hogar
+ALT-0275,Carro Control Remoto 275,Electrónicos
+ALT-0276,Colchoneta Yoga 276,Hogar
+ALT-0277,Chaqueta 277,Alimentos
+ALT-0278,Mesa Centro 278,Electrónicos
+ALT-0279,Vestido 279,Automotriz
+ALT-0280,Set Construcción 280,Alimentos
+ALT-0281,Smartphone 281,Automotriz
+ALT-0282,Puzzle 1000pzs 282,Libros
+ALT-0283,Lámpara LED 283,Automotriz
+ALT-0284,Enciclopedia 284,Automotriz
+ALT-0285,Carro Control Remoto 285,Electrónicos
+ALT-0286,Muñeca Articulada 286,Ropa
+ALT-0287,Pesas 287,Belleza
+ALT-0288,Colchoneta Yoga 288,Belleza
+ALT-0289,Camiseta Básica 289,Salud
+ALT-0290,Raqueta Tenis 290,Deportes
+ALT-0291,Zapatos Deportivos 291,Deportes
+ALT-0292,Cocina Inducción 292,Juguetes
+ALT-0293,Jeans 293,Hogar
+ALT-0294,Cuentos Infantiles 294,Hogar
+ALT-0295,Tablet 295,Hogar
+ALT-0296,Camiseta Básica 296,Electrónicos
+ALT-0297,Bicicleta 297,Alimentos
+ALT-0298,Cocina Inducción 298,Belleza
+ALT-0299,Colchoneta Yoga 299,Salud
+ALT-0300,Enciclopedia 300,Libros
+ALT-0301,Mesa Centro 301,Libros
+ALT-0302,Cuentos Infantiles 302,Deportes
+ALT-0303,Muñeca Articulada 303,Ropa
+ALT-0304,Jeans 304,Automotriz
+ALT-0305,Raqueta Tenis 305,Deportes
+ALT-0306,Novela BestSeller 306,Automotriz
+ALT-0307,Mesa Centro 307,Salud
+ALT-0308,Muñeca Articulada 308,Electrónicos
+ALT-0309,Juego Mesa 309,Juguetes
+ALT-0310,Colchoneta Yoga 310,Alimentos
+ALT-0311,Laptop Gaming 311,Ropa
+ALT-0312,Set Construcción 312,Juguetes
+ALT-0313,Lámpara LED 313,Libros
+ALT-0314,Juego Mesa 314,Juguetes
+ALT-0315,Novela BestSeller 315,Libros
+ALT-0316,Cocina Inducción 316,Alimentos
+ALT-0317,Set Construcción 317,Automotriz
+ALT-0318,Raqueta Tenis 318,Libros
+ALT-0319,Puzzle 1000pzs 319,Ropa
+ALT-0320,Carro Control Remoto 320,Deportes
+ALT-0321,Pelota Fútbol 321,Belleza
+ALT-0322,Sofá 322,Alimentos
+ALT-0323,Muñeca Articulada 323,Libros
+ALT-0324,Zapatos Deportivos 324,Electrónicos
+ALT-0325,Tablet 325,Automotriz
+ALT-0326,Puzzle 1000pzs 326,Libros
+ALT-0327,Camiseta Básica 327,Deportes
+ALT-0328,Puzzle 1000pzs 328,Deportes
+ALT-0329,Carro Control Remoto 329,Salud
+ALT-0330,Jeans 330,Juguetes
+ALT-0331,Cuentos Infantiles 331,Belleza
+ALT-0332,Raqueta Tenis 332,Ropa
+ALT-0333,Bicicleta 333,Alimentos
+ALT-0334,Biografía 334,Belleza
+ALT-0335,Pesas 335,Libros
+ALT-0336,Zapatos Deportivos 336,Belleza
+ALT-0337,Cocina Inducción 337,Automotriz
+ALT-0338,Sofá 338,Juguetes
+ALT-0339,Vestido 339,Electrónicos
+ALT-0340,Lámpara LED 340,Electrónicos
+ALT-0341,Pesas 341,Hogar
+ALT-0342,Sofá 342,Juguetes
+ALT-0343,Bicicleta 343,Electrónicos
+ALT-0344,Smartwatch 344,Juguetes
+ALT-0345,Auriculares Inalámbricos 345,Electrónicos
+ALT-0346,Novela BestSeller 346,Libros
+ALT-0347,Sofá 347,Juguetes
+ALT-0348,Pelota Fútbol 348,Salud
+ALT-0349,Smartwatch 349,Automotriz
+ALT-0350,Laptop Gaming 350,Salud
+ALT-0351,Chaqueta 351,Electrónicos
+ALT-0352,Raqueta Tenis 352,Libros
+ALT-0353,Pesas 353,Salud
+ALT-0354,Jeans 354,Libros
+ALT-0355,Tablet 355,Libros
+ALT-0356,Set Construcción 356,Hogar
+ALT-0357,Smartphone 357,Alimentos
+ALT-0358,Smartwatch 358,Hogar
+ALT-0359,Libro Cocina 359,Libros
+ALT-0360,Refrigerador 360,Electrónicos
+ALT-0361,Auriculares Inalámbricos 361,Ropa
+ALT-0362,Smartphone 362,Hogar
+ALT-0363,Mesa Centro 363,Libros
+ALT-0364,Zapatos Deportivos 364,Automotriz
+ALT-0365,Cuentos Infantiles 365,Deportes
+ALT-0366,Refrigerador 366,Juguetes
+ALT-0367,Biografía 367,Alimentos
+ALT-0368,Smartphone 368,Electrónicos
+ALT-0369,Colchoneta Yoga 369,Ropa
+ALT-0370,Cocina Inducción 370,Hogar
+ALT-0371,Sofá 371,Libros
+ALT-0372,Pesas 372,Deportes
+ALT-0373,Tablet 373,Belleza
+ALT-0374,Enciclopedia 374,Electrónicos
+ALT-0375,Cocina Inducción 375,Hogar
+ALT-0376,Enciclopedia 376,Hogar
+ALT-0377,Puzzle 1000pzs 377,Hogar
+ALT-0378,Jeans 378,Hogar
+ALT-0379,Smartwatch 379,Hogar
+ALT-0380,Smartwatch 380,Deportes
+ALT-0381,Libro Cocina 381,Deportes
+ALT-0382,Colchoneta Yoga 382,Salud
+ALT-0383,Raqueta Tenis 383,Electrónicos
+ALT-0384,Zapatos Deportivos 384,Electrónicos
+ALT-0385,Laptop Gaming 385,Libros
+ALT-0386,Juego Mesa 386,Deportes
+ALT-0387,Libro Cocina 387,Electrónicos
+ALT-0388,Mesa Centro 388,Deportes
+ALT-0389,Vestido 389,Salud
+ALT-0390,Sofá 390,Electrónicos
+ALT-0391,Smartwatch 391,Libros
+ALT-0392,Novela BestSeller 392,Automotriz
+ALT-0393,Sofá 393,Electrónicos
+ALT-0394,Refrigerador 394,Salud
+ALT-0395,Zapatos Deportivos 395,Hogar
+ALT-0396,Lámpara LED 396,Hogar
+ALT-0397,Refrigerador 397,Salud
+ALT-0398,Biografía 398,Hogar
+ALT-0399,Smartwatch 399,Salud
+ALT-0400,Colchoneta Yoga 400,Libros
+ALT-0401,Smartwatch 401,Electrónicos
+ALT-0402,Refrigerador 402,Electrónicos
+ALT-0403,Enciclopedia 403,Belleza
+ALT-0404,Auriculares Inalámbricos 404,Libros
+ALT-0405,Set Construcción 405,Belleza
+ALT-0406,Enciclopedia 406,Juguetes
+ALT-0407,Novela BestSeller 407,Deportes
+ALT-0408,Mesa Centro 408,Salud
+ALT-0409,Tablet 409,Electrónicos
+ALT-0410,Cuentos Infantiles 410,Salud
+ALT-0411,Enciclopedia 411,Belleza
+ALT-0412,Novela BestSeller 412,Alimentos
+ALT-0413,Camiseta Básica 413,Automotriz
+ALT-0414,Set Construcción 414,Hogar
+ALT-0415,Auriculares Inalámbricos 415,Ropa
+ALT-0416,Zapatos Deportivos 416,Deportes
+ALT-0417,Juego Mesa 417,Salud
+ALT-0418,Pesas 418,Deportes
+ALT-0419,Raqueta Tenis 419,Juguetes
+ALT-0420,Sofá 420,Automotriz
+ALT-0421,Zapatos Deportivos 421,Automotriz
+ALT-0422,Vestido 422,Electrónicos
+ALT-0423,Pesas 423,Alimentos
+ALT-0424,Refrigerador 424,Electrónicos
+ALT-0425,Puzzle 1000pzs 425,Ropa
+ALT-0426,Refrigerador 426,Electrónicos
+ALT-0427,Libro Cocina 427,Ropa
+ALT-0428,Colchoneta Yoga 428,Electrónicos
+ALT-0429,Colchoneta Yoga 429,Automotriz
+ALT-0430,Puzzle 1000pzs 430,Salud
+ALT-0431,Bicicleta 431,Belleza
+ALT-0432,Sofá 432,Libros
+ALT-0433,Smartphone 433,Belleza
+ALT-0434,Raqueta Tenis 434,Deportes
+ALT-0435,Colchoneta Yoga 435,Electrónicos
+ALT-0436,Smartphone 436,Belleza
+ALT-0437,Puzzle 1000pzs 437,Electrónicos
+ALT-0438,Camiseta Básica 438,Libros
+ALT-0439,Vestido 439,Electrónicos
+ALT-0440,Lámpara LED 440,Juguetes
+ALT-0441,Vestido 441,Deportes
+ALT-0442,Biografía 442,Juguetes
+ALT-0443,Laptop Gaming 443,Hogar
+ALT-0444,Sofá 444,Juguetes
+ALT-0445,Biografía 445,Alimentos
+ALT-0446,Tablet 446,Electrónicos
+ALT-0447,Refrigerador 447,Belleza
+ALT-0448,Pesas 448,Salud
+ALT-0449,Bicicleta 449,Automotriz
+ALT-0450,Pesas 450,Belleza
+ALT-0451,Auriculares Inalámbricos 451,Belleza
+ALT-0452,Juego Mesa 452,Alimentos
+ALT-0453,Mesa Centro 453,Hogar
+ALT-0454,Auriculares Inalámbricos 454,Automotriz
+ALT-0455,Refrigerador 455,Belleza
+ALT-0456,Bicicleta 456,Automotriz
+ALT-0457,Camiseta Básica 457,Alimentos
+ALT-0458,Smartphone 458,Juguetes
+ALT-0459,Muñeca Articulada 459,Belleza
+ALT-0460,Vestido 460,Hogar
+ALT-0461,Camiseta Básica 461,Belleza
+ALT-0462,Zapatos Deportivos 462,Salud
+ALT-0463,Muñeca Articulada 463,Salud
+ALT-0464,Colchoneta Yoga 464,Alimentos
+ALT-0465,Sofá 465,Deportes
+ALT-0466,Camiseta Básica 466,Belleza
+ALT-0467,Chaqueta 467,Hogar
+ALT-0468,Tablet 468,Juguetes
+ALT-0469,Tablet 469,Hogar
+ALT-0470,Sofá 470,Alimentos
+ALT-0471,Libro Cocina 471,Alimentos
+ALT-0472,Pesas 472,Alimentos
+ALT-0473,Colchoneta Yoga 473,Belleza
+ALT-0474,Colchoneta Yoga 474,Juguetes
+ALT-0475,Laptop Gaming 475,Libros
+ALT-0476,Colchoneta Yoga 476,Deportes
+ALT-0477,Cocina Inducción 477,Salud
+ALT-0478,Bicicleta 478,Juguetes
+ALT-0479,Refrigerador 479,Juguetes
+ALT-0480,Smartphone 480,Salud
+ALT-0481,Tablet 481,Hogar
+ALT-0482,Smartwatch 482,Libros
+ALT-0483,Carro Control Remoto 483,Libros
+ALT-0484,Cocina Inducción 484,Electrónicos
+ALT-0485,Raqueta Tenis 485,Juguetes
+ALT-0486,Raqueta Tenis 486,Salud
+ALT-0487,Laptop Gaming 487,Juguetes
+ALT-0488,Biografía 488,Libros
+ALT-0489,Colchoneta Yoga 489,Automotriz
+ALT-0490,Cuentos Infantiles 490,Salud
+ALT-0491,Enciclopedia 491,Automotriz
+ALT-0492,Juego Mesa 492,Salud
+ALT-0493,Puzzle 1000pzs 493,Alimentos
+ALT-0494,Tablet 494,Electrónicos
+ALT-0495,Biografía 495,Electrónicos
+ALT-0496,Muñeca Articulada 496,Libros
+ALT-0497,Novela BestSeller 497,Libros
+ALT-0498,Chaqueta 498,Deportes
+ALT-0499,Camiseta Básica 499,Electrónicos
+ALT-0500,Colchoneta Yoga 500,Electrónicos
