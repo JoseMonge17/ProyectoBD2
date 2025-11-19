@@ -1,11 +1,4 @@
 SKU,Nombre,Categoria,ProductoId
-SKU-LTP-DLL-001,Laptop Dell XPS 13,Tecnología,1
-SKU-CEL-IPH-002,iPhone 14 Pro 128GB,Tecnología,2
-SKU-CEL-SAM-003,Samsung Galaxy S23 Ultra,Tecnología,3
-SKU-TAB-APP-004,iPad Air 5ta Generación,Tecnología,4
-SKU-AUD-SON-005,Auriculares Sony WH-1000XM4,Audio,5
-SKU-SMT-APP-006,Apple Watch Series 8,Tecnología,6
-SKU-LTP-MAC-007,MacBook Air M2,Tecnología,7
 SKU-3009,Audifonos Bluetooth Noise Cancelling,Electronica,8
 SKU-3014,Tablet Samsung Galaxy Tab,Electronica,9
 SKU-3021,Smartwatch con Monitor Cardiaco,Electronica,10
@@ -85,3 +78,104 @@ SKU-3041,Anticongelante Concentrado,Automotriz,83
 SKU-3071,Kit de Herramientas Mecanicas,Automotriz,84
 SKU-3095,Kit de Limpieza de Inyectores,Automotriz,85
 SKU-3100,Limpiaparabrisas Conjunto Delantero,Automotriz,86
+SKU,Nombre,Categoria,ProductoId
+SKU-6001,Tablet Windows Pro 12 pulgadas,Tecnología,87
+SKU-6002,Smartphone Android Ultra,Tecnología,88
+SKU-6003,Monitor Curvo 32" Gaming,Tecnología,89
+SKU-6004,Teclado Mecánico RGB Pro,Tecnología,90
+SKU-6005,Mouse Gaming 16000DPI,Tecnología,91
+SKU-6006,Auriculares Inalámbricos Premium,Audio,92
+SKU-6007,Altavoz Bluetooth Stereo,Audio,93
+SKU-6008,Microfono Condensador Estudio,Audio,94
+SKU-6009,Silla Ejecutiva Ergonómica,Oficina,95
+SKU-6010,Escritorio Moderno Roble,Oficina,96
+SKU-6011,Archivador Metálico 4 Cajones,Oficina,97
+SKU-6012,Organizador Escritorio Multiusos,Oficina,98
+SKU-6013,Pizarra Magnética 90x120cm,Oficina,99
+SKU-6014,Sofá Seccional 3 Plazas,Hogar,100
+SKU-6015,Mesa Centro Cristal Templado,Hogar,101
+SKU-6016,Lámpara LED Smart RGB,Hogar,102
+SKU-6017,Cortinas Blackout Termicas,Hogar,103
+SKU-6018,Alfombra Persa 2x3 Metros,Hogar,104
+SKU-6019,Cama King Size Madera Maciza,Hogar,105
+SKU-6020,Comedor 6 Sillas Roble,Hogar,106
+SKU-6021,Cortadora Césped Eléctrica,Jardinería,107
+SKU-6022,Manguera Profesional 50m,Jardinería,108
+SKU-6023,Maceta Cerámica 40cm,Jardinería,109
+SKU-6024,Tierra Abonada Premium 20kg,Jardinería,110
+SKU-6025,Semillas Hortícolas Variedad,Jardinería,111
+SKU-6026,Set Herramientas Jardín,Jardinería,112
+SKU-6027,Alimento Premium Perro Adulto,Mascotas,113
+SKU-6028,Juguete Interactivo Gato,Mascotas,114
+SKU-6029,Cama Ortopédica Mascota,Mascotas,115
+SKU-6030,Transportadora Aérea Mascota,Mascotas,116
+SKU-6031,Correa Retráctil 8m,Mascotas,117
+SKU-6032,Maleta Rígida 360° Ruedas,Viajes,118
+SKU-6033,Mochila Viaje Antirrobo,Viajes,119
+SKU-6034,Neceser Organizador Viaje,Viajes,120
+SKU-6035,Almohada Cervical Memory Foam,Viajes,121
+SKU-6036,Adaptador Internacional Universal,Viajes,122
+SKU-6037,Cámara DSLR Profesional 24MP,Fotografía,123
+SKU-6038,Trípode Profesional Aluminio,Fotografía,124
+SKU-6039,Lente Gran Angular 16mm,Fotografía,125
+SKU-6040,Flash Externo TTL,Fotografía,126
+SKU-6041,Drone 4K GPS Autónomo,Fotografía,127
+SKU-6042,Joystick Inalámbrico Xbox,Videojuegos,128
+SKU-6043,Auriculares Gaming 7.1,Videojuegos,129
+SKU-6044,Teclado Mecánico RGB Switch Azul,Videojuegos,130
+SKU-6045,Mouse Gaming 16000DPI Optical,Videojuegos,131
+SKU-6046,Silla Gamer Ergonomica,Videojuegos,132
+SKU-6047,Novela Best Seller Edición Especial,Libros,133
+SKU-6048,Libro Cocina Gourmet,Libros,134
+SKU-6049,Enciclopedia Digital 2024,Libros,135
+SKU-6050,Libro Infantil Interactivo,Libros,136
+SKU-6051,Guía Viajes Europa,Libros,137
+SKU-6052,Guitarra Acústica Clásica,Música,138
+SKU-6053,Teclado Digital 88 Teclas,Música,139
+SKU-6054,Micrófono Estudio Condensador,Música,140
+SKU-6055,Audífonos DJ Profesionales,Música,141
+SKU-6056,Amplificador Guitarra 100W,Música,142
+SKU-6057,Set Acuarelas Profesional 24 colores,Arte,143
+SKU-6058,Lienzo Profesional 100x70cm,Arte,144
+SKU-6059,Pinceles Sintéticos Set 12 pzs,Arte,145
+SKU-6060,Caballete Madera Roble,Arte,146
+SKU-6061,Block Sketch 200 hojas,Arte,147
+SKU-6062,Chaqueta Cuero Genuino,Moda,148
+SKU-6063,Zapatos Formales Italiano,Moda,149
+SKU-6064,Bolso Diseñador Cuero,Moda,150
+SKU-6065,Reloj Lujo Acero Inoxidable,Moda,151
+SKU-6066,Gafas Sol Polarizadas,Moda,152
+SKU-6067,Cuna Convertible 3 en 1,Bebés,153
+SKU-6068,Silla Auto Grupo 0-1,Bebés,154
+SKU-6069,Corral Plegable Portátil,Bebés,155
+SKU-6070,Juguete Educativo Montessori,Bebés,156
+SKU-6071,Pañales Ecológicos Talla 3,Bebés,157
+SKU-6072,Bicicleta Eléctrica Plegable,Deportes,158
+SKU-6073,Set Pesas Ajustables 50kg,Deportes,159
+SKU-6074,Cinta Correr Plegable,Deportes,160
+SKU-6075,Maquina Elíptica Profesional,Deportes,161
+SKU-6076,Pelota Baloncesto Profesional,Deportes,162
+SKU-6077,Raqueta Tenis Carbon,Deportes,163
+SKU-6078,Set Golf 14 Palos,Deportes,164
+SKU-6079,Mancuernas Hexagonales 20kg,Deportes,165
+SKU-6080,Colchoneta Yoga Extra Gruesa,Deportes,166
+SKU-6081,Set Maquillaje Profesional 120 colores,Belleza,167
+SKU-6082,Secaor Pelo Iónico Profesional,Belleza,168
+SKU-6083,Plancha Pelo Cerámica,Belleza,169
+SKU-6084,Kit Skincare Completo,Belleza,170
+SKU-6085,Espejo Aumento LED,Belleza,171
+SKU-6086,Set Brochas Maquillaje Premium,Belleza,172
+SKU-6087,Tensiómetro Digital Brazo,Salud,173
+SKU-6088,Termómetro Digital Infrarrojo,Salud,174
+SKU-6089,Nebulizador Portátil,Salud,175
+SKU-6090,Monitor Sueño Digital,Salud,176
+SKU-6091,Masajeador Percusión Profundo,Salud,177
+SKU-6092,Báscula Inteligente Bluetooth,Salud,178
+SKU-6093,Aceite Motor Full Sintético,Automotriz,179
+SKU-6094,Batería Auto 12V 70Ah,Automotriz,180
+SKU-6095,Kit Limpieza Inyectores,Automotriz,181
+SKU-6096,Llantas Aleación 17 Pulgadas,Automotriz,182
+SKU-6097,Aceite Transmisión ATF,Automotriz,183
+SKU-6098,Filtro Aire Alto Rendimiento,Automotriz,184
+SKU-6099,Kit Herramientas 150 pzs,Automotriz,185
+SKU-6100,Limpiaparabrisas Aero Dinámicos,Automotriz,186
