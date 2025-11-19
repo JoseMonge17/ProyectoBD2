@@ -1,0 +1,11 @@
+{
+  "last_execution": "2025-11-19T14:17:15.694516",
+  "last_processed_date": "2025-12-27 10:04:30",
+  "processed_records": {
+    "clientes": 0,
+    "productos": 0,
+    "ventas": 2953
+  },
+  "source": "MySQL",
+  "status": "completed"
+}
