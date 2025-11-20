@@ -144,7 +144,6 @@ def process_mongo_data():
             continue
 
         if check_cliente_existe(email):
-            print(f"Cliente {email} ya existe en la DW")
             continue  # ya existe en la DW
 
         genero = (cliente.get("genero") or "").capitalize()

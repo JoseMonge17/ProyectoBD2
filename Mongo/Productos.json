@@ -993,7 +993,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47100"
+            "$oid": "6917dcda94f109e21acc4800"
         },
         "codigo_mongo": "MNG-5101",
         "nombre": "Detergente l\u00edquido 1L",
@@ -1001,7 +1001,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47101"
+            "$oid": "6917dcda94f109e21acc4801"
         },
         "codigo_mongo": "MNG-5102",
         "nombre": "Cereal de arroz 500g",
@@ -1013,7 +1013,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47102"
+            "$oid": "6917dcda94f109e21acc4802"
         },
         "codigo_mongo": "MNG-5103",
         "nombre": "Jugo de naranja 1L",
@@ -1021,7 +1021,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47103"
+            "$oid": "6917dcda94f109e21acc4803"
         },
         "codigo_mongo": "MNG-5104",
         "nombre": "Aspiradora sin bolsa",
@@ -1029,7 +1029,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47104"
+            "$oid": "6917dcda94f109e21acc4804"
         },
         "codigo_mongo": "MNG-5105",
         "nombre": "C\u00e1mara de seguridad inal\u00e1mbrica",
@@ -1037,7 +1037,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47105"
+            "$oid": "6917dcda94f109e21acc4805"
         },
         "codigo_mongo": "MNG-5106",
         "nombre": "Sarten antiadherente 30cm",
@@ -1049,7 +1049,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47106"
+            "$oid": "6917dcda94f109e21acc4806"
         },
         "codigo_mongo": "MNG-5107",
         "nombre": "Licuadora 1.5L",
@@ -1061,7 +1061,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47107"
+            "$oid": "6917dcda94f109e21acc4807"
         },
         "codigo_mongo": "MNG-5108",
         "nombre": "Cargador inal\u00e1mbrico",
@@ -1069,7 +1069,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47108"
+            "$oid": "6917dcda94f109e21acc4808"
         },
         "codigo_mongo": "MNG-5109",
         "nombre": "Cafetera 12 tazas",
@@ -1077,7 +1077,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47109"
+            "$oid": "6917dcda94f109e21acc4809"
         },
         "codigo_mongo": "MNG-5110",
         "nombre": "Horno microondas 20L",
@@ -1089,7 +1089,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47110"
+            "$oid": "6917dcda94f109e21acc4710"
         },
         "codigo_mongo": "MNG-5111",
         "nombre": "Bicicleta de paseo",
@@ -1097,7 +1097,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47111"
+            "$oid": "6917dcda94f109e21acc4711"
         },
         "codigo_mongo": "MNG-5112",
         "nombre": "Secadora de cabello profesional",
@@ -1109,7 +1109,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47112"
+            "$oid": "6917dcda94f109e21acc4712"
         },
         "codigo_mongo": "MNG-5113",
         "nombre": "Refrigerador 200L",
@@ -1121,7 +1121,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47113"
+            "$oid": "6917dcda94f109e21acc4713"
         },
         "codigo_mongo": "MNG-5114",
         "nombre": "L\u00e1mpara LED de escritorio",
@@ -1133,7 +1133,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47114"
+            "$oid": "6917dcda94f109e21acc4714"
         },
         "codigo_mongo": "MNG-5115",
         "nombre": "Mochila deportiva",
@@ -1145,7 +1145,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47115"
+            "$oid": "6917dcda94f109e21acc4715"
         },
         "codigo_mongo": "MNG-5116",
         "nombre": "Reloj de pared digital",
@@ -1157,7 +1157,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47116"
+            "$oid": "6917dcda94f109e21acc4716"
         },
         "codigo_mongo": "MNG-5117",
         "nombre": "Alicates de presi\u00f3n",
@@ -1169,7 +1169,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47117"
+            "$oid": "6917dcda94f109e21acc4717"
         },
         "codigo_mongo": "MNG-5118",
         "nombre": "Silla ergon\u00f3mica",
@@ -1177,7 +1177,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47118"
+            "$oid": "6917dcda94f109e21acc4718"
         },
         "codigo_mongo": "MNG-5119",
         "nombre": "Termo de agua 1L",
@@ -1189,7 +1189,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47119"
+            "$oid": "6917dcda94f109e21acc4719"
         },
         "codigo_mongo": "MNG-5120",
         "nombre": "Juguera de prensado en fr\u00edo",
@@ -1197,7 +1197,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47120"
+            "$oid": "6917dcda94f109e21acc4720"
         },
         "codigo_mongo": "MNG-5121",
         "nombre": "Juego de s\u00e1banas 3 piezas",
@@ -1209,7 +1209,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47121"
+            "$oid": "6917dcda94f109e21acc4721"
         },
         "codigo_mongo": "MNG-5122",
         "nombre": "Funda para colch\u00f3n",
@@ -1221,7 +1221,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47122"
+            "$oid": "6917dcda94f109e21acc4722"
         },
         "codigo_mongo": "MNG-5123",
         "nombre": "Bater\u00edas recargables AA",
@@ -1233,7 +1233,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47123"
+            "$oid": "6917dcda94f109e21acc4723"
         },
         "codigo_mongo": "MNG-5124",
         "nombre": "M\u00e1quina de afeitar",
@@ -1241,7 +1241,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47124"
+            "$oid": "6917dcda94f109e21acc4724"
         },
         "codigo_mongo": "MNG-5125",
         "nombre": "Kit de herramientas para el hogar",
@@ -1253,7 +1253,7 @@
     },
     {
         "_id": {
-            "$oid": "6917dcda94f109e21acc47125"
+            "$oid": "6917dcda94f109e21acc4725"
         },
         "codigo_mongo": "MNG-5126",
         "nombre": "Cinta m\u00e9trica 10m",
