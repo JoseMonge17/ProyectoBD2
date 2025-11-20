@@ -4,8 +4,8 @@ import random
 from datetime import datetime, timedelta
 
 # === CONFIGURACION ===
-CLIENTES_FILE = "/Supabase/csv/clientes.csv"
-OUTPUT_FILE = "/Supabase/csv/ordenes.csv"
+CLIENTES_FILE = "D:\VsCode\ProyectoBD2\Supabase\csv\clientes.csv"
+OUTPUT_FILE = "D:\VsCode\ProyectoBD2\Supabase\csv\ordenes.csv"
 
 # === CARGAR CLIENTES ===
 clientes = pd.read_csv(CLIENTES_FILE)
@@ -31,11 +31,14 @@ for _ in range(NUM_ORDENES):
     canal = random.choice(CANALES)
     moneda = random.choice(MONEDAS)
 
-    # monto aleatorio según moneda
-    if moneda == "USD":
-        total = round(random.uniform(10, 1500), 2)
-    else:  # CRC
-        total = round(random.uniform(5000, 900000), 2)
+    # monto base siempre en USD (mínimo 5 USD)
+    base_usd = round(random.uniform(5.01, 1500), 2)
+
+    # si la moneda es CRC → convertir
+    if moneda == "CRC":
+        total = round(base_usd * 500, 2)
+    else:
+        total = base_usd
 
     ordenes.append({
         "orden_id": str(uuid.uuid4()),

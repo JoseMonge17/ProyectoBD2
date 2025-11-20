@@ -44,7 +44,7 @@ def insert_equivalencias_productos(df):
 # Función principal para ejecutar el proceso ETL
 def main():
     # Ruta del archivo CSV
-    file_path = 'E:\BD2\Proyecto\ProyectoBD2\EquivalenciaProductos.csv'
+    file_path = 'D:\VsCode\ProyectoBD2\EquivalenciaProductos.csv'
 
     # Leer y transformar datos
     df = load_csv_to_dataframe(file_path)
