@@ -161,8 +161,8 @@ class ETL_MySQL_to_DW:
         ]].copy()
         
         # Estandarización de género (acortar para que quepa en la columna)
-        genero_map = {'M': 'Masc', 'F': 'Fem', 'X': 'No esp'}
-        dim_cliente['genero'] = dim_cliente['genero'].map(genero_map).fillna('No esp')
+        genero_map = {'M': 'Masculino', 'F': 'Femenino', 'X': 'Otro'}
+        dim_cliente['genero'] = dim_cliente['genero'].map(genero_map).fillna('Otro')
         
         # Convertir fecha (VARCHAR a DATE)
         dim_cliente['created_at'] = pd.to_datetime(dim_cliente['created_at'], errors='coerce').dt.date

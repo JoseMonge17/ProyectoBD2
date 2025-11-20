@@ -45,6 +45,7 @@ def insert_equivalencias_productos(df):
 def main():
     # Ruta del archivo CSV
     file_path = 'D:\VsCode\ProyectoBD2\EquivalenciaProductos.csv'
+    #file_path = 'C:/Users/djmon/OneDrive/Documentos/GitHub/ProyectoBD2/EquivalenciaProductos.csv'
 
     # Leer y transformar datos
     df = load_csv_to_dataframe(file_path)
