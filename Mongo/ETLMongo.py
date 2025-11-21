@@ -1,6 +1,7 @@
 import pymongo
 import pyodbc
 import pandas as pd
+import json
 from datetime import datetime
 from dateutil import parser
 
@@ -22,6 +23,27 @@ conn_str = (
 )
 conn = pyodbc.connect(conn_str)
 cursor = conn.cursor()
+
+# Función para leer la fecha de la última carga desde log.json
+def get_fecha_carga():
+    try:
+        with open("log.json", "r") as file:
+            data = json.load(file)
+            return data.get("fechaCarga", "")  # Devuelve vacío si no tiene valor
+    except FileNotFoundError:
+        return ""  # Si el archivo no existe, retornamos vacío
+ 
+ # Función para actualizar la fecha de la última carga en log.json   
+def update_log_data():
+    # Obtener la fecha y hora actual
+    fecha_carga = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')  # Formato datetime ISO 8601
+    
+    log_data = {
+        "fechaCarga": fecha_carga,  # Guardamos la fecha de la última orden procesada
+    }
+    
+    with open("log.json", "w") as file:
+        json.dump(log_data, file, indent=4)
 
 # ================== HELPERS SQL ==================
 
@@ -125,9 +147,20 @@ def insert_fact_ventas(cliente_id, producto_id, idTiempo, cantidad, precio_unit,
 
 def process_mongo_data():
     # ---------- CARGA MASIVA DESDE MONGO CON PANDAS ----------
+    # Obtener la fecha de la última carga desde log.json
+    fecha_carga = get_fecha_carga()
+    
     clientes_df = pd.DataFrame(list(clientes_collection.find()))
     productos_df = pd.DataFrame(list(productos_collection.find()))
-    ordenes_df = pd.DataFrame(list(ordenes_collection.find()))
+    
+    # Si fecha_carga está vacía, traeremos todas las órdenes
+    if not fecha_carga:
+        ordenes_df = pd.DataFrame(list(ordenes_collection.find()))
+    else:
+        # Convertir la fecha de la carga en formato datetime
+        fecha_carga_obj = datetime.strptime(fecha_carga, "%Y-%m-%dT%H:%M:%S.%fZ")  # Convertir a formato datetime
+        query = {"fecha": {"$gt": fecha_carga_obj}}  # Filtra las órdenes con fecha mayor que fecha_carga
+        ordenes_df = pd.DataFrame(list(ordenes_collection.find(query)))
 
     print(f"Clientes cargados desde Mongo: {len(clientes_df)}")
     print(f"Productos cargados desde Mongo: {len(productos_df)}")
@@ -299,6 +332,7 @@ def process_mongo_data():
 # 7. Función principal que ejecuta todo el proceso
 def main():
     process_mongo_data()
+    update_log_data()
     print("Datos procesados y cargados en SQL Server.")
 
 # Ejecutar el script
