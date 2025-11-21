@@ -1,5 +1,5 @@
 {
-  "name": "website",
+  "name": "salesapi",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "mongodb": "^6.21.0",
-    "neo4j-driver": "^6.0.1",
-    "supabase": "^2.58.5"
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.20.1",
+    "neo4j-driver": "^6.0.1"
   }
 }

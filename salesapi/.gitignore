@@ -1,0 +1,34 @@
+# Node.js dependencies
+/node_modules/
+
+# Logs
+/logs
+*.log
+
+# Environment variables
+.env
+
+# npm-debug log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory (for testing tools like Jest, Mocha, etc.)
+/coverage
+
+# IDEs and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Build directory (if applicable)
+dist/
+build/
+
+# Optional files to ignore (like compiled files from TypeScript or Babel, etc.)
+/*.tsbuildinfo
