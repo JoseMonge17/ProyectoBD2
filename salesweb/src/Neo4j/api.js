@@ -14,6 +14,31 @@ export const fetchVentas = async () => {
   }
 };
 
+// Función para obtener todos los clientes
+export const fetchClientes = async () => {
+  try {
+    const response = await fetch(`${API_URL}/clientes`); // Ruta de clientes
+    console.log("Extraccion clientes")
+    console.log(response.json)
+    return await response.json();
+  } catch (error) {
+    console.error('Error al obtener los clientes:', error);
+    return [];
+  }
+};
+
+// Función para obtener todos los productos
+export const fetchProductos = async () => {
+  try {
+    const response = await fetch(`${API_URL}/productos`); // Ruta de productos
+    console.log("Venta insertada")
+    return await response.json();
+  } catch (error) {
+    console.error('Error al obtener los productos:', error);
+    return [];
+  }
+};
+
 // Función para crear una nueva venta
 export const createVenta = async (venta) => {
   try {
