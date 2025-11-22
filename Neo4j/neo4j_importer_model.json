@@ -1,0 +1,901 @@
+{
+  "version": "2.3.1-beta.0",
+  "visualisation": {
+    "nodes": [
+      {
+        "id": "n:1",
+        "position": {
+          "x": 1.2500198882394917,
+          "y": 154.61426711766964
+        }
+      },
+      {
+        "id": "n:2",
+        "position": {
+          "x": 16.764214711981253,
+          "y": 283.23578528801875
+        }
+      },
+      {
+        "id": "n:3",
+        "position": {
+          "x": 128.57860835483257,
+          "y": 156.29068858886777
+        }
+      },
+      {
+        "id": "n:4",
+        "position": {
+          "x": 122.25762535776698,
+          "y": 266.8620245857724
+        }
+      }
+    ]
+  },
+  "dataModel": {
+    "version": "2.3.1-beta.0",
+    "graphSchemaRepresentation": {
+      "version": "1.0.0",
+      "graphSchema": {
+        "nodeLabels": [
+          {
+            "$id": "nl:1",
+            "token": "Producto",
+            "properties": [
+              {
+                "$id": "p:9",
+                "token": "idProducto",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:11",
+                "token": "sku",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:12",
+                "token": "codigo_alt",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:13",
+                "token": "codigo_mongo",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:14",
+                "token": "nombre",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              }
+            ]
+          },
+          {
+            "$id": "nl:2",
+            "token": "Categoria",
+            "properties": [
+              {
+                "$id": "p:7",
+                "token": "idCategoria",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:8",
+                "token": "categoria",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              }
+            ]
+          },
+          {
+            "$id": "nl:3",
+            "token": "Cliente",
+            "properties": [
+              {
+                "$id": "p:1",
+                "token": "idCliente",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:2",
+                "token": "nombre",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:3",
+                "token": "genero",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:4",
+                "token": "email",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:5",
+                "token": "pais",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:6",
+                "token": "fechaRegistro",
+                "type": {
+                  "type": "datetime"
+                },
+                "nullable": true
+              }
+            ]
+          },
+          {
+            "$id": "nl:4",
+            "token": "Orden",
+            "properties": [
+              {
+                "$id": "p:10",
+                "token": "idOrden",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:15",
+                "token": "fecha",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:16",
+                "token": "canal",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:17",
+                "token": "moneda",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:18",
+                "token": "total",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              }
+            ]
+          }
+        ],
+        "relationshipTypes": [
+          {
+            "$id": "rt:1",
+            "token": "PERTENECE_A",
+            "properties": []
+          },
+          {
+            "$id": "rt:2",
+            "token": "REALIZO",
+            "properties": []
+          },
+          {
+            "$id": "rt:3",
+            "token": "CONTIENTE",
+            "properties": [
+              {
+                "$id": "p:19",
+                "token": "cantidad",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:20",
+                "token": "precio",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              }
+            ]
+          }
+        ],
+        "nodeObjectTypes": [
+          {
+            "$id": "n:1",
+            "labels": [
+              {
+                "$ref": "#nl:1"
+              }
+            ]
+          },
+          {
+            "$id": "n:2",
+            "labels": [
+              {
+                "$ref": "#nl:2"
+              }
+            ]
+          },
+          {
+            "$id": "n:3",
+            "labels": [
+              {
+                "$ref": "#nl:3"
+              }
+            ]
+          },
+          {
+            "$id": "n:4",
+            "labels": [
+              {
+                "$ref": "#nl:4"
+              }
+            ]
+          }
+        ],
+        "relationshipObjectTypes": [
+          {
+            "$id": "r:1",
+            "type": {
+              "$ref": "#rt:1"
+            },
+            "from": {
+              "$ref": "#n:1"
+            },
+            "to": {
+              "$ref": "#n:2"
+            }
+          },
+          {
+            "$id": "r:2",
+            "type": {
+              "$ref": "#rt:2"
+            },
+            "from": {
+              "$ref": "#n:3"
+            },
+            "to": {
+              "$ref": "#n:4"
+            }
+          },
+          {
+            "$id": "r:3",
+            "type": {
+              "$ref": "#rt:3"
+            },
+            "from": {
+              "$ref": "#n:4"
+            },
+            "to": {
+              "$ref": "#n:1"
+            }
+          }
+        ],
+        "constraints": [
+          {
+            "$id": "c:2",
+            "name": "idCategoria_Categoria_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:2"
+            },
+            "properties": [
+              {
+                "$ref": "#p:7"
+              }
+            ]
+          },
+          {
+            "$id": "c:1",
+            "name": "idProducto_Producto_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:9"
+              }
+            ]
+          },
+          {
+            "$id": "c:3",
+            "name": "idCliente_Cliente_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:3"
+            },
+            "properties": [
+              {
+                "$ref": "#p:1"
+              }
+            ]
+          },
+          {
+            "$id": "c:4",
+            "name": "idOrden_Orden_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:4"
+            },
+            "properties": [
+              {
+                "$ref": "#p:10"
+              }
+            ]
+          }
+        ],
+        "indexes": [
+          {
+            "$id": "i:2",
+            "name": "idCategoria_Categoria_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:2"
+            },
+            "properties": [
+              {
+                "$ref": "#p:7"
+              }
+            ]
+          },
+          {
+            "$id": "i:1",
+            "name": "idProducto_Producto_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:9"
+              }
+            ]
+          },
+          {
+            "$id": "i:3",
+            "name": "idCliente_Cliente_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:3"
+            },
+            "properties": [
+              {
+                "$ref": "#p:1"
+              }
+            ]
+          },
+          {
+            "$id": "i:4",
+            "name": "idOrden_Orden_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:4"
+            },
+            "properties": [
+              {
+                "$ref": "#p:10"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "graphSchemaExtensionsRepresentation": {
+      "nodeKeyProperties": [
+        {
+          "node": {
+            "$ref": "#n:2"
+          },
+          "keyProperty": {
+            "$ref": "#p:7"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:1"
+          },
+          "keyProperty": {
+            "$ref": "#p:9"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:3"
+          },
+          "keyProperty": {
+            "$ref": "#p:1"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:4"
+          },
+          "keyProperty": {
+            "$ref": "#p:10"
+          }
+        }
+      ]
+    },
+    "graphMappingRepresentation": {
+      "dataSourceSchema": {
+        "type": "local",
+        "tableSchemas": [
+          {
+            "name": "Cliente.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "idCliente",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "nombre",
+                "sample": "Donna Kemp",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "genero",
+                "sample": "Femenino",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "email",
+                "sample": "donna.kemp1@gmail.com",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "pais",
+                "sample": "El Salvador",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "fechaRegistro",
+                "sample": "2025-05-30",
+                "recommendedType": {
+                  "type": "datetime"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Categoria.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "idCategoria",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "categoria",
+                "sample": "Fijaciones y tornilleria",
+                "recommendedType": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Producto_PERTENECE_A_Categoria.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "idProducto",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "idCategoria",
+                "sample": "5",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Producto.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "idProducto",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "nombre",
+                "sample": "Martillo carpintero",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "sku",
+                "sample": "SKU-4001",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "codigo_alt",
+                "sample": "",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "codigo_mongo",
+                "sample": "MNG-4001",
+                "recommendedType": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Orden.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "idOrden",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "fecha",
+                "sample": "2024-11-18 12:33:57.472653",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "canal",
+                "sample": "TIENDA",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "moneda",
+                "sample": "CRC",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "total",
+                "sample": "3323915",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Cliente_REALIZO_Orden.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "idOrden",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "idCliente",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Orden_CONTIENTE_Producto.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "idOrden",
+                "sample": "1",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "idProducto",
+                "sample": "81",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "cantidad",
+                "sample": "4",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              },
+              {
+                "name": "precio",
+                "sample": "228500",
+                "recommendedType": {
+                  "type": "integer"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "nodeMappings": [
+        {
+          "node": {
+            "$ref": "#n:3"
+          },
+          "tableName": "Cliente.csv",
+          "propertyMappings": [
+            {
+              "fieldName": "idCliente",
+              "property": {
+                "$ref": "#p:1"
+              }
+            },
+            {
+              "fieldName": "nombre",
+              "property": {
+                "$ref": "#p:2"
+              }
+            },
+            {
+              "fieldName": "genero",
+              "property": {
+                "$ref": "#p:3"
+              }
+            },
+            {
+              "fieldName": "email",
+              "property": {
+                "$ref": "#p:4"
+              }
+            },
+            {
+              "fieldName": "pais",
+              "property": {
+                "$ref": "#p:5"
+              }
+            },
+            {
+              "fieldName": "fechaRegistro",
+              "property": {
+                "$ref": "#p:6"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:2"
+          },
+          "tableName": "Categoria.csv",
+          "propertyMappings": [
+            {
+              "fieldName": "idCategoria",
+              "property": {
+                "$ref": "#p:7"
+              }
+            },
+            {
+              "fieldName": "categoria",
+              "property": {
+                "$ref": "#p:8"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:1"
+          },
+          "tableName": "Producto.csv",
+          "propertyMappings": [
+            {
+              "fieldName": "idProducto",
+              "property": {
+                "$ref": "#p:9"
+              }
+            },
+            {
+              "fieldName": "nombre",
+              "property": {
+                "$ref": "#p:14"
+              }
+            },
+            {
+              "fieldName": "sku",
+              "property": {
+                "$ref": "#p:11"
+              }
+            },
+            {
+              "fieldName": "codigo_alt",
+              "property": {
+                "$ref": "#p:12"
+              }
+            },
+            {
+              "fieldName": "codigo_mongo",
+              "property": {
+                "$ref": "#p:13"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:4"
+          },
+          "tableName": "Orden.csv",
+          "propertyMappings": [
+            {
+              "fieldName": "fecha",
+              "property": {
+                "$ref": "#p:15"
+              }
+            },
+            {
+              "fieldName": "canal",
+              "property": {
+                "$ref": "#p:16"
+              }
+            },
+            {
+              "fieldName": "moneda",
+              "property": {
+                "$ref": "#p:17"
+              }
+            },
+            {
+              "fieldName": "total",
+              "property": {
+                "$ref": "#p:18"
+              }
+            },
+            {
+              "property": {
+                "$ref": "#p:10"
+              },
+              "fieldName": "idOrden"
+            }
+          ]
+        }
+      ],
+      "relationshipMappings": [
+        {
+          "relationship": {
+            "$ref": "#r:1"
+          },
+          "tableName": "Producto_PERTENECE_A_Categoria.csv",
+          "propertyMappings": [],
+          "fromMapping": {
+            "fieldName": "idProducto"
+          },
+          "toMapping": {
+            "fieldName": "idCategoria"
+          }
+        },
+        {
+          "relationship": {
+            "$ref": "#r:2"
+          },
+          "tableName": "Cliente_REALIZO_Orden.csv",
+          "propertyMappings": [],
+          "fromMapping": {
+            "fieldName": "idCliente"
+          },
+          "toMapping": {
+            "fieldName": "idOrden"
+          }
+        },
+        {
+          "relationship": {
+            "$ref": "#r:3"
+          },
+          "tableName": "Orden_CONTIENTE_Producto.csv",
+          "propertyMappings": [
+            {
+              "fieldName": "cantidad",
+              "property": {
+                "$ref": "#p:19"
+              }
+            },
+            {
+              "fieldName": "precio",
+              "property": {
+                "$ref": "#p:20"
+              }
+            }
+          ],
+          "fromMapping": {
+            "fieldName": "idOrden"
+          },
+          "toMapping": {
+            "fieldName": "idProducto"
+          }
+        }
+      ]
+    },
+    "configurations": {
+      "idsToIgnore": []
+    }
+  }
+}
