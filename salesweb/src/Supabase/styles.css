@@ -4,40 +4,48 @@ ESTILOS PARA LISTAVENTAS
 .container {
     padding: 20px;
     width: 100%;
-    max-width: 100%;
-    margin: 0;
+    max-width: 1100px;
+    margin: 0 auto;
     font-family: Arial, sans-serif;
-    box-sizing: border-box; /* importante: incluye padding en el ancho total */
+    box-sizing: border-box;
 }
 
+/* Botones generales */
 button {
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 6px 6px 15px 0;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
     color: white;
     font-weight: bold;
+    font-size: 0.95rem;
+    transition: 0.15s ease-in-out;
+}
+
+button:hover {
+    opacity: 0.9;
 }
 
 .scroll-table {
-    overflow-x: auto;  /* scroll horizontal */
-    overflow-y: auto;  /* scroll vertical */
-    max-height: 800px; /* altura máxima para scroll vertical */
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 800px;
     border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 100%; /* ocupa todo el container */
+    border-radius: 10px;
+    width: 100%;
     box-sizing: border-box;
 }
 
-table {
+/* TABLA ESPECÍFICA CON MÁS ESPECIFICIDAD */
+.scroll-table table.ventas-table {
     width: 100%;
-    margin-top: 0px;
     min-width: 900px;
+    margin-top: 0px;
     border-collapse: collapse;
 }
 
-thead {
+.scroll-table table.ventas-table thead {
     background-color: #2196f3;
     color: white;
     position: sticky;
@@ -45,44 +53,21 @@ thead {
     z-index: 2;
 }
 
-th, td {
-    padding: 12px 8px;
-    border: 1px solid #ccc;
+.scroll-table table.ventas-table th, 
+.scroll-table table.ventas-table td {
+    padding: 12px 10px;
+    border: 1px solid #d0d0d0;
     text-align: center;
     white-space: nowrap;
-    color: black;
+    color: #222;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
+.scroll-table table.ventas-table tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
 }
 
-tbody tr:hover {
+.scroll-table table.ventas-table tbody tr:hover {
     background-color: #e3f2fd;
 }
 
-
-/* =========================
-ESTILOS PARA CREARVENTA
-========================= */
-.subcard {
-    padding: 15px;
-    margin: 15px 0;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fafafa;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
-
-input, select {
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 12px;
-    box-sizing: border-box;
-}
-
+/* El resto de tus estilos para CrearVenta permanecen igual... */

@@ -63,7 +63,7 @@ const ListVentas = () => {
                 <p style={{ color: "red" }}>{error}</p>
             ) : (
                 <div className="scroll-table">
-                    <table>
+                    <table className="ventas-table">
                         <thead>
                             <tr>
                                 <th>#</th>

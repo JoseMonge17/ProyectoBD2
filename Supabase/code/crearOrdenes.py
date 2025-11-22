@@ -15,10 +15,11 @@ NUM_ORDENES = 5000
 CANALES = ["WEB", "APP", "PARTNER"]
 MONEDAS = ["USD", "CRC"]
 
-# === FUNCION PARA FECHA ALEATORIA ENTRE 2024 Y 2025 ===
+# === FUNCION PARA FECHA ALEATORIA ENTRE 2024 Y 31 OCTUBRE 2025 ===
 def random_date(start_year=2024, end_year=2025):
     start = datetime(start_year, 1, 1)
-    end = datetime(end_year, 12, 31)
+    # Fecha máxima: 31 de octubre de 2025
+    end = datetime(end_year, 10, 31)
     delta = end - start
     random_days = random.randint(0, delta.days)
     random_seconds = random.randint(0, 86400)

@@ -1,147 +1,348 @@
 // src/pages/CrearVenta.js
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "./styles.css";
+import "./styless.css";
+
+// Función para redondear a 2 decimales
+const round2 = (num) => Math.round(num * 100) / 100;
 
 const CreateVenta = () => {
     const navigate = useNavigate();
 
-    // Datos generales de la venta
+    // ===============================
+    // ESTADOS PARA LISTAS DE API
+    // ===============================
+    const [clientes, setClientes] = useState([]);
+    const [productos, setProductos] = useState([]);
+
+    // textos de búsqueda (inputs únicos)
+    const [buscarCliente, setBuscarCliente] = useState("");
+    const [buscarProducto, setBuscarProducto] = useState("");
+
+    // control de dropdowns
+    const [showClientesDropdown, setShowClientesDropdown] = useState(false);
+    const [showProductosDropdown, setShowProductosDropdown] = useState(false);
+
+    // refs para detectar click fuera
+    const clienteRef = useRef(null);
+    const productoRef = useRef(null);
+
+    // ===============================
+    // CARGAR DATOS DEL API
+    // ===============================
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/clientes")
+            .then(res => res.json())
+            .then(data => setClientes(data))
+            .catch(err => console.error("Error clientes:", err));
+
+        fetch("http://127.0.0.1:8000/productos")
+            .then(res => res.json())
+            .then(data => setProductos(data))
+            .catch(err => console.error("Error productos:", err));
+    }, []);
+
+    // cerrar dropdowns si se hace click fuera
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (clienteRef.current && !clienteRef.current.contains(e.target)) {
+                setShowClientesDropdown(false);
+            }
+            if (productoRef.current && !productoRef.current.contains(e.target)) {
+                setShowProductosDropdown(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    // ===============================
+    // DATOS GENERALES
+    // ===============================
     const [venta, setVenta] = useState({
         cliente: "",
         canal: "",
-    });
-
-    // Producto actual
-    const [productoActual, setProductoActual] = useState({
-        nombre: "",
-        cantidad: 1,
-        precio: 0,
         moneda: "USD",
     });
-
-    // Lista de productos agregados
-    const [detalle, setDetalle] = useState([]);
 
     const handleVentaChange = (e) => {
         const { name, value } = e.target;
         setVenta({ ...venta, [name]: value });
     };
 
+    // -------------------------------
+    // PRODUCTO ACTUAL
+    // -------------------------------
+    const [productoActual, setProductoActual] = useState({
+        producto_id: "",
+        nombre: "",
+        cantidad: 1,
+        precio: 0,
+    });
+
     const handleProductoChange = (e) => {
         const { name, value } = e.target;
-        setProductoActual({ ...productoActual, [name]: value });
-    };
-
-    const agregarProducto = () => {
-        if (!productoActual.nombre || productoActual.precio <= 0) return;
-
-        setDetalle([...detalle, productoActual]);
-
+        // asegurar que cantidad sea número
         setProductoActual({
-            nombre: "",
-            cantidad: 1,
-            precio: 0,
-            moneda: productoActual.moneda,
+            ...productoActual,
+            [name]: name === "cantidad" ? Number(value) : value,
         });
     };
 
+    // Lista final
+    const [detalle, setDetalle] = useState([]);
+
+    const agregarProducto = () => {
+        if (!productoActual.producto_id) {
+            alert("Seleccione un producto válido.");
+            return;
+        }
+
+        const precio = Number(productoActual.precio);
+
+        if (isNaN(precio) || precio <= 0) {
+            alert("El precio debe ser mayor a 0.");
+            return;
+        }
+
+        const productoConMoneda = {
+            ...productoActual,
+            moneda: venta.moneda,
+        };
+
+        setDetalle([...detalle, productoConMoneda]);
+
+        setProductoActual({
+            producto_id: "",
+            nombre: "",
+            cantidad: 1,
+            precio: 0,
+        });
+
+        setBuscarProducto("");
+        setShowProductosDropdown(false);
+    }
+
     const cancelar = () => navigate("/ventasSupabase");
 
-    const realizarVenta = () => {
-        const total = detalle.reduce(
-            (acc, p) => acc + p.precio * p.cantidad,
-            0
+    const totalFooter = round2(
+        detalle.reduce((acc, p) => acc + (Number(p.precio) * Number(p.cantidad || 0)), 0)
+    );
+
+    const realizarVenta = async () => {
+        if (!venta.cliente || detalle.length === 0) return;
+
+        const total = round2(
+            detalle.reduce((acc, p) => acc + (Number(p.precio) * Number(p.cantidad || 0)), 0)
         );
 
         const nuevaVenta = {
-            ...venta,
-            total,
-            fecha: new Date().toISOString().split("T")[0],
-            productos: detalle,
+            cliente_id: venta.cliente,         // ← CAMPO CORRECTO
+            canal: venta.canal,
+            moneda: venta.moneda,
+            total: total,
+            detalles: detalle.map(p => ({
+                producto_id: p.producto_id,
+                cantidad: Number(p.cantidad),
+                precio_unit: Number(p.precio)  // ← nombre correcto y convertido a número
+            }))
         };
 
-        console.log("Venta creada (MOCK): ", nuevaVenta);
+        console.log("JSON enviado:", nuevaVenta);
 
-        navigate("/ventasSupabase");
+        try {
+            const res = await fetch("http://127.0.0.1:8000/ordenes", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(nuevaVenta),
+            });
+
+            if (!res.ok) {
+                const err = await res.json();
+                alert("Error al crear la orden: " + err.detail);
+                return;
+            }
+
+            alert("Venta registrada correctamente.");
+            navigate("/ventasSupabase");
+
+        } catch (e) {
+            alert("Error conectando al servidor: " + e.message);
+        }
+    };
+
+
+
+    // ===============================
+    // FILTRADOS EN VIVO
+    // ===============================
+    const clientesFiltrados = clientes.filter(c =>
+        c.nombre.toLowerCase().includes(buscarCliente.toLowerCase())
+    );
+
+    const productosFiltrados = productos.filter(p =>
+        p.nombre.toLowerCase().includes(buscarProducto.toLowerCase())
+    );
+
+    // seleccionar cliente -> guarda cliente_id en venta.cliente
+    const seleccionarCliente = (c) => {
+        setVenta({ ...venta, cliente: c.cliente_id });
+        setBuscarCliente(c.nombre);
+        setShowClientesDropdown(false);
+    };
+
+    // seleccionar producto -> llena productoActual.producto_id y nombre
+    const seleccionarProducto = (p) => {
+        setProductoActual({
+            ...productoActual,
+            producto_id: p.producto_id,
+            nombre: p.nombre,
+        });
+        setBuscarProducto(p.nombre);
+        setShowProductosDropdown(false);
     };
 
     return (
-        <div className="container">
+        <div className="create-container">
             <h2>Registrar Nueva Venta</h2>
 
             {/* DATOS GENERALES */}
             <div className="subcard">
                 <h3>Datos Generales</h3>
 
+                {/* ======================= CLIENTE (input único con dropdown) ======================== */}
                 <label>Cliente:</label>
-                <input
-                    type="text"
-                    name="cliente"
-                    placeholder="Nombre del cliente"
-                    value={venta.cliente}
-                    onChange={handleVentaChange}
-                />
+                <div ref={clienteRef} style={{ position: "relative", width: "100%" }}>
+                    <input
+                        type="text"
+                        placeholder="Buscar cliente..."
+                        value={buscarCliente}
+                        onChange={(e) => {
+                            setBuscarCliente(e.target.value);
+                            setShowClientesDropdown(true);
+                        }}
+                        onFocus={() => setShowClientesDropdown(true)}
+                        autoComplete="off"
+                    />
 
+                    {showClientesDropdown && buscarCliente.length > 0 && (
+                        <div className="search-dropdown">
+                            {clientesFiltrados.length === 0 ? (
+                                <div className="dropdown-empty">No se encontraron clientes</div>
+                            ) : (
+                                clientesFiltrados.map((c) => (
+                                    <div
+                                        key={c.cliente_id}
+                                        className="dropdown-item"
+                                        onClick={() => seleccionarCliente(c)}
+                                    >
+                                        <div className="dd-main">{c.nombre}</div>
+                                        <div className="dd-sub">{c.email}</div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    )}
+                </div>
+
+                {/* ======================= CANAL ======================== */}
                 <label>Canal:</label>
-                <input
-                    type="text"
+                <select
                     name="canal"
-                    placeholder="Ej: Online, Tienda, WhatsApp"
                     value={venta.canal}
                     onChange={handleVentaChange}
-                />
+                >
+                    <option value="">Seleccione canal</option>
+                    <option value="WEB">WEB</option>
+                    <option value="APP">APP</option>
+                    <option value="PARTNER">PARTNER</option>
+                </select>
+
+                {/* ======================= MONEDA ======================== */}
+                <label>Moneda:</label>
+                <select
+                    name="moneda"
+                    value={venta.moneda}
+                    onChange={(e) => {
+                        if (detalle.length > 0) {
+                            alert("No puede cambiar la moneda después de agregar productos.");
+                            return;
+                        }
+                        handleVentaChange(e);
+                    }}
+                    disabled={detalle.length > 0}
+                >
+                    <option value="USD">USD</option>
+                    <option value="CRC">CRC</option>
+                </select>
             </div>
 
             {/* PRODUCTOS */}
             <div className="subcard">
                 <h3>Agregar Productos</h3>
 
+                {/* ======================= PRODUCTO (input único con dropdown) ======================== */}
                 <label>Producto:</label>
-                <input
-                    type="text"
-                    name="nombre"
-                    placeholder="Nombre del producto"
-                    value={productoActual.nombre}
-                    onChange={handleProductoChange}
-                />
+                <div ref={productoRef} style={{ position: "relative", width: "100%" }}>
+                    <input
+                        type="text"
+                        placeholder="Buscar producto..."
+                        value={buscarProducto}
+                        onChange={(e) => {
+                            setBuscarProducto(e.target.value);
+                            setShowProductosDropdown(true);
+                        }}
+                        onFocus={() => setShowProductosDropdown(true)}
+                        autoComplete="off"
+                    />
 
+                    {showProductosDropdown && buscarProducto.length > 0 && (
+                        <div className="search-dropdown">
+                            {productosFiltrados.length === 0 ? (
+                                <div className="dropdown-empty">No se encontraron productos</div>
+                            ) : (
+                                productosFiltrados.map((p) => (
+                                    <div
+                                        key={p.producto_id}
+                                        className="dropdown-item"
+                                        onClick={() => seleccionarProducto(p)}
+                                    >
+                                        <div className="dd-main">{p.nombre}</div>
+                                        <div className="dd-sub">{p.categoria}</div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    )}
+                </div>
+
+                {/* ======================= CANTIDAD ======================== */}
                 <label>Cantidad:</label>
                 <input
                     type="number"
                     name="cantidad"
                     value={productoActual.cantidad}
                     onChange={handleProductoChange}
+                    min={1}
                 />
 
-                <label>Precio:</label>
+                {/* ======================= PRECIO ======================== */}
+                <label>Precio ({venta.moneda}):</label>
                 <input
                     type="number"
                     name="precio"
                     value={productoActual.precio}
                     onChange={handleProductoChange}
+                    step="0.01"
                 />
 
-                <label>Moneda:</label>
-                <select
-                    name="moneda"
-                    value={productoActual.moneda}
-                    onChange={handleProductoChange}
-                >
-                    <option value="USD">USD</option>
-                    <option value="CRC">CRC</option>
-                </select>
-
-                <button
-                    style={{ background: "#4caf50" }}
-                    onClick={agregarProducto}
-                >
+                <button className="btn-add" onClick={agregarProducto}>
                     + Insertar Producto
                 </button>
 
-                {/* TABLA DETALLE */}
+                {/* TABLA DE PRODUCTOS */}
                 {detalle.length > 0 && (
-                    <table style={{ marginTop: "20px" }}>
+                    <table>
                         <thead>
                             <tr>
                                 <th>Producto</th>
@@ -149,6 +350,7 @@ const CreateVenta = () => {
                                 <th>Precio</th>
                                 <th>Moneda</th>
                                 <th>Subtotal</th>
+                                <th></th>
                             </tr>
                         </thead>
 
@@ -157,9 +359,19 @@ const CreateVenta = () => {
                                 <tr key={i}>
                                     <td>{p.nombre}</td>
                                     <td>{p.cantidad}</td>
-                                    <td>{p.precio}</td>
+                                    <td>{round2(p.precio)}</td>
                                     <td>{p.moneda}</td>
-                                    <td>{p.precio * p.cantidad}</td>
+                                    <td>{round2(p.precio * p.cantidad)}</td>
+                                    <td>
+                                        <button
+                                            className="btn-delete"
+                                            onClick={() =>
+                                                setDetalle(detalle.filter((_, index) => index !== i))
+                                            }
+                                        >
+                                            ✕
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -167,16 +379,21 @@ const CreateVenta = () => {
                 )}
             </div>
 
+            {/* FOOTER DE TOTAL */}
+            {detalle.length > 0 && (
+                <div className="total-footer">
+                    <span>Total:</span>
+                    <strong>{totalFooter} {venta.moneda}</strong>
+                </div>
+            )}
+
             {/* BOTONES */}
-            <button
-                style={{ background: "#9e9e9e" }}
-                onClick={cancelar}
-            >
+            <button className="btn-secondary" onClick={cancelar}>
                 Cancelar
             </button>
 
             <button
-                style={{ background: "#2196f3" }}
+                className="btn-primary"
                 onClick={realizarVenta}
                 disabled={detalle.length === 0 || !venta.cliente}
             >
