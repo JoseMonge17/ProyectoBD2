@@ -231,19 +231,19 @@ def run_etl():
 
     print("Extrayendo datos desde Supabase...")
     clientes = pd.read_sql(
-        "SELECT cliente_id, nombre, email, genero, pais, fecha_registro FROM ventas_pg.cliente",
+        "SELECT cliente_id, nombre, email, genero, pais, fecha_registro FROM public.cliente",
         pg_conn
     )
     productos = pd.read_sql(
-        "SELECT producto_id, sku, nombre, categoria FROM ventas_pg.producto",
+        "SELECT producto_id, sku, nombre, categoria FROM public.producto",
         pg_conn
     )
     ordenes = pd.read_sql(
-        "SELECT orden_id, cliente_id, fecha, canal, moneda, total FROM ventas_pg.orden",
+        "SELECT orden_id, cliente_id, fecha, canal, moneda, total FROM public.orden",
         pg_conn
     )
     detalles = pd.read_sql(
-        "SELECT orden_detalle_id, orden_id, producto_id, cantidad, precio_unit FROM ventas_pg.orden_detalle",
+        "SELECT orden_detalle_id, orden_id, producto_id, cantidad, precio_unit FROM public.orden_detalle",
         pg_conn
     )
 

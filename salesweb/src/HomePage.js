@@ -14,7 +14,9 @@ const HomePage = () => {
             </header>
             
             <div className="options-container">
-                <button className="option-btn">CRUD Ventas de Supabase</button>
+                <Link to="/ventasSupabase">
+                    <button className="option-btn">CRUD Ventas de Supabase</button>
+                </Link>
                 <Link to="/ventasNeo4j">
                     <button className="option-btn">CRUD Ventas de Neo4j</button>
                 </Link>

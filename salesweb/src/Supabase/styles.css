@@ -1,0 +1,88 @@
+/* =========================
+ESTILOS PARA LISTAVENTAS
+========================= */
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box; /* importante: incluye padding en el ancho total */
+}
+
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+.scroll-table {
+    overflow-x: auto;  /* scroll horizontal */
+    overflow-y: auto;  /* scroll vertical */
+    max-height: 800px; /* altura máxima para scroll vertical */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%; /* ocupa todo el container */
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    margin-top: 0px;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #2196f3;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+th, td {
+    padding: 12px 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+    white-space: nowrap;
+    color: black;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #e3f2fd;
+}
+
+
+/* =========================
+ESTILOS PARA CREARVENTA
+========================= */
+.subcard {
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input, select {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
