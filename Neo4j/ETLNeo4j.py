@@ -1,7 +1,9 @@
 import pandas as pd
 import pyodbc
 from neo4j import GraphDatabase
+import json
 from datetime import datetime
+from decimal import Decimal
 
 # Conexión global a Neo4j
 URI = "bolt://localhost:7687"
@@ -23,6 +25,28 @@ cursor = conn.cursor()
 # Obtener el driver de Neo4j
 neo4j_driver = get_driver()
 
+# Función para leer el último ID insertado y la fecha de carga desde el archivo log.json
+def get_log_data():
+    try:
+        with open("log.json", "r") as file:
+            data = json.load(file)
+            return data.get("last_id", 0), data.get("fechaCarga", "")  # Devuelve 0 si no existe last_id
+    except FileNotFoundError:
+        return 0, ""  # Si el archivo no existe, asumimos que no hay ventas procesadas
+
+# Función para actualizar el archivo log.json con el último ID insertado y la fecha de carga
+def update_log_data(last_id):
+    # Obtener la fecha actual
+    fecha_carga = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    log_data = {
+        "last_id": last_id,
+        "fechaCarga": fecha_carga
+    }
+    
+    with open("log.json", "w") as file:
+        json.dump(log_data, file, indent=4)
+        
 # 1. Extraer datos de clientes desde Neo4j
 def extract_clientes_data():
     clientes_query = """
@@ -48,16 +72,19 @@ def extract_productos_data():
     return pd.DataFrame(productos)
 
 
-# 3. Extraer datos de órdenes desde Neo4j
-def extract_ordenes_data():
-    ordenes_query = """
+# 3. Extraer datos de órdenes desde Neo4j (con filtro por id mayor que el último insertado)
+def extract_ordenes_data(last_id):
+    ordenes_query = f"""
     MATCH (c:Cliente)-[:REALIZO]->(o:Orden)-[contiente:CONTIENTE]->(p:Producto)
-    RETURN o.fecha AS fecha, o.total AS total, o.moneda AS moneda, c.email AS cliente_email, p.sku AS producto_sku, p.codigo_alt AS codigo_alterno, p.codigo_mongo AS codigo_mongo, contiente.cantidad AS cantidad, contiente.precio AS precio_unitario, o.canal as canal
+    WHERE o.idOrden > {last_id}
+    RETURN o.idOrden AS orden_id, o.fecha AS fecha, o.total AS total, o.moneda AS moneda, c.email AS cliente_email, 
+           p.sku AS producto_sku, p.codigo_alt AS codigo_alterno, p.codigo_mongo AS codigo_mongo, 
+           contiente.cantidad AS cantidad, contiente.precio AS precio_unitario, o.canal as canal
     """
     with neo4j_driver.session(database=DATABASE_NAME) as session:
         ordenes_data = session.run(ordenes_query)
         ordenes = [record.data() for record in ordenes_data]
-    print(f"Se extrajeron {len(ordenes)} registros de órdenes desde Neo4j.")
+    print(f"Se extrajeron {len(ordenes)} registros de ventas desde Neo4j.")
     return pd.DataFrame(ordenes)
 
 # 5. Validar si un cliente ya existe en la base de datos SQL Server
@@ -207,10 +234,9 @@ def get_or_insert_canal(canal):
         id_canal1 = cursor.fetchone()
         return id_canal1[0]
     
-# 8. Insertar ventas en la tabla FACT_Ventas
+# 8. Insertar ventas en la tabla FACT_Ventas con actualización del último ID insertado
 def insert_fact_ventas(orden, cliente_id, producto_id):
     # Obtener el tipo de cambio desde DIM_Tiempo usando la fecha de la orden
-     # Obtener el tipo de cambio y idTiempo desde DIM_Tiempo usando la fecha de la orden
     query_tipo_cambio = "SELECT idTiempo, tipoCambio FROM DIM_Tiempo WHERE fecha = ?"
     cursor.execute(query_tipo_cambio, (orden['fecha'],))
     tipo_cambio_data = cursor.fetchone()
@@ -226,6 +252,8 @@ def insert_fact_ventas(orden, cliente_id, producto_id):
     
     cantidad = orden['cantidad']
     precio_unitario = orden['precio_unitario']
+    cantidad = Decimal(str(cantidad))
+    precio_unitario = Decimal(str(precio_unitario))
     
     if orden['moneda'] == 'CRC':
         # Si la moneda es CRC, calculamos total_CRC con cantidad * precio_unitario
@@ -250,6 +278,10 @@ def insert_fact_ventas(orden, cliente_id, producto_id):
     """
     cursor.execute(query, (cliente_id, producto_id, id_tiempo, id_canal, cantidad, precio_unitario, 0, total_venta, total_crc))
     conn.commit()
+
+    # Actualizar el último ID insertado en el archivo log.json
+    update_log_data(orden['orden_id'])  # Asumimos que el orden_id es único
+
 
 
 # 9. Procesar clientes e insertarlos
@@ -304,10 +336,12 @@ def process_ventas(ordenes_df):
 
 # Función principal que ejecuta todo el proceso
 def main():
+    # Obtener el último id y la fecha de carga desde el archivo log.json
+    last_id, fecha_carga = get_log_data()
     # Extraer datos desde Neo4j
     clientes_df = extract_clientes_data()
     productos_df = extract_productos_data()
-    ordenes_df = extract_ordenes_data()
+    ordenes_df = extract_ordenes_data(last_id)
 
     # Procesar e insertar los datos en SQL Server
     process_clientes(clientes_df)

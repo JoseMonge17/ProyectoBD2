@@ -25,18 +25,20 @@ with open(PRODUCTOS_FILE, newline="", encoding="utf-8") as f:
         productos.append(row["producto_id"])
 
 if not productos:
-    raise ValueError("No se pudieron cargar productos desde productos_supabase.csv")
+    raise ValueError("No se pudieron cargar productos desde productos.csv")
 
-# Leer órdenes
+# Leer órdenes con su moneda
 ordenes = []
 with open(ORDENES_FILE, newline="", encoding="utf-8") as f:
     reader = csv.DictReader(f)
     for row in reader:
-        ordenes.append(row["orden_id"])
+        ordenes.append({
+            "orden_id": row["orden_id"],
+            "moneda": row["moneda"]
+        })
 
 if not ordenes:
     raise ValueError("No se pudieron cargar órdenes desde ordenes.csv")
-
 
 # Crear detalles
 with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
@@ -44,16 +46,28 @@ with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=fieldnames)
     writer.writeheader()
 
-    for orden_id in ordenes:
+    for orden in ordenes:
+        orden_id = orden["orden_id"]
+        moneda = orden["moneda"]
+
         n_items = random.randint(1, 5)
 
         for _ in range(n_items):
+            # precio base en USD (mayor a 5 USD)
+            precio_usd = round(random.uniform(5.01, 150.0), 2)
+
+            # si moneda es CRC, convertir
+            if moneda == "CRC":
+                precio_unit = round(precio_usd * 500, 2)
+            else:
+                precio_unit = precio_usd
+
             writer.writerow({
                 "orden_detalle_id": str(uuid.uuid4()),
                 "orden_id": orden_id,
                 "producto_id": random.choice(productos),
                 "cantidad": random.randint(1, 4),
-                "precio_unit": round(random.uniform(5.0, 150.0), 2)
+                "precio_unit": precio_unit
             })
 
 print("✔ Archivo orden_detalles.csv generado correctamente!")
