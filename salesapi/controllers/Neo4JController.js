@@ -2,6 +2,26 @@
 
 const neo4j = require('neo4j-driver');
 
+const fs = require('fs');
+const path = require('path');
+
+// 👇 Ajusta esta ruta al lugar REAL donde está tu log.json
+const LOG_PATH = 'E:/BD2/Proyecto/ProyectoBD2/Neo4j/log.json'; 
+// o la ruta que corresponda en tu máquina
+
+// Convierte "2025-11-23 18:28:55" a Date
+function parseFechaCarga(fechaStr) {
+  if (!fechaStr) return null;
+  try {
+    const [datePart, timePart] = fechaStr.split(' '); // "2025-11-23" y "18:28:55"
+    const [year, month, day] = datePart.split('-').map(Number);
+    const [hour, minute, second] = timePart.split(':').map(Number);
+    return new Date(year, month - 1, day, hour, minute, second);
+  } catch {
+    return null;
+  }
+}
+
 // Configuración del driver con IPv4 explícito y sin encriptación
 const driver = neo4j.driver(
   'neo4j://127.0.0.1:7687', // Cambiado de 'bolt://' a 'neo4j://'
@@ -16,37 +36,64 @@ const driver = neo4j.driver(
 
 // Función para obtener las ventas desde Neo4j
 const getVentas = async (req, res) => {
-  console.log("Estrayendo ventas");
-  const session = driver.session({ database: 'ventas' }); // Crear sesión aquí
-  
-  try {
-    const result = await session.run(
-        'MATCH (c:Cliente)-[:REALIZO]->(o:Orden) ' +
-        'RETURN o.idOrden AS id, o.fecha AS fecha, o.total AS total, o.moneda AS moneda, o.canal AS canal, c.nombre AS cliente ' +
-        'ORDER BY o.idOrden ASC '
-    );
-    // Mapear los resultados de la consulta
-    const ventas = result.records.map(record => ({
-      id: record.get('id'),
-      fecha: record.get('fecha'),
-      total: record.get('total'),
-      moneda: record.get('moneda'),
-      canal: record.get('canal'),
-      cliente: record.get('cliente'),
-    }));
+  console.log("Extrayendo ventas");
+  const session = driver.session({ database: 'ventas' });
 
-    // Enviar los datos de las ventas como respuesta
+  try {
+    // 🔹 Leer log.json desde el disco
+    let fechaLimiteDate = null;
+    try {
+      const rawLog = fs.readFileSync(LOG_PATH, 'utf8');
+      const logJson = JSON.parse(rawLog); // { last_id, fechaCarga }
+      
+      if(logJson.fechaCarga == "")
+        logJson.fechaCarga = "2000-11-23 18:28:55"
+      fechaLimiteDate = parseFechaCarga(logJson.fechaCarga);
+      console.log('Fecha límite desde log.json:', logJson.fechaCarga, fechaLimiteDate);
+    } catch (e) {
+      console.warn('No se pudo leer log.json, no se aplicará lógica de edición:', e.message);
+    }
+
+    const result = await session.run(
+      'MATCH (c:Cliente)-[:REALIZO]->(o:Orden) ' +
+      'RETURN o.idOrden AS id, o.fecha AS fecha, o.total AS total, o.moneda AS moneda, o.canal AS canal, c.nombre AS cliente ' +
+      'ORDER BY o.idOrden ASC '
+    );
+
+    const ventas = result.records.map(record => {
+      const fechaVentaStr = record.get('fecha');
+      let puedeEditar = false;
+
+      if (fechaLimiteDate) {
+        const fechaVentaDate = new Date(fechaVentaStr);
+        if (!isNaN(fechaVentaDate.getTime())) {
+          puedeEditar = fechaVentaDate > fechaLimiteDate;
+        }
+      }
+
+      return {
+        id: record.get('id'),
+        fecha: fechaVentaStr,
+        total: record.get('total'),
+        moneda: record.get('moneda'),
+        canal: record.get('canal'),
+        cliente: record.get('cliente'),
+        puedeEditar // 👈 aquí va la marca para el front
+      };
+    });
+
     res.json(ventas);
   } catch (error) {
     console.error('Error al obtener las ventas de Neo4j:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       message: 'Error al obtener las ventas',
-      error: error.message 
+      error: error.message
     });
   } finally {
-    await session.close(); // Cerrar la sesión de Neo4j
+    await session.close();
   }
 };
+
 
 const getVentaById = async (req, res) => {
   const { id } = req.params; // viene de /api/neo4j/:id
