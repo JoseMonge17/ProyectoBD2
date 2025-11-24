@@ -11,12 +11,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import './OrdersPage.css';
 
-import { fetchVentas, fetchVentaDetalle, updateVenta, deleteVenta } from "./api";
+import { fetchVentas, fetchVentaDetalle, deleteVenta, ejecutarETL } from "./api";
 
 const columnHelper = createColumnHelper();
-
-// Fecha límite desde log.json - ACTUALIZA ESTA FECHA manualmente o cárgala desde tu archivo
-const FECHA_LIMITE_LOG = "2024-01-01T00:00:00"; // Cambia esto por la fecha de tu log.json
 
 function VentasPage() {
   const navigate = useNavigate();
@@ -30,6 +27,7 @@ function VentasPage() {
 
   const [sorting, setSorting] = useState([]);
   const [search, setSearch] = useState("");
+  const [loadingETL, setLoadingETL] = useState(false);
 
   // 🔁 Cargar ventas desde tu API
   useEffect(() => {
@@ -48,17 +46,6 @@ function VentasPage() {
 
     loadVentas();
   }, []);
-
-  // Verificar si la venta es posterior a la fecha límite
-  const isPosteriorALog = (fechaVenta) => {
-    try {
-      const fechaVentaDate = new Date(fechaVenta);
-      const fechaLimiteDate = new Date(FECHA_LIMITE_LOG);
-      return fechaVentaDate > fechaLimiteDate;
-    } catch {
-      return false;
-    }
-  };
 
   // 🔍 Filtrado simple por texto
   const filteredData = useMemo(() => {
@@ -199,7 +186,7 @@ function VentasPage() {
   // ✏️ Actualizar venta
   const handleActualizar = (venta) => {
     // Redirigir a página de edición o abrir modal
-    navigate(`/ventas/editar/${venta.id}`);
+    navigate(`/ventasNeo4j/editar/${venta.id}`);
   };
 
   // 🗑️ Eliminar venta
@@ -226,13 +213,32 @@ function VentasPage() {
 
   // ➕ Crear nueva venta
   const handleNuevaVenta = () => {
-    navigate('/ventas/crear'); // Ajusta la ruta según tu aplicación
+    navigate('/ventasNeo4j/crear'); // Ajusta la ruta según tu aplicación
   };
 
-  // 🔄 Ejecutar ETL
-  const handleEjecutarETL = () => {
-    // TODO: Implementar funcionalidad ETL
-    alert('Funcionalidad ETL - Por implementar');
+  const handleEjecutarETL = async () => {
+    if (!window.confirm('¿Está seguro de ejecutar el proceso ETL? Esto puede tomar varios segundos.')) {
+      return;
+    }
+
+    try {
+      setLoadingETL(true);
+      alert('Ejecutando ETL... Este proceso puede tomar varios segundos. Por favor espere.');
+      
+      const data = await ejecutarETL();
+
+      alert('ETL ejecutado exitosamente!\n' + (data.message || ''));
+      
+      // Recargar ventas después del ETL
+      const ventasData = await fetchVentas();
+      setVentas(ventasData || []);
+      
+    } catch (error) {
+      console.error('Error al ejecutar ETL:', error);
+      alert('Error al ejecutar ETL: ' + error.message);
+    } finally {
+      setLoadingETL(false);
+    }
   };
 
   return (
@@ -243,8 +249,8 @@ function VentasPage() {
           ← Volver
         </button>
         <div className="right-buttons">
-          <button className="btn-etl" onClick={handleEjecutarETL}>
-            🔄 Ejecutar ETL
+          <button className="btn-etl" onClick={handleEjecutarETL} disabled={loadingETL}>
+            🔄 {loadingETL ? 'Ejecutando...' : 'Ejecutar ETL'}
           </button>
           <button className="btn-nueva-venta" onClick={handleNuevaVenta}>
             + Nueva Venta

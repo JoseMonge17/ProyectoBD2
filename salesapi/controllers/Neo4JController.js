@@ -3,11 +3,14 @@
 const neo4j = require('neo4j-driver');
 
 const fs = require('fs');
+const { spawn } = require('child_process');
 const path = require('path');
 
 // 👇 Ajusta esta ruta al lugar REAL donde está tu log.json
 const LOG_PATH = 'E:/BD2/Proyecto/ProyectoBD2/Neo4j/log.json'; 
+const PYTHON_SCRIPT_PATH = 'E:/BD2/Proyecto/ProyectoBD2/Neo4j/ETLNeo4j.py';
 // o la ruta que corresponda en tu máquina
+const PYTHON_COMMAND = 'python';
 
 // Convierte "2025-11-23 18:28:55" a Date
 function parseFechaCarga(fechaStr) {
@@ -94,7 +97,7 @@ const getVentas = async (req, res) => {
   }
 };
 
-
+// Funcion para obtener los datos de una venta en concreto
 const getVentaById = async (req, res) => {
   const { id } = req.params; // viene de /api/neo4j/:id
   const session = driver.session({ database: 'ventas' });
@@ -156,7 +159,6 @@ const getVentaById = async (req, res) => {
     await session.close();
   }
 };
-
 
 // Función para crear una nueva venta
 const createVentas = async (req, res) => {
@@ -257,6 +259,152 @@ const createVentas = async (req, res) => {
   }
 };
 
+//Funcion de actualizar venta
+const updateVenta = async (req, res) => {
+  const { id } = req.params; // ID de la orden a actualizar
+  const { cliente, moneda, canal, productos } = req.body;
+  const session = driver.session({ database: 'ventas' });
+
+  try {
+    const idOrden = Number(id);
+    
+    // 1. Verificar que la orden existe
+    const existeResult = await session.run(
+      'MATCH (o:Orden {idOrden: $idOrden}) RETURN o',
+      { idOrden }
+    );
+
+    if (existeResult.records.length === 0) {
+      return res.status(404).json({ message: `Venta con id ${id} no encontrada` });
+    }
+
+    // 2. Calcular nuevo total
+    const totalOrden = productos.reduce((acc, producto) => acc + producto.total, 0);
+
+    // 3. Actualizar propiedades de la Orden (excepto fecha e idOrden)
+    await session.run(
+      `
+      MATCH (o:Orden {idOrden: $idOrden})
+      SET o.total = $total,
+          o.moneda = $moneda,
+          o.canal = $canal
+      RETURN o
+      `,
+      {
+        idOrden: idOrden,
+        total: totalOrden,
+        moneda: moneda,
+        canal: canal
+      }
+    );
+
+    // 4. Actualizar relación con el cliente
+    // Primero eliminar la relación anterior
+    await session.run(
+      `
+      MATCH (c:Cliente)-[r:REALIZO]->(o:Orden {idOrden: $idOrden})
+      DELETE r
+      `,
+      { idOrden }
+    );
+
+    // Crear nueva relación con el cliente actualizado
+    await session.run(
+      `
+      MATCH (c:Cliente {idCliente: $clienteId}),
+            (o:Orden {idOrden: $idOrden})
+      MERGE (c)-[:REALIZO]->(o)
+      `,
+      {
+        clienteId: cliente,
+        idOrden: idOrden
+      }
+    );
+
+    // 5. Actualizar productos: eliminar todas las relaciones CONTIENTE anteriores
+    await session.run(
+      `
+      MATCH (o:Orden {idOrden: $idOrden})-[r:CONTIENTE]->(p:Producto)
+      DELETE r
+      `,
+      { idOrden }
+    );
+
+    // 6. Crear nuevas relaciones CONTIENTE con los productos actualizados
+    for (let producto of productos) {
+      await session.run(
+        `
+        MATCH (p:Producto {idProducto: $productoId}),
+              (o:Orden {idOrden: $idOrden})
+        MERGE (o)-[:CONTIENTE {
+          cantidad: $cantidad,
+          precio: $precio
+        }]->(p)
+        `,
+        {
+          productoId: producto.id,
+          idOrden: idOrden,
+          cantidad: producto.cantidad,
+          precio: producto.precio
+        }
+      );
+    }
+
+    res.json({
+      message: 'Venta actualizada con éxito',
+      idOrden: idOrden,
+      total: totalOrden
+    });
+
+  } catch (error) {
+    console.error('Error al actualizar la venta en Neo4j:', error);
+    res.status(500).json({
+      message: 'Error al actualizar la venta',
+      error: error.message
+    });
+  } finally {
+    await session.close();
+  }
+};
+
+// Funcion de eliminar venta
+const deleteVenta = async (req, res) => {
+  const { id } = req.params; // viene de /api/neo4j/:id
+  const session = driver.session({ database: 'ventas' });
+
+  try {
+    // Si idOrden es numérico en Neo4j, conviene convertirlo a Number
+    const idOrden = Number(id);
+
+    const result = await session.run(
+      `
+      MATCH (o:Orden {idOrden: $idOrden})
+      DETACH DELETE o
+      `,
+      { idOrden }
+    );
+
+    // Opcional: revisar si realmente eliminó algo
+    const summary = result.summary;
+    const nodesDeleted = summary.counters.updates().nodesDeleted || 0;
+
+    if (nodesDeleted === 0) {
+      return res.status(404).json({ message: `No se encontró la venta con id ${id}` });
+    }
+
+    res.json({ message: `Venta ${id} eliminada correctamente` });
+
+  } catch (error) {
+    console.error('Error al eliminar la venta en Neo4j:', error);
+    res.status(500).json({
+      message: 'Error al eliminar la venta',
+      error: error.message
+    });
+  } finally {
+    await session.close();
+  }
+};
+
 // Función para obtener todos los clientes desde Neo4j
 const getClientes = async (req, res) => {
   console.log("Extrayendo clientes");
@@ -318,4 +466,81 @@ const closeDriver = async () => {
   await driver.close();
 };
 
-module.exports = { getVentas, getClientes, getProductos, closeDriver, createVentas, getVentaById };
+const ejecutarETL = async (req, res) => {
+  console.log('🔄 Iniciando proceso ETL...');
+  console.log('📂 Script:', PYTHON_SCRIPT_PATH);
+
+  // Verificar que el archivo existe
+  const fs = require('fs');
+  if (!fs.existsSync(PYTHON_SCRIPT_PATH)) {
+    return res.status(404).json({
+      message: 'Script ETL no encontrado',
+      path: PYTHON_SCRIPT_PATH
+    });
+  }
+
+  try {
+    // Spawn el proceso de Python
+    const pythonProcess = spawn(PYTHON_COMMAND, [PYTHON_SCRIPT_PATH]);
+
+    let stdoutData = '';
+    let stderrData = '';
+
+    // Capturar salida estándar (stdout)
+    pythonProcess.stdout.on('data', (data) => {
+      const output = data.toString();
+      console.log('📤 Python stdout:', output);
+      stdoutData += output;
+    });
+
+    // Capturar errores (stderr)
+    pythonProcess.stderr.on('data', (data) => {
+      const error = data.toString();
+      console.error('❌ Python stderr:', error);
+      stderrData += error;
+    });
+
+    // Cuando el proceso termina
+    pythonProcess.on('close', (code) => {
+      console.log(`🏁 Proceso ETL terminado con código: ${code}`);
+
+      if (code === 0) {
+        // Éxito
+        res.json({
+          success: true,
+          message: 'ETL ejecutado exitosamente',
+          output: stdoutData,
+          exitCode: code
+        });
+      } else {
+        // Error
+        res.status(500).json({
+          success: false,
+          message: 'El proceso ETL finalizó con errores',
+          error: stderrData || stdoutData,
+          exitCode: code
+        });
+      }
+    });
+
+    // Manejar errores del proceso
+    pythonProcess.on('error', (error) => {
+      console.error('❌ Error al ejecutar Python:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error al ejecutar el script ETL',
+        error: error.message
+      });
+    });
+
+  } catch (error) {
+    console.error('❌ Error en ejecutarETL:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al iniciar el proceso ETL',
+      error: error.message
+    });
+  }
+};
+
+module.exports = { getVentas, getClientes, getProductos, closeDriver, createVentas, getVentaById, deleteVenta, updateVenta, ejecutarETL };

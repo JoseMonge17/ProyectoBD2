@@ -10,6 +10,7 @@ URI = "bolt://localhost:7687"
 AUTH_USER = "neo4j"
 AUTH_PASS = "Jjmb260505*"
 DATABASE_NAME = "ventas"
+LOG_PATH = r"E:/BD2/Proyecto/ProyectoBD2/Neo4j/log.json"
 
 def get_driver():
     """Retorna el driver de Neo4j."""
@@ -28,7 +29,7 @@ neo4j_driver = get_driver()
 # Función para leer el último ID insertado y la fecha de carga desde el archivo log.json
 def get_log_data():
     try:
-        with open("log.json", "r") as file:
+        with open(LOG_PATH, "r", encoding="utf-8") as file:
             data = json.load(file)
             return data.get("last_id", 0), data.get("fechaCarga", "")  # Devuelve 0 si no existe last_id
     except FileNotFoundError:
@@ -44,7 +45,7 @@ def update_log_data(last_id):
         "fechaCarga": fecha_carga
     }
     
-    with open("log.json", "w") as file:
+    with open(LOG_PATH, "w", encoding="utf-8") as file:
         json.dump(log_data, file, indent=4)
         
 # 1. Extraer datos de clientes desde Neo4j
