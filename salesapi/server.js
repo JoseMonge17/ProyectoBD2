@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const neo4j = require('neo4j-driver');
+const AprioriRoutes = require('./routes/AprioriRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
