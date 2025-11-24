@@ -237,7 +237,6 @@ class ETL_SQLServer_to_DW:
             return False
 
     def load_fact_ventas(self, df_fact_ventas):
-        """Cargar Fact_Ventas en DW - CON TIPO DE CAMBIO REAL"""
         logger.info("📤 Cargando Fact_Ventas...")
         
         try:
@@ -292,18 +291,35 @@ class ETL_SQLServer_to_DW:
                     'cantidad', 'precioUnitario', 'descuentoPct', 'totalVenta', 'totalCRC'
                 ]
 
-                # Insertar en Fact_Ventas
-                fact_final.to_sql(
-                    name='FACT_Ventas',
-                    con=conn,
-                    if_exists='append',
-                    index=False
-                )
-                conn.commit() 
+                # ✅ VERIFICACIÓN DE DUPLICADOS (3 líneas)
+                existentes = pd.read_sql("""
+                    SELECT idCliente, idProducto, idTiempo, idCanal, cantidad 
+                    FROM FACT_Ventas 
+                """, conn)
                 
-                logger.info(f"✅ {len(fact_final)} registros cargados en Fact_Ventas")
+                # Combinar columnas para comparar
+                fact_final['key'] = fact_final['idCliente'].astype(str) + '_' + fact_final['idProducto'].astype(str) + '_' + fact_final['idTiempo'].astype(str) + '_' + fact_final['idCanal'].astype(str) + '_' + fact_final['cantidad'].astype(str)
+                existentes['key'] = existentes['idCliente'].astype(str) + '_' + existentes['idProducto'].astype(str) + '_' + existentes['idTiempo'].astype(str) + '_' + existentes['idCanal'].astype(str) + '_' + existentes['cantidad'].astype(str)
+                
+                nuevos = fact_final[~fact_final['key'].isin(existentes['key'])]
+                nuevos = nuevos.drop('key', axis=1)
+                
+                logger.info(f"📊 Duplicados encontrados: {len(fact_final) - len(nuevos)} registros")
+                
+                # Insertar solo los nuevos
+                if len(nuevos) > 0:
+                    nuevos.to_sql(
+                        name='FACT_Ventas',
+                        con=conn,
+                        if_exists='append',
+                        index=False
+                    )
+                    logger.info(f"✅ {len(nuevos)} registros NUEVOS cargados en Fact_Ventas")
+                else:
+                    logger.info("ℹ️  No hay registros nuevos para cargar en Fact_Ventas")
+                
                 return True
-                
+                    
         except Exception as e:
             logger.error(f"❌ Error cargando Fact_Ventas: {str(e)}")
             return False
