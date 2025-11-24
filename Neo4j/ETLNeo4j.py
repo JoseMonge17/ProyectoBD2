@@ -3,6 +3,7 @@ import pyodbc
 from neo4j import GraphDatabase
 import json
 from datetime import datetime
+from decimal import Decimal
 
 # Conexión global a Neo4j
 URI = "bolt://localhost:7687"
@@ -251,6 +252,8 @@ def insert_fact_ventas(orden, cliente_id, producto_id):
     
     cantidad = orden['cantidad']
     precio_unitario = orden['precio_unitario']
+    cantidad = Decimal(str(cantidad))
+    precio_unitario = Decimal(str(precio_unitario))
     
     if orden['moneda'] == 'CRC':
         # Si la moneda es CRC, calculamos total_CRC con cantidad * precio_unitario

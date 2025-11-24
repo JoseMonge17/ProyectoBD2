@@ -23,8 +23,7 @@ const getVentas = async (req, res) => {
     const result = await session.run(
         'MATCH (c:Cliente)-[:REALIZO]->(o:Orden) ' +
         'RETURN o.idOrden AS id, o.fecha AS fecha, o.total AS total, o.moneda AS moneda, o.canal AS canal, c.nombre AS cliente ' +
-        'ORDER BY o.idOrden ASC ' +  // Ordenar por fecha, de más reciente a más antigua
-        'LIMIT 50'
+        'ORDER BY o.idOrden ASC '
     );
     // Mapear los resultados de la consulta
     const ventas = result.records.map(record => ({
@@ -49,51 +48,144 @@ const getVentas = async (req, res) => {
   }
 };
 
-// Función para crear una nueva venta
-const createVenta = async (req, res) => {
-  const session = driver.session({ database: 'ventas' }); // Crear sesión aquí
-
-  const { fecha, cliente, moneda, canal, productos } = req.body;
+const getVentaById = async (req, res) => {
+  const { id } = req.params; // viene de /api/neo4j/:id
+  const session = driver.session({ database: 'ventas' });
 
   try {
-    // Obtener el ID más alto de las órdenes existentes
     const result = await session.run(
-      'MATCH (o:Orden) RETURN MAX(o.idOrden) AS maxId'
+      `
+      MATCH (o:Orden {idOrden: $idOrden})
+      MATCH (c:Cliente)-[relCliente:REALIZO]->(o)
+      MATCH (o)-[r:CONTIENTE]->(p:Producto)
+      RETURN 
+        {
+          idOrden: o.idOrden,
+          fecha: o.fecha,
+          total: o.total,
+          moneda: o.moneda,
+          canal: o.canal
+        } AS orden,
+        {
+          idCliente: c.idCliente,
+          nombre: c.nombre,
+          telefono: c.telefono,
+          correo: c.correo
+        } AS cliente,
+        {
+          tipo: type(relCliente),
+          propiedades: properties(relCliente)
+        } AS relacion_cliente_orden,
+        collect({
+          producto: properties(p),
+          relacion: {
+            tipo: type(r),
+            propiedades: properties(r)
+          }
+        }) AS productos
+      `,
+      { idOrden: Number(id) } // si lo guardas numérico
     );
 
-    // Obtener el máximo ID y sumar 1
-    const maxId = result.records[0].get('maxId') || 0; // Si no hay órdenes, empieza desde 0
-    const nuevoId = maxId + 1;
+    if (result.records.length === 0) {
+      return res.status(404).json({ message: 'Venta no encontrada' });
+    }
 
-    // Crear un nodo de la orden con el nuevo ID
+    const record = result.records[0];
+
+    res.json({
+      orden: record.get('orden'),
+      cliente: record.get('cliente'),
+      relacion_cliente_orden: record.get('relacion_cliente_orden'),
+      productos: record.get('productos'),
+    });
+  } catch (error) {
+    console.error('Error al obtener la venta en Neo4j:', error);
+    res.status(500).json({
+      message: 'Error al obtener la venta',
+      error: error.message,
+    });
+  } finally {
+    await session.close();
+  }
+};
+
+
+// Función para crear una nueva venta
+const createVentas = async (req, res) => {
+  const session = driver.session({ database: 'ventas' });
+
+  console.log(req.body);
+  const { cliente, moneda, canal, productos } = req.body; // ya no usamos fecha del body
+
+  try {
+    // 1. Obtener el ID más alto de las órdenes existentes
+    const result = await session.run(
+      'MATCH (o:Orden) RETURN coalesce(MAX(o.idOrden), 0) AS maxId'
+    );
+
+    let maxId = result.records[0].get('maxId');
+
+    // Si viene como Integer de neo4j, lo convertimos
+    if (neo4j.isInt(maxId)) {
+      maxId = maxId.toNumber();
+    }
+
+    const nuevoId = (maxId || 0) + 1;
+
+    // 2. Crear fecha en este momento
+    const fechaActual = new Date().toISOString();
+
+    // 3. Calcular total de la orden
+    const totalOrden = productos.reduce((acc, producto) => acc + producto.total, 0);
+
+    // 4. Crear nodo de la orden con el nuevo ID
     const ordenResult = await session.run(
-      'CREATE (o:Orden {idOrden: $nuevoId, fecha: $fecha, total: $total, moneda: $moneda, canal: $canal}) RETURN o',
+      `
+      CREATE (o:Orden {
+        idOrden: $nuevoId,
+        fecha: $fecha,
+        total: $total,
+        moneda: $moneda,
+        canal: $canal
+      })
+      RETURN o
+      `,
       {
         nuevoId: nuevoId,
-        fecha: new Date(fecha).toISOString(),
-        total: productos.reduce((acc, producto) => acc + producto.total, 0), // Sumar total de la venta
+        fecha: fechaActual,
+        total: totalOrden,
         moneda: moneda,
         canal: canal
       }
     );
 
-    const orden = ordenResult.records[0].get('o'); // Orden creada
+    const orden = ordenResult.records[0].get('o');
 
-    // Crear la relación con el cliente
+    // 5. Crear la relación con el cliente (sin recrear la Orden)
     await session.run(
-      'MATCH (c:Cliente {idCliente: $clienteId}) ' +
-      'MERGE (c)-[:REALIZO]->(o:Orden {idOrden: $ordenId})',
+      `
+      MATCH (c:Cliente {idCliente: $clienteId}),
+            (o:Orden  {idOrden: $ordenId})
+      MERGE (c)-[:REALIZO]->(o)
+      `,
       {
         clienteId: cliente,
         ordenId: orden.properties.idOrden
       }
     );
 
-    // Crear relaciones con los productos
+    // 6. Crear relaciones con los productos (igual: MATCH, no MERGE del nodo Orden)
     for (let producto of productos) {
       await session.run(
-        'MATCH (p:Producto {idProducto: $productoId}) ' +
-        'MERGE (o:Orden {idOrden: $ordenId})-[:CONTIENTE {cantidad: $cantidad, precio: $precio, total: $total}]->(p:Producto)',
+        `
+        MATCH (p:Producto {idProducto: $productoId}),
+              (o:Orden   {idOrden: $ordenId})
+        MERGE (o)-[:CONTIENTE {
+          cantidad: $cantidad,
+          precio: $precio
+        }]->(p)
+        `,
         {
           productoId: producto.id,
           ordenId: orden.properties.idOrden,
@@ -104,13 +196,17 @@ const createVenta = async (req, res) => {
       );
     }
 
-    res.status(201).json({ message: 'Venta creada con éxito', idOrden: orden.properties.idOrden });
+    res.status(201).json({
+      message: 'Venta creada con éxito',
+      idOrden: orden.properties.idOrden,
+      fecha: fechaActual
+    });
 
   } catch (error) {
     console.error('Error al crear la venta en Neo4j:', error);
-    res.status(500).json({ message: 'Error al crear la venta' });
+    res.status(500).json({ message: 'Error al crear la venta', error: error.message });
   } finally {
-    await session.close(); // Cerrar la sesión de Neo4j
+    await session.close();
   }
 };
 
@@ -175,4 +271,4 @@ const closeDriver = async () => {
   await driver.close();
 };
 
-module.exports = { getVentas, getClientes, getProductos, closeDriver, createVenta };
+module.exports = { getVentas, getClientes, getProductos, closeDriver, createVentas, getVentaById };

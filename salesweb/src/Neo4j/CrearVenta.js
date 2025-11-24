@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createVenta, fetchClientes, fetchProductos } from './api'; // Usamos las funciones para obtener datos
 import Select from 'react-select'; // Importamos react-select
 import { useNavigate } from 'react-router-dom'; // Usamos useNavigate para la navegación
-import '../styles.css'; // Estilos básicos
+import './CrearVenta.css'; // Estilos básicos
 
 const CrearVenta = () => {
   const navigate = useNavigate(); // Para la navegación
@@ -61,6 +61,7 @@ const CrearVenta = () => {
 
     const nuevoProducto = {
       producto: selectedProducto.label,
+      id: selectedProducto.value,
       precio: parseFloat(precio),
       cantidad: parseInt(cantidad),
       total: parseFloat(cantidad) * parseFloat(precio),
@@ -83,9 +84,6 @@ const CrearVenta = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Establecer la fecha actual cuando se haga el submit
-    const currentDate = new Date().toLocaleString(); // Puedes usar `toISOString()` si prefieres ese formato
-    newVenta.fecha = currentDate;
 
     try {
       await createVenta(newVenta);

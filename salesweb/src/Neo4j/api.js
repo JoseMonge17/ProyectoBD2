@@ -14,6 +14,19 @@ export const fetchVentas = async () => {
   }
 };
 
+export const fetchVentaDetalle = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/${id}`);
+    if (!response.ok) {
+      throw new Error('Error al obtener el detalle de la venta');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error al obtener el detalle de la venta:', error);
+    throw error;
+  }
+};
+
 // Función para obtener todos los clientes
 export const fetchClientes = async () => {
   try {
