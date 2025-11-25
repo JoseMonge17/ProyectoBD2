@@ -92,8 +92,7 @@ const getVentas = async (req, res) => {
       if (fechaLimiteDate && !isNaN(fechaVenta.getTime())) {
         puedeEditar = fechaVenta > fechaLimiteDate;
       }
-      if(puedeEditar)
-        console.log(fechaVenta+ " "+ fechaLimiteDate)
+      
       return {
         id: doc._id.toString(),                 // 👈 ID que usa el front
         fecha: doc.fecha,                       // Date -> se serializa a ISO

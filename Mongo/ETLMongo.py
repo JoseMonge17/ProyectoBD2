@@ -164,9 +164,9 @@ def process_mongo_data():
         # 2) Convertirla a UTC (Costa Rica es UTC-6, así que sumamos 6 horas)
         fecha_carga_utc = fecha_carga_local + timedelta(hours=6)
 
-    # 3) Usar esa fecha UTC en el query de Mongo
-    query = {"fecha": {"$gt": fecha_carga_utc}}
-    ordenes_df = pd.DataFrame(list(ordenes_collection.find(query)))
+        # 3) Usar esa fecha UTC en el query de Mongo
+        query = {"fecha": {"$gt": fecha_carga_utc}}
+        ordenes_df = pd.DataFrame(list(ordenes_collection.find(query)))
 
     print(f"Clientes cargados desde Mongo: {len(clientes_df)}")
     print(f"Productos cargados desde Mongo: {len(productos_df)}")
