@@ -125,16 +125,13 @@ const CreateVenta = () => {
 
     const cancelar = () => navigate("/ventasSupabase");
 
-    const totalFooter = round2(
+    // Calcular el total
+    const total = round2(
         detalle.reduce((acc, p) => acc + (Number(p.precio) * Number(p.cantidad || 0)), 0)
     );
 
     const realizarVenta = async () => {
         if (!venta.cliente || detalle.length === 0) return;
-
-        const total = round2(
-            detalle.reduce((acc, p) => acc + (Number(p.precio) * Number(p.cantidad || 0)), 0)
-        );
 
         const nuevaVenta = {
             cliente_id: venta.cliente,         // ← CAMPO CORRECTO
@@ -170,8 +167,6 @@ const CreateVenta = () => {
             alert("Error conectando al servidor: " + e.message);
         }
     };
-
-
 
     // ===============================
     // FILTRADOS EN VIVO
@@ -374,31 +369,36 @@ const CreateVenta = () => {
                                     </td>
                                 </tr>
                             ))}
+                            
+                            {/* FILA DEL TOTAL - DENTRO DE LA TABLA */}
+                            <tr className="total-row">
+                                <td colSpan="4" style={{ textAlign: 'right', fontWeight: 'bold', paddingRight: '20px' }}>
+                                    TOTAL:
+                                </td>
+                                <td style={{ fontWeight: 'bold', fontSize: '1.1em' }}>
+                                    {total} {venta.moneda}
+                                </td>
+                                <td></td>
+                            </tr>
                         </tbody>
                     </table>
                 )}
             </div>
 
-            {/* FOOTER DE TOTAL */}
-            {detalle.length > 0 && (
-                <div className="total-footer">
-                    <span>Total:</span>
-                    <strong>{totalFooter} {venta.moneda}</strong>
-                </div>
-            )}
+            {/* CONTENEDOR PARA BOTONES - SE MANTIENE A LA IZQUIERDA */}
+            <div className="botones-container">
+                <button className="btn-secondary" onClick={cancelar}>
+                    Cancelar
+                </button>
 
-            {/* BOTONES */}
-            <button className="btn-secondary" onClick={cancelar}>
-                Cancelar
-            </button>
-
-            <button
-                className="btn-primary"
-                onClick={realizarVenta}
-                disabled={detalle.length === 0 || !venta.cliente}
-            >
-                Realizar Venta
-            </button>
+                <button 
+                    className="btn-primary" 
+                    onClick={realizarVenta}
+                    disabled={!venta.cliente || detalle.length === 0}
+                >
+                    Guardar Venta
+                </button>
+            </div>
         </div>
     );
 };

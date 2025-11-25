@@ -4,6 +4,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from pydantic import BaseModel
+from typing import List
+
+class DetalleItem(BaseModel):
+    producto_id: str
+    cantidad: int
+    precio_unit: float
+
+class OrdenCreate(BaseModel):
+    cliente_id: str
+    canal: str
+    moneda: str
+    total: float
+    detalles: List[DetalleItem]
+
 
 # -------------------------
 # CONFIGURACIÓN PostgreSQL
@@ -119,21 +134,6 @@ def get_productos():
 # ====================================================
 # ENDPOINT: CREAR ORDEN CON DETALLES
 # ====================================================
-from pydantic import BaseModel
-from typing import List
-
-class DetalleItem(BaseModel):
-    producto_id: str
-    cantidad: int
-    precio_unit: float
-
-class OrdenCreate(BaseModel):
-    cliente_id: str
-    canal: str
-    moneda: str
-    total: float
-    detalles: List[DetalleItem]
-
 @app.post("/ordenes")
 def crear_orden(data: OrdenCreate):
     conn = get_pg_connection()
@@ -182,6 +182,198 @@ def crear_orden(data: OrdenCreate):
     finally:
         cur.close()
         conn.close()
+
+# ====================================================
+# ENDPOINT: ELIMINAR ORDEN + DETALLES
+# ====================================================
+@app.delete("/ordenes/{orden_id}")
+def eliminar_orden(orden_id: str):
+    conn = get_pg_connection()
+    cur = conn.cursor()
+
+    try:
+        # 1) Verificar si existe la orden
+        cur.execute("SELECT orden_id FROM public.orden WHERE orden_id = %s", (orden_id,))
+        existe = cur.fetchone()
+
+        if not existe:
+            raise HTTPException(status_code=404, detail="La orden no existe")
+
+        # 2) Borrar detalles primero
+        cur.execute("""
+            DELETE FROM public.orden_detalle
+            WHERE orden_id = %s;
+        """, (orden_id,))
+
+        # 3) Borrar la orden
+        cur.execute("""
+            DELETE FROM public.orden
+            WHERE orden_id = %s;
+        """, (orden_id,))
+
+        conn.commit()
+
+        return {
+            "status": "success",
+            "orden_id": orden_id,
+            "mensaje": "Orden y detalles eliminados correctamente."
+        }
+
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
+    finally:
+        cur.close()
+        conn.close()
+
+# ====================================================
+# ENDPOINT: OBTENER DETALLES DE UNA ORDEN
+# ====================================================
+@app.get("/ordenes/{orden_id}", response_model=dict)
+def get_orden_con_detalles(orden_id: str):
+    conn = get_pg_connection()
+    cur = conn.cursor()
+
+    try:
+        # 1) Datos generales de la orden + cliente
+        cur.execute("""
+            SELECT o.orden_id, o.fecha, o.canal, o.moneda, o.total,
+                    c.cliente_id, c.nombre AS cliente_nombre
+            FROM public.orden o
+            JOIN public.cliente c ON o.cliente_id = c.cliente_id
+            WHERE o.orden_id = %s;
+        """, (orden_id,))
+        orden = cur.fetchone()
+
+        if not orden:
+            raise HTTPException(status_code=404, detail="Orden no encontrada")
+
+        # 2) Detalles de la orden (YA INCLUYE producto_id)
+        cur.execute("""
+            SELECT d.orden_detalle_id,
+                    d.producto_id,
+                    p.nombre AS producto_nombre,
+                    d.cantidad,
+                    d.precio_unit
+            FROM public.orden_detalle d
+            JOIN public.producto p ON d.producto_id = p.producto_id
+            WHERE d.orden_id = %s;
+        """, (orden_id,))
+        detalles = cur.fetchall()
+
+        return {
+            "orden": orden,
+            "detalles": detalles
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    finally:
+        cur.close()
+        conn.close()
+
+# ====================================================
+# ENDPOINT: ACTUALIZAR ORDEN + DETALLES
+# ====================================================
+@app.put("/ordenes/{orden_id}")
+def actualizar_orden(orden_id: str, data: OrdenCreate):
+    conn = get_pg_connection()
+    cur = conn.cursor()
+
+    try:
+        # 1) Validar que exista la orden
+        cur.execute("SELECT orden_id FROM public.orden WHERE orden_id = %s", (orden_id,))
+        existe = cur.fetchone()
+
+        if not existe:
+            raise HTTPException(status_code=404, detail="La orden no existe")
+
+        # 2) Actualizar datos generales
+        cur.execute("""
+            UPDATE public.orden
+            SET cliente_id = %s,
+                canal = %s,
+                moneda = %s,
+                total = %s
+            WHERE orden_id = %s;
+        """, (
+            data.cliente_id,
+            data.canal,
+            data.moneda,
+            data.total,
+            orden_id
+        ))
+
+        # 3) Borrar detalles anteriores
+        cur.execute("""
+            DELETE FROM public.orden_detalle
+            WHERE orden_id = %s;
+        """, (orden_id,))
+
+        # 4) Insertar nuevos detalles
+        for item in data.detalles:
+            cur.execute("""
+                INSERT INTO public.orden_detalle (orden_id, producto_id, cantidad, precio_unit)
+                VALUES (%s, %s, %s, %s);
+            """, (
+                orden_id,
+                item.producto_id,
+                item.cantidad,
+                item.precio_unit
+            ))
+
+        conn.commit()
+
+        return {
+            "status": "success",
+            "orden_id": orden_id,
+            "mensaje": "Orden actualizada correctamente."
+        }
+
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
+    finally:
+        cur.close()
+        conn.close()
+
+# ====================================================
+# ENDPOINT: EJECUTAR ETL SUPABASE -> DW
+# ====================================================
+import subprocess
+
+@app.post("/ejecutar-etl")
+def ejecutar_etl():
+    """
+    Ejecuta el ETL que extrae datos de Supabase y los carga al Data Warehouse.
+    """
+    try:
+        # Ejecutar el script Python como proceso externo
+        result = subprocess.run(
+            ["python", "Supabase\code\etl_supabase.py"],
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            return {
+                "status": "error",
+                "mensaje": "El ETL falló",
+                "stdout": result.stdout,
+                "stderr": result.stderr
+            }
+
+        return {
+            "status": "success",
+            "mensaje": "ETL ejecutado correctamente",
+            "stdout": result.stdout
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # -------------------------

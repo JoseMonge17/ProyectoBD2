@@ -20,7 +20,9 @@ const HomePage = () => {
                 <Link to="/ventasNeo4j">
                     <button className="option-btn">CRUD Ventas de Neo4j</button>
                 </Link>
-                <button className="option-btn">CRUD Ventas de MongoDB</button>
+                <Link to="/ventasMongo">
+                    <button className="option-btn">CRUD Ventas de MongoDB</button>
+                </Link>
                 <button className="option-btn">Loader de MySQL</button>
                 <button className="option-btn">Loader de SQL Server</button>
             </div>

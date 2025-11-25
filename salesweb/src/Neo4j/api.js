@@ -6,7 +6,10 @@ const API_URL = 'http://localhost:5000/api/neo4j'; // Ajusta a tu URL de backend
 // Función para obtener todas las ventas
 export const fetchVentas = async () => {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/ventas`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return await response.json();
   } catch (error) {
     console.error('Error al obtener las ventas:', error);
@@ -16,9 +19,12 @@ export const fetchVentas = async () => {
 
 export const fetchVentaDetalle = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`);
+    const response = await fetch(`${API_URL}/ventas/${id}`);
     if (!response.ok) {
       throw new Error('Error al obtener el detalle de la venta');
+    }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
@@ -33,6 +39,9 @@ export const fetchClientes = async () => {
     const response = await fetch(`${API_URL}/clientes`); // Ruta de clientes
     console.log("Extraccion clientes")
     console.log(response.json)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return await response.json();
   } catch (error) {
     console.error('Error al obtener los clientes:', error);
@@ -45,6 +54,9 @@ export const fetchProductos = async () => {
   try {
     const response = await fetch(`${API_URL}/productos`); // Ruta de productos
     console.log("Venta insertada")
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return await response.json();
   } catch (error) {
     console.error('Error al obtener los productos:', error);
@@ -55,11 +67,14 @@ export const fetchProductos = async () => {
 // Función para crear una nueva venta
 export const createVenta = async (venta) => {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${API_URL}/ventas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(venta),
     });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return await response.json();
   } catch (error) {
     console.error('Error al crear la venta:', error);
@@ -69,11 +84,14 @@ export const createVenta = async (venta) => {
 // Función para actualizar una venta
 export const updateVenta = async (id, venta) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/ventas/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(venta),
     });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return await response.json();
   } catch (error) {
     console.error('Error al actualizar la venta:', error);
@@ -83,9 +101,31 @@ export const updateVenta = async (id, venta) => {
 // Función para eliminar una venta
 export const deleteVenta = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/ventas/${id}`, {
       method: 'DELETE',
     });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error al eliminar la venta:', error);
+  }
+};
+
+// Función para eliminar una venta
+export const ejecutarETL = async () => {
+  try {
+    const response = await fetch(`${API_URL}/etl`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     return await response.json();
   } catch (error) {
     console.error('Error al eliminar la venta:', error);

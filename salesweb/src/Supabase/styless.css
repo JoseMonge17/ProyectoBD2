@@ -5,10 +5,13 @@ ESTILOS PARA CREARVENTA
 .create-container {
     padding: 20px;
     width: 100%;
-    min-width: 1100px; /* más ancho */
-    margin: 0 auto;   /* centrado */
+    min-width: 1100px;
+    margin: 0 auto;
     font-family: Arial, sans-serif;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra las cards */
 }
 
 .subcard {
@@ -20,6 +23,7 @@ ESTILOS PARA CREARVENTA
     box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
     transition: 0.15s ease-in-out;
     width: 100%;
+    max-width: 1500px !important;
 }
 
 .subcard:hover {
@@ -192,3 +196,9 @@ table th {
     border: 1px solid #ddd;
 }
 
+.botones-container {
+    align-self: flex-start; /* Mantiene los botones a la izquierda */
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
