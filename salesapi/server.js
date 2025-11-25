@@ -13,11 +13,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Importar rutas
-//const mongoRoutes = require('./routes/mongoRoutes');
+const mongoRoutes = require('./routes/MongoRoutes');
 const neo4jRoutes = require('./routes/Neo4jRoutes');
 
 // Usar las rutas
-//app.use('/api/mongo', mongoRoutes);
+app.use('/api/mongo', mongoRoutes);
 app.use('/api/neo4j', neo4jRoutes);
 
 // Iniciar servidor

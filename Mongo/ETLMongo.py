@@ -2,7 +2,7 @@ import pymongo
 import pyodbc
 import pandas as pd
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import parser
 
 # Conexión a MongoDB Atlas
@@ -23,11 +23,12 @@ conn_str = (
 )
 conn = pyodbc.connect(conn_str)
 cursor = conn.cursor()
+LOG_PATH = r"E:/BD2/Proyecto/ProyectoBD2/Mongo/log.json"
 
 # Función para leer la fecha de la última carga desde log.json
 def get_fecha_carga():
     try:
-        with open("log.json", "r") as file:
+        with open(LOG_PATH, "r", encoding="utf-8") as file:
             data = json.load(file)
             return data.get("fechaCarga", "")  # Devuelve vacío si no tiene valor
     except FileNotFoundError:
@@ -36,13 +37,13 @@ def get_fecha_carga():
  # Función para actualizar la fecha de la última carga en log.json   
 def update_log_data():
     # Obtener la fecha y hora actual
-    fecha_carga = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%fZ')  # Formato datetime ISO 8601
+    fecha_carga = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Formato datetime ISO 8601
     
     log_data = {
         "fechaCarga": fecha_carga,  # Guardamos la fecha de la última orden procesada
     }
     
-    with open("log.json", "w") as file:
+    with open(LOG_PATH, "w", encoding="utf-8") as file:
         json.dump(log_data, file, indent=4)
 
 # ================== HELPERS SQL ==================
@@ -157,10 +158,15 @@ def process_mongo_data():
     if not fecha_carga:
         ordenes_df = pd.DataFrame(list(ordenes_collection.find()))
     else:
-        # Convertir la fecha de la carga en formato datetime
-        fecha_carga_obj = datetime.strptime(fecha_carga, "%Y-%m-%dT%H:%M:%S.%fZ")  # Convertir a formato datetime
-        query = {"fecha": {"$gt": fecha_carga_obj}}  # Filtra las órdenes con fecha mayor que fecha_carga
-        ordenes_df = pd.DataFrame(list(ordenes_collection.find(query)))
+        # 1) Parsear la fecha del log como LOCAL (CR)
+        fecha_carga_local = datetime.strptime(fecha_carga, "%Y-%m-%d %H:%M:%S")
+
+        # 2) Convertirla a UTC (Costa Rica es UTC-6, así que sumamos 6 horas)
+        fecha_carga_utc = fecha_carga_local + timedelta(hours=6)
+
+    # 3) Usar esa fecha UTC en el query de Mongo
+    query = {"fecha": {"$gt": fecha_carga_utc}}
+    ordenes_df = pd.DataFrame(list(ordenes_collection.find(query)))
 
     print(f"Clientes cargados desde Mongo: {len(clientes_df)}")
     print(f"Productos cargados desde Mongo: {len(productos_df)}")
