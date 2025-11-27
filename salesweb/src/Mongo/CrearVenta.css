@@ -316,3 +316,98 @@ tbody:empty::after {
   color: #95a5a6;
   font-style: italic;
 }
+
+.recomendaciones-section {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.recomendaciones-section h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.recomendaciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.recomendacion-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.recomendacion-info {
+  flex: 1;
+}
+
+.recomendacion-info strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.recomendacion-stats {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.btn-agregar-recomendado {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-agregar-recomendado:hover {
+  background-color: #218838;
+}
+
+.cargando-recomendaciones {
+  text-align: center;
+  padding: 10px;
+  color: #666;
+}
+
+.precio-input {
+  margin-top: 5px;
+}
+
+.precio-input label {
+  font-size: 0.8em;
+  color: #666;
+  margin-right: 5px;
+}
+
+.precio-input-field {
+  width: 80px;
+  padding: 2px 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+.recomendacion-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Cambiado para mejor alineación */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.recomendacion-info {
+  flex: 1;
+  margin-right: 10px; /* Espacio entre info y botón */
+}

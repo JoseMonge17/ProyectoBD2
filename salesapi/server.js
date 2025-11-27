@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const neo4j = require('neo4j-driver');
 const { updateExchangeRate } = require("./jobs/tipoCambioJob");
 
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -16,10 +17,12 @@ app.use(bodyParser.json());
 // Importar rutas
 const mongoRoutes = require('./routes/MongoRoutes');
 const neo4jRoutes = require('./routes/Neo4jRoutes');
+const aprioriRoutes = require('./routes/AprioriRoutes');
 
 // Usar las rutas
 app.use('/api/mongo', mongoRoutes);
 app.use('/api/neo4j', neo4jRoutes);
+app.use('/api/apriori', aprioriRoutes);
 
 // Iniciar servidor
 app.listen(port, () => {

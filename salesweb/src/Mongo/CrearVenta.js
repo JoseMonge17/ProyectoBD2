@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { createVenta, fetchClientes, fetchProductos } from './api'; // Usamos las funciones para obtener datos
-import Select from 'react-select'; // Importamos react-select
-import { useNavigate } from 'react-router-dom'; // Usamos useNavigate para la navegación
-import './CrearVenta.css'; // Estilos básicos
+import { createVenta, fetchClientes, fetchProductos } from './api';
+import Select from 'react-select';
+import { useNavigate } from 'react-router-dom';
+import './CrearVenta.css';
 
 const CrearVenta = () => {
-  const navigate = useNavigate(); // Para la navegación
+  const navigate = useNavigate();
 
   const [newVenta, setNewVenta] = useState({
     fecha: '',
@@ -19,22 +19,62 @@ const CrearVenta = () => {
 
   const [clientes, setClientes] = useState([]);
   const [productos, setProductos] = useState([]);
-  const [selectedProducto, setSelectedProducto] = useState(null); // Producto seleccionado
+  const [selectedProducto, setSelectedProducto] = useState(null);
   const [cantidad, setCantidad] = useState('');
   const [precio, setPrecio] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  // Nuevos estados para recomendaciones
+  const [recomendaciones, setRecomendaciones] = useState([]);
+  const [cargandoRecomendaciones, setCargandoRecomendaciones] = useState(false);
+  const [preciosRecomendados, setPreciosRecomendados] = useState({});
 
   // Cargar los clientes y productos desde la API
   useEffect(() => {
     async function fetchData() {
-      const fetchedClientes = await fetchClientes(); // Llamada a la API para obtener clientes
-      const fetchedProductos = await fetchProductos(); // Llamada a la API para obtener productos
+      const fetchedClientes = await fetchClientes();
+      const fetchedProductos = await fetchProductos();
       setClientes(fetchedClientes);
       setProductos(fetchedProductos);
     }
-
     fetchData();
   }, []);
+
+  // Función para obtener recomendaciones cuando se selecciona un producto
+  const obtenerRecomendaciones = async (productoId) => {
+    if (!productoId) {
+      setRecomendaciones([]);
+      return;
+    }
+
+    setCargandoRecomendaciones(true);
+    try {
+      const response = await fetch(`http://localhost:5000/api/apriori/recomendaciones/${productoId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setRecomendaciones(data.recomendaciones || []);
+      } else {
+        setRecomendaciones([]);
+      }
+    } catch (error) {
+      console.error('Error al obtener recomendaciones:', error);
+      setRecomendaciones([]);
+    } finally {
+      setCargandoRecomendaciones(false);
+    }
+  };
+
+  // Manejar cambio de producto seleccionado
+  const handleProductoChange = (selectedOption) => {
+    setSelectedProducto(selectedOption);
+    
+    if (selectedOption) {
+      // Obtener recomendaciones para el producto seleccionado
+      obtenerRecomendaciones(selectedOption.value);
+    } else {
+      setRecomendaciones([]);
+    }
+  };
 
   // Manejar los cambios en el formulario
   const handleChange = (e) => {
@@ -53,7 +93,34 @@ const CrearVenta = () => {
     }));
   };
 
-  // Agregar un producto con cantidad y precio
+  // Agregar producto recomendado directamente
+  const agregarProductoRecomendado = (productoRecomendado) => {
+    const precio = preciosRecomendados[productoRecomendado.productoId] || 1000;
+    
+    const nuevoProducto = {
+      producto: productoRecomendado.nombre,
+      id: productoRecomendado.productoId,
+      precio: precio,
+      cantidad: 1,
+      total: precio,
+    };
+
+    setNewVenta((prevState) => ({
+      ...prevState,
+      productos: [...prevState.productos, nuevoProducto],
+      total: prevState.total + nuevoProducto.total,
+    }));
+  };
+
+  // Agregar función para manejar cambio de precio en recomendaciones
+  const handlePrecioRecomendadoChange = (productoId, precio) => {
+    setPreciosRecomendados(prev => ({
+      ...prev,
+      [productoId]: precio
+    }));
+  };
+
+  // Agregar un producto con cantidad y precio (función original)
   const handleAgregarProducto = () => {
     if (!selectedProducto || !cantidad || !precio) {
       alert("Por favor, complete todos los campos.");
@@ -71,20 +138,20 @@ const CrearVenta = () => {
     setNewVenta((prevState) => ({
       ...prevState,
       productos: [...prevState.productos, nuevoProducto],
-      total: prevState.total + nuevoProducto.total, // Actualiza el total de la venta
+      total: prevState.total + nuevoProducto.total,
     }));
 
     // Reiniciar los inputs después de agregar
     setCantidad('');
     setPrecio('');
     setSelectedProducto(null);
+    setRecomendaciones([]); // Limpiar recomendaciones después de agregar
   };
 
   // Manejar el submit del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
 
     try {
       await createVenta(newVenta);
@@ -120,19 +187,16 @@ const CrearVenta = () => {
 
   // Función para navegar hacia la página de ventas
   const handleVolver = () => {
-    navigate('/ventasMongo'); // Redirige a la página de ventas
+    navigate('/ventasMongo');
   };
 
   return (
     <div className="container">
-      {/* Botón Volver */}
       <button className="back-btn" onClick={handleVolver}>Volver</button>
 
-      {/* Encabezado de la factura */}
       <h2>Crear Venta</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-header">
-          {/* Select de clientes */}
           <Select
             options={clienteOptions}
             onChange={(selectedOption) => handleSelectChange(selectedOption, 'cliente')}
@@ -142,7 +206,6 @@ const CrearVenta = () => {
         </div>
 
         <div className="form-details">
-          {/* Select de canal */}
           <select
             name="canal"
             value={newVenta.canal}
@@ -171,7 +234,8 @@ const CrearVenta = () => {
             <div className="input-column">
               <Select
                 options={productoOptions}
-                onChange={setSelectedProducto}
+                onChange={handleProductoChange}
+                value={selectedProducto}
                 placeholder="Selecciona un Producto"
                 isClearable
               />
@@ -187,20 +251,13 @@ const CrearVenta = () => {
               <input
                 type="number"
                 min="0"
-                step="1"    // 👈 permite solo enteros
+                step="1"
                 value={precio}
                 onChange={(e) => {
                   const raw = e.target.value;
-
-                  // Convertir a entero seguro
                   let intValue = parseInt(raw, 10);
-
-                  // Si es NaN (vacío, letra o valor inválido) → lo dejamos en 0
                   if (isNaN(intValue)) intValue = 0;
-
-                  // Evitar negativos
                   if (intValue < 0) intValue = 0;
-
                   setPrecio(intValue);
                 }}
                 placeholder="Precio"
@@ -212,6 +269,52 @@ const CrearVenta = () => {
             Agregar Producto
           </button>
         </div>
+
+        {/* Sección de Recomendaciones */}
+        {recomendaciones.length > 0 && (
+          <div className="recomendaciones-section">
+            <h3>💡 Productos que otros clientes también compran:</h3>
+            <div className="recomendaciones-grid">
+              {recomendaciones.map((rec, index) => (
+                <div key={index} className="recomendacion-card">
+                  <div className="recomendacion-info">
+                    <strong>{rec.nombre}</strong>
+                    <div className="recomendacion-stats">
+                      <span>Confianza: {rec.confidence}%</span>
+                    </div>
+                    <div className="precio-input">
+                      <label>Precio:</label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        value={preciosRecomendados[rec.productoId] || 1000}
+                        onChange={(e) => {
+                          const valor = parseInt(e.target.value) || 0;
+                          handlePrecioRecomendadoChange(rec.productoId, valor);
+                        }}
+                        className="precio-input-field"
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    type="button"
+                    className="btn-agregar-recomendado"
+                    onClick={() => agregarProductoRecomendado(rec)}
+                  >
+                    Agregar
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {cargandoRecomendaciones && (
+          <div className="cargando-recomendaciones">
+            <p>Buscando recomendaciones...</p>
+          </div>
+        )}
 
         {/* Tabla de productos agregados */}
         <div className="table-container">
