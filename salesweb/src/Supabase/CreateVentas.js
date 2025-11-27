@@ -23,6 +23,10 @@ const CreateVenta = () => {
     const [showClientesDropdown, setShowClientesDropdown] = useState(false);
     const [showProductosDropdown, setShowProductosDropdown] = useState(false);
 
+    const [recomendaciones, setRecomendaciones] = useState([]);
+    const [cargandoRecomendaciones, setCargandoRecomendaciones] = useState(false);
+    const [preciosRecomendados, setPreciosRecomendados] = useState({});
+
     // refs para detectar click fuera
     const clienteRef = useRef(null);
     const productoRef = useRef(null);
@@ -68,6 +72,30 @@ const CreateVenta = () => {
     const handleVentaChange = (e) => {
         const { name, value } = e.target;
         setVenta({ ...venta, [name]: value });
+    };
+
+    // Función para obtener recomendaciones cuando se selecciona un producto
+    const obtenerRecomendaciones = async (productoId) => {
+    if (!productoId) {
+        setRecomendaciones([]);
+        return;
+    }
+
+    setCargandoRecomendaciones(true);
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/recomendaciones/${productoId}`);
+        if (response.ok) {
+        const data = await response.json();
+        setRecomendaciones(data.recomendaciones || []);
+        } else {
+        setRecomendaciones([]);
+        }
+    } catch (error) {
+        console.error('Error al obtener recomendaciones:', error);
+        setRecomendaciones([]);
+    } finally {
+        setCargandoRecomendaciones(false);
+    }
     };
 
     // -------------------------------
@@ -195,6 +223,31 @@ const CreateVenta = () => {
         });
         setBuscarProducto(p.nombre);
         setShowProductosDropdown(false);
+        // Obtener recomendaciones para el producto seleccionado
+        obtenerRecomendaciones(p.producto_id);
+    };
+
+    // Manejar cambio de precio en recomendaciones
+    const handlePrecioRecomendadoChange = (productoId, precio) => {
+    setPreciosRecomendados(prev => ({
+        ...prev,
+        [productoId]: precio
+    }));
+    };
+
+    // Agregar producto recomendado directamente
+    const agregarProductoRecomendado = (productoRecomendado) => {
+    const precio = preciosRecomendados[productoRecomendado.producto_id] || 10; // Precio por defecto más bajo para USD
+    
+    const productoConMoneda = {
+        producto_id: productoRecomendado.producto_id,
+        nombre: productoRecomendado.nombre,
+        cantidad: 1,
+        precio: precio,
+        moneda: venta.moneda,
+    };
+
+    setDetalle([...detalle, productoConMoneda]);
     };
 
     return (
@@ -334,6 +387,52 @@ const CreateVenta = () => {
                 <button className="btn-add" onClick={agregarProducto}>
                     + Insertar Producto
                 </button>
+
+                {/* SECCIÓN DE RECOMENDACIONES */}
+                {recomendaciones.length > 0 && (
+                <div className="recomendaciones-section">
+                    <h3>💡 Productos que otros clientes también compran:</h3>
+                    <div className="recomendaciones-grid">
+                    {recomendaciones.map((rec, index) => (
+                        <div key={index} className="recomendacion-card">
+                        <div className="recomendacion-info">
+                            <strong>{rec.nombre}</strong>
+                            <div className="recomendacion-stats">
+                            <span>Confianza: {rec.confidence}%</span>
+                            </div>
+                            <div className="precio-input">
+                            <label>Precio ({venta.moneda}):</label>
+                            <input
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                value={preciosRecomendados[rec.producto_id] || 10}
+                                onChange={(e) => {
+                                const valor = parseFloat(e.target.value) || 0;
+                                handlePrecioRecomendadoChange(rec.producto_id, valor);
+                                }}
+                                className="precio-input-field"
+                            />
+                            </div>
+                        </div>
+                        <button 
+                            type="button"
+                            className="btn-agregar-recomendado"
+                            onClick={() => agregarProductoRecomendado(rec)}
+                        >
+                            Agregar
+                        </button>
+                        </div>
+                    ))}
+                    </div>
+                </div>
+                )}
+
+                {cargandoRecomendaciones && (
+                <div className="cargando-recomendaciones">
+                    <p>Buscando recomendaciones...</p>
+                </div>
+                )}
 
                 {/* TABLA DE PRODUCTOS */}
                 {detalle.length > 0 && (
