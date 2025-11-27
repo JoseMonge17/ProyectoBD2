@@ -375,6 +375,89 @@ def ejecutar_etl():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# ====================================================
+# ENDPOINT: OBTENER RECOMENDACIONES APRIORI
+# ====================================================
+@app.get("/recomendaciones/{producto_id}")
+def get_recomendaciones(producto_id: str):
+    """
+    Obtiene recomendaciones de productos basadas en reglas Apriori
+    """
+    conn = get_pg_connection()
+    cur = conn.cursor()
+
+    try:
+        # 1) Buscar reglas donde el producto esté en antecedentes y fuente sea supabase
+        cur.execute("""
+            SELECT antecedents, consequents, support, confidence, lift
+            FROM public.reglas_apriori 
+            WHERE %s = ANY(antecedents) 
+            AND fuente = 'supabase'
+            ORDER BY confidence DESC
+            LIMIT 10;
+        """, (producto_id,))
+
+        reglas = cur.fetchall()
+
+        if not reglas:
+            return {
+                "producto_id": producto_id,
+                "recomendaciones": []
+            }
+
+        # 2) Extraer todos los IDs de productos recomendados
+        productos_recomendados_ids = []
+        productos_vistos = set()
+        
+        for regla in reglas:
+            producto_recomendado_id = regla['consequents'][0] if regla['consequents'] else None
+            if producto_recomendado_id and producto_recomendado_id not in productos_vistos:
+                productos_vistos.add(producto_recomendado_id)
+                productos_recomendados_ids.append(producto_recomendado_id)
+
+        # 3) Obtener nombres de los productos recomendados - CORREGIDO CON CAST
+        if productos_recomendados_ids:
+            # Convertir lista de strings a array de UUIDs para PostgreSQL
+            cur.execute("""
+                SELECT producto_id, nombre 
+                FROM public.producto 
+                WHERE producto_id = ANY(%s::uuid[]);
+            """, (productos_recomendados_ids,))
+            
+            productos_recomendados = cur.fetchall()
+            productos_map = {str(prod['producto_id']): prod['nombre'] for prod in productos_recomendados}
+        else:
+            productos_map = {}
+
+        # 4) Obtener nombre del producto original - CORREGIDO
+        cur.execute("SELECT nombre FROM public.producto WHERE producto_id = %s::uuid", (producto_id,))
+        producto_original = cur.fetchone()
+
+        # 5) Construir respuesta
+        recomendaciones = []
+        for regla in reglas:
+            producto_recomendado_id = regla['consequents'][0] if regla['consequents'] else None
+            if producto_recomendado_id:
+                recomendaciones.append({
+                    "producto_id": producto_recomendado_id,
+                    "nombre": productos_map.get(producto_recomendado_id, "Producto no encontrado"),
+                    "confidence": round(regla['confidence'] * 100),
+                    "lift": round(regla['lift'] * 100) / 100,
+                    "support": round(regla['support'] * 1000) / 10
+                })
+
+        return {
+            "producto_id": producto_id,
+            "producto_nombre": producto_original['nombre'] if producto_original else "Producto no encontrado",
+            "recomendaciones": recomendaciones
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    finally:
+        cur.close()
+        conn.close()
 
 # -------------------------
 # Punto de entrada
