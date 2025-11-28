@@ -6,9 +6,13 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Parámetros 
-MIN_SUPPORT = 0.0005
-MIN_CONFIDENCE = 0.01
+# Parámetros
+# 148 REGLAS 
+# MIN_SUPPORT = 0.0015     # ~9 transacciones (en lugar de ~12)
+# MIN_CONFIDENCE = 0.05    # 5% de confianza (en lugar de 1%)
+# 
+MIN_SUPPORT = 0.0015     # ~9 transacciones 
+MIN_CONFIDENCE = 0.05    # 5% de confianza
 
 # Conexiones
 MONGO_CONN = "mongodb+srv://jmonge18:Jjmb260505@micluster.aqjfniv.mongodb.net/?appName=MiCluster"
