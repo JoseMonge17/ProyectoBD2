@@ -314,6 +314,7 @@ class ETL_SQLServer_to_DW:
                         if_exists='append',
                         index=False
                     )
+                    conn.commit() 
                     logger.info(f"✅ {len(nuevos)} registros NUEVOS cargados en Fact_Ventas")
                 else:
                     logger.info("ℹ️  No hay registros nuevos para cargar en Fact_Ventas")
