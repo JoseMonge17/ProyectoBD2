@@ -18,11 +18,13 @@ app.use(bodyParser.json());
 const mongoRoutes = require('./routes/MongoRoutes');
 const neo4jRoutes = require('./routes/Neo4jRoutes');
 const aprioriRoutes = require('./routes/AprioriRoutes');
+const sqlServerRoutes = require('./routes/SQLServerRoutes');
 
 // Usar las rutas
 app.use('/api/mongo', mongoRoutes);
 app.use('/api/neo4j', neo4jRoutes);
 app.use('/api/apriori', aprioriRoutes);
+app.use('/api/sqlserver', sqlServerRoutes);
 
 // Iniciar servidor
 app.listen(port, () => {

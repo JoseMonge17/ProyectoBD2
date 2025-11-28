@@ -24,7 +24,9 @@ const HomePage = () => {
                     <button className="option-btn">CRUD Ventas de MongoDB</button>
                 </Link>
                 <button className="option-btn">Loader de MySQL</button>
-                <button className="option-btn">Loader de SQL Server</button>
+                <Link to="/sqlserver/loader">
+                    <button className="option-btn">Loader de SQL Server</button>
+                </Link>
             </div>
         </div>
     );

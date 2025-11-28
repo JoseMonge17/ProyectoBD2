@@ -12,6 +12,7 @@ import ListVentas from "./Supabase/ListVentas";
 import CreateVenta from "./Supabase/CreateVentas";
 import ListDetalles from './Supabase/ListDetalles';
 import EditVenta from './Supabase/EditVentas';
+import LoaderPage from './SQLServer/LoaderPage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/crearVentaSupabase" element={<CreateVenta />} />
         <Route path="/detallesVentaSupabase/:id" element={<ListDetalles />} /> 
         <Route path="/editarVentaSupabase/:id" element={<EditVenta />} />
+        <Route path="/sqlserver/loader" element={<LoaderPage />} />
       </Routes>
     </Router>
   );
