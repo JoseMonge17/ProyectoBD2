@@ -180,8 +180,8 @@ def main():
         host='127.0.0.1', 
         database='sales_mysql', 
         user='root',
-        password='12345678', 
-        port=3306
+        password='', 
+        port=3307
     )
     
     loader.cargar_datos()
