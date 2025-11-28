@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 class ETL_MySQL_to_DW:
     def __init__(self):
         # Connection strings
-        self.mysql_conn_str = "mysql+mysqlconnector://root:@127.0.0.1:3307/sales_mysql"
+        self.mysql_conn_str = "mysql+mysqlconnector://root:12345678@127.0.0.1:3306/sales_mysql"
         self.dw_conn_str = "mssql+pyodbc://localhost/DW_Proyecto_Sales?driver=ODBC+Driver+17+for+SQL+Server&Trusted_Connection=yes"
         
         self.mysql_engine = None

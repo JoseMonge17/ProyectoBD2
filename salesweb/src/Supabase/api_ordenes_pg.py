@@ -353,7 +353,7 @@ def ejecutar_etl():
     try:
         # Ejecutar el script Python como proceso externo
         result = subprocess.run(
-            ["python", "Supabase\code\etl_supabase.py"],
+            ["python", "E:\BD2\Proyecto\ProyectoBD2\Supabase\code\etl_supabase.py"],
             capture_output=True,
             text=True
         )
