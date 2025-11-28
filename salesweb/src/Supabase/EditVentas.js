@@ -27,6 +27,10 @@ const EditVenta = () => {
     const [buscarProducto, setBuscarProducto] = useState("");
     const [showProductosDropdown, setShowProductosDropdown] = useState(false);
 
+    const [recomendaciones, setRecomendaciones] = useState([]);
+    const [cargandoRecomendaciones, setCargandoRecomendaciones] = useState(false);
+    const [preciosRecomendados, setPreciosRecomendados] = useState({});
+
     const productoRef = useRef(null);
 
     // Producto a agregar
@@ -117,33 +121,36 @@ const EditVenta = () => {
     };
 
     const seleccionarProducto = (p) => {
-        setProductoActual({
-            producto_id: p.producto_id,
-            nombre: p.nombre,
-            cantidad: 1,
-            precio: 0
-        });
-        setBuscarProducto(p.nombre);
-        setShowProductosDropdown(false);
+    setProductoActual({
+        producto_id: p.producto_id,
+        nombre: p.nombre,
+        cantidad: 1,
+        precio: 0
+    });
+    setBuscarProducto(p.nombre);
+    setShowProductosDropdown(false);
+    
+    // Obtener recomendaciones para el producto seleccionado
+    obtenerRecomendaciones(p.producto_id);
     };
 
     const agregarProducto = () => {
-        if (!productoActual.producto_id) return alert("Seleccione un producto");
+    if (!productoActual.producto_id) return alert("Seleccione un producto");
 
-        if (!productoActual.precio || productoActual.precio <= 0) {
-            return alert("El precio debe ser mayor a 0");
+    if (!productoActual.precio || productoActual.precio <= 0) {
+        return alert("El precio debe ser mayor a 0");
+    }
+
+    setDetalle([
+        ...detalle,
+        {
+        ...productoActual,
+        moneda: venta.moneda
         }
+    ]);
 
-        setDetalle([
-            ...detalle,
-            {
-                ...productoActual,
-                moneda: venta.moneda
-            }
-        ]);
-
-        setProductoActual({ producto_id: "", nombre: "", cantidad: 1, precio: 0 });
-        setBuscarProducto("");
+    setProductoActual({ producto_id: "", nombre: "", cantidad: 1, precio: 0 });
+    setBuscarProducto("");
     };
 
     // ========================================
@@ -208,6 +215,53 @@ const EditVenta = () => {
 
         alert("Venta actualizada correctamente");
         navigate("/ventasSupabase");
+    };
+
+    // Función para obtener recomendaciones cuando se selecciona un producto
+    const obtenerRecomendaciones = async (productoId) => {
+    if (!productoId) {
+        setRecomendaciones([]);
+        return;
+    }
+
+    setCargandoRecomendaciones(true);
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/recomendaciones/${productoId}`);
+        if (response.ok) {
+        const data = await response.json();
+        setRecomendaciones(data.recomendaciones || []);
+        } else {
+        setRecomendaciones([]);
+        }
+    } catch (error) {
+        console.error('Error al obtener recomendaciones:', error);
+        setRecomendaciones([]);
+    } finally {
+        setCargandoRecomendaciones(false);
+    }
+    };
+
+    // Manejar cambio de precio en recomendaciones
+    const handlePrecioRecomendadoChange = (productoId, precio) => {
+    setPreciosRecomendados(prev => ({
+        ...prev,
+        [productoId]: precio
+    }));
+    };
+
+    // Agregar producto recomendado directamente
+    const agregarProductoRecomendado = (productoRecomendado) => {
+    const precio = preciosRecomendados[productoRecomendado.producto_id] || 10;
+    
+    const productoConMoneda = {
+        producto_id: productoRecomendado.producto_id,
+        nombre: productoRecomendado.nombre,
+        cantidad: 1,
+        precio: precio,
+        moneda: venta.moneda,
+    };
+
+    setDetalle([...detalle, productoConMoneda]);
     };
 
 
@@ -358,6 +412,52 @@ const EditVenta = () => {
                     + Agregar Producto
                 </button>
             </div>
+            
+            {/* SECCIÓN DE RECOMENDACIONES */}
+            {recomendaciones.length > 0 && (
+            <div className="recomendaciones-section">
+                <h3>💡 Productos que otros clientes también compran:</h3>
+                <div className="recomendaciones-grid">
+                {recomendaciones.map((rec, index) => (
+                    <div key={index} className="recomendacion-card">
+                    <div className="recomendacion-info">
+                        <strong>{rec.nombre}</strong>
+                        <div className="recomendacion-stats">
+                        <span>Confianza: {rec.confidence}%</span>
+                        </div>
+                        <div className="precio-input">
+                        <label>Precio ({venta.moneda}):</label>
+                        <input
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            value={preciosRecomendados[rec.producto_id] || 10}
+                            onChange={(e) => {
+                            const valor = parseFloat(e.target.value) || 0;
+                            handlePrecioRecomendadoChange(rec.producto_id, valor);
+                            }}
+                            className="precio-input-field"
+                        />
+                        </div>
+                    </div>
+                    <button 
+                        type="button"
+                        className="btn-agregar-recomendado"
+                        onClick={() => agregarProductoRecomendado(rec)}
+                    >
+                        Agregar
+                    </button>
+                    </div>
+                ))}
+                </div>
+            </div>
+            )}
+
+            {cargandoRecomendaciones && (
+            <div className="cargando-recomendaciones">
+                <p>Buscando recomendaciones...</p>
+            </div>
+            )}
 
             {/* FOOTER */}
 
