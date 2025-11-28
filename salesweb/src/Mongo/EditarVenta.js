@@ -26,6 +26,11 @@ const EditarVenta = () => {
   const [loading, setLoading] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
 
+  // Agregar después de los estados existentes
+  const [recomendaciones, setRecomendaciones] = useState([]);
+  const [cargandoRecomendaciones, setCargandoRecomendaciones] = useState(false);
+  const [preciosRecomendados, setPreciosRecomendados] = useState({});
+
   // Cargar datos iniciales
   useEffect(() => {
     async function fetchData() {
@@ -100,6 +105,7 @@ const EditarVenta = () => {
   };
 
   // Agregar un producto con cantidad y precio
+  // Agregar un producto con cantidad y precio
   const handleAgregarProducto = () => {
     if (!selectedProducto || !cantidad || !precio) {
       alert("Por favor, complete todos los campos.");
@@ -120,7 +126,7 @@ const EditarVenta = () => {
       total: prevState.total + nuevoProducto.total,
     }));
 
-    // Reiniciar los inputs después de agregar
+    // Solo reiniciar inputs, NO las recomendaciones
     setCantidad('');
     setPrecio('');
     setSelectedProducto(null);
@@ -177,6 +183,69 @@ const EditarVenta = () => {
   // Función para navegar hacia la página de ventas
   const handleVolver = () => {
     navigate('/ventasMongo');
+  };
+
+  // Función para obtener recomendaciones cuando se selecciona un producto
+  const obtenerRecomendaciones = async (productoId) => {
+    if (!productoId) {
+      setRecomendaciones([]);
+      return;
+    }
+
+    setCargandoRecomendaciones(true);
+    try {
+      const response = await fetch(`http://localhost:5000/api/apriori/recomendaciones/${productoId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setRecomendaciones(data.recomendaciones || []);
+      } else {
+        setRecomendaciones([]);
+      }
+    } catch (error) {
+      console.error('Error al obtener recomendaciones:', error);
+      setRecomendaciones([]);
+    } finally {
+      setCargandoRecomendaciones(false);
+    }
+  };
+
+  // Manejar cambio de producto seleccionado
+  const handleProductoChange = (selectedOption) => {
+    setSelectedProducto(selectedOption);
+    
+    if (selectedOption) {
+      // Obtener recomendaciones para el producto seleccionado
+      obtenerRecomendaciones(selectedOption.value);
+    } else {
+      setRecomendaciones([]);
+    }
+  };
+
+  // Manejar cambio de precio en recomendaciones
+  const handlePrecioRecomendadoChange = (productoId, precio) => {
+    setPreciosRecomendados(prev => ({
+      ...prev,
+      [productoId]: precio
+    }));
+  };
+
+  // Agregar producto recomendado directamente
+  const agregarProductoRecomendado = (productoRecomendado) => {
+    const precio = preciosRecomendados[productoRecomendado.productoId] || 1000;
+    
+    const nuevoProducto = {
+      producto: productoRecomendado.nombre,
+      id: productoRecomendado.productoId,
+      precio: precio,
+      cantidad: 1,
+      total: precio,
+    };
+
+    setVenta((prevState) => ({
+      ...prevState,
+      productos: [...prevState.productos, nuevoProducto],
+      total: prevState.total + nuevoProducto.total,
+    }));
   };
 
   // Mostrar loading mientras se cargan los datos
@@ -240,7 +309,7 @@ const EditarVenta = () => {
             <div className="input-column">
               <Select
                 options={productoOptions}
-                onChange={setSelectedProducto}
+                onChange={handleProductoChange}
                 value={selectedProducto}
                 placeholder="Selecciona un Producto"
                 isClearable
@@ -269,6 +338,52 @@ const EditarVenta = () => {
             Agregar Producto
           </button>
         </div>
+
+        {/* SECCIÓN DE RECOMENDACIONES */}
+        {recomendaciones.length > 0 && (
+          <div className="recomendaciones-section">
+            <h3>💡 Productos que otros clientes también compran:</h3>
+            <div className="recomendaciones-grid">
+              {recomendaciones.map((rec, index) => (
+                <div key={index} className="recomendacion-card">
+                  <div className="recomendacion-info">
+                    <strong>{rec.nombre}</strong>
+                    <div className="recomendacion-stats">
+                      <span>Confianza: {rec.confidence}%</span>
+                    </div>
+                    <div className="precio-input">
+                      <label>Precio:</label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        value={preciosRecomendados[rec.productoId] || 1000}
+                        onChange={(e) => {
+                          const valor = parseInt(e.target.value) || 0;
+                          handlePrecioRecomendadoChange(rec.productoId, valor);
+                        }}
+                        className="precio-input-field"
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    type="button"
+                    className="btn-agregar-recomendado"
+                    onClick={() => agregarProductoRecomendado(rec)}
+                  >
+                    Agregar
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {cargandoRecomendaciones && (
+          <div className="cargando-recomendaciones">
+            <p>Buscando recomendaciones...</p>
+          </div>
+        )}
 
         {/* Tabla de productos agregados */}
         <div className="table-container">

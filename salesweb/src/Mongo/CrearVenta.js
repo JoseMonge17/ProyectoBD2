@@ -145,7 +145,6 @@ const CrearVenta = () => {
     setCantidad('');
     setPrecio('');
     setSelectedProducto(null);
-    setRecomendaciones([]); // Limpiar recomendaciones después de agregar
   };
 
   // Manejar el submit del formulario
