@@ -6,6 +6,8 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from pydantic import BaseModel
 from typing import List
+import json
+import os
 
 class DetalleItem(BaseModel):
     producto_id: str
@@ -458,6 +460,26 @@ def get_recomendaciones(producto_id: str):
     finally:
         cur.close()
         conn.close()
+
+
+@app.get("/get-log-data")
+async def get_log_data():
+    try:
+        log_path = "D:/VsCode/ProyectoBD2/Supabase/code/logVenta.json"
+        
+        if not os.path.exists(log_path):
+            return {
+                "last_processed_date": None,
+                "last_processed_id": None,
+                "last_run": None
+            }
+        
+        with open(log_path, 'r', encoding='utf-8') as f:
+            log_data = json.load(f)
+        
+        return log_data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error leyendo archivo log: {str(e)}")
 
 # -------------------------
 # Punto de entrada
