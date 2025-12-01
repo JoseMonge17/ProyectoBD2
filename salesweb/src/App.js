@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Usar Routes en lugar de Switch
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 import CrearVentaNeo4j from './Neo4j/CrearVenta';
 import EditarVentaNeo4j from './Neo4j/EditarVenta';
@@ -12,7 +12,8 @@ import ListVentas from "./Supabase/ListVentas";
 import CreateVenta from "./Supabase/CreateVentas";
 import ListDetalles from './Supabase/ListDetalles';
 import EditVenta from './Supabase/EditVentas';
-import LoaderPage from './SQLServer/LoaderPage';
+import LoaderPageSQL from './SQLServer/LoaderPage';
+import LoaderPageMySQL from './MySQL/LoaderPageMySQL';
 
 function App() {
   return (
@@ -33,7 +34,10 @@ function App() {
         <Route path="/crearVentaSupabase" element={<CreateVenta />} />
         <Route path="/detallesVentaSupabase/:id" element={<ListDetalles />} /> 
         <Route path="/editarVentaSupabase/:id" element={<EditVenta />} />
-        <Route path="/sqlserver/loader" element={<LoaderPage />} />
+        
+        {/* Loaders */}
+        <Route path="/sqlserver/loader" element={<LoaderPageSQL />} />
+        <Route path="/mysql/loader" element={<LoaderPageMySQL />} />
       </Routes>
     </Router>
   );

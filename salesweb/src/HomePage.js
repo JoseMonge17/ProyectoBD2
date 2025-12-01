@@ -1,7 +1,7 @@
 // src/HomePage.js
 import React from 'react';
-import './HomePage.css'; // Importamos los estilos
-import { Link } from 'react-router-dom'; // Importamos Link de react-router-dom
+import './HomePage.css';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     return (
@@ -23,7 +23,9 @@ const HomePage = () => {
                 <Link to="/ventasMongo">
                     <button className="option-btn">CRUD Ventas de MongoDB</button>
                 </Link>
-                <button className="option-btn">Loader de MySQL</button>
+                <Link to="/mysql/loader">
+                    <button className="option-btn">Loader de MySQL</button>
+                </Link>
                 <Link to="/sqlserver/loader">
                     <button className="option-btn">Loader de SQL Server</button>
                 </Link>
