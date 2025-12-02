@@ -465,8 +465,8 @@ def get_recomendaciones(producto_id: str):
 @app.get("/get-log-data")
 async def get_log_data():
     try:
-        log_path = "D:/VsCode/ProyectoBD2/Supabase/code/logVenta.json"
-        
+        #log_path = "D:/VsCode/ProyectoBD2/Supabase/code/logVenta.json" #
+        log_path = "E:\BD2\Proyecto\ProyectoBD2\Supabase\code\logVenta.json"
         if not os.path.exists(log_path):
             return {
                 "last_processed_date": None,

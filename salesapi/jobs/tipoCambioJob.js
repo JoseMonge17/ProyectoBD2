@@ -42,7 +42,7 @@ async function updateExchangeRate() {
 // Corre todos los días a las 5:00 a.m.
 // Formato cron: min hora dia mes diaSemana
 // 0 5 * * *   = 5:00am todos los días
-cron.schedule("22 16 * * *", () => {
+cron.schedule("0 5 * * *", () => {
   updateExchangeRate();
 });
 

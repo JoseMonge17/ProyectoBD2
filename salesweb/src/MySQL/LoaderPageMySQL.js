@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LoaderPage.css';
+import './LoaderPageMySQL.css';
 
 const LoaderPage = () => {
   const [loading, setLoading] = useState(false);
