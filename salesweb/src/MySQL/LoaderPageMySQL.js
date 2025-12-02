@@ -80,30 +80,6 @@ const LoaderPage = () => {
         {resultado && (
           <div className="result-section">
             <h3>✅ Loader MySQL Completado</h3>
-            
-            {resultado.estadisticas && (
-              <div className="estadisticas">
-                <h4>📊 Estadísticas de Carga MySQL:</h4>
-                <div className="stats-grid">
-                  <div className="stat-item">
-                    <span className="stat-number">{resultado.estadisticas.clientes}</span>
-                    <span className="stat-label">Clientes</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-number">{resultado.estadisticas.productos}</span>
-                    <span className="stat-label">Productos</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-number">{resultado.estadisticas.ordenes}</span>
-                    <span className="stat-label">Órdenes</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-number">{resultado.estadisticas.detalles}</span>
-                    <span className="stat-label">Detalles</span>
-                  </div>
-                </div>
-              </div>
-            )}
 
             <div className="output-section">
               <h4>📝 Output del Proceso MySQL:</h4>
